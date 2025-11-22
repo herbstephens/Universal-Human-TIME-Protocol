@@ -12,14 +12,21 @@ import Link from "next/link";
 import { useAuthStore } from "@/state/authStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useWalletAuth } from "@/lib/worldcoin/useWalletAuth";
 
 export default function HomePage() {
   const router = useRouter();
   const { isVerified, checkVerificationExpiry, verificationData } = useAuthStore();
+  const { isConnected, address } = useWalletAuth();
   const [isLoading, setIsLoading] = useState(true);
 
   // TODO: Check if user is married when blockchain is integrated
   const isMarried = false;
+
+  // Debug: Log connection state
+  useEffect(() => {
+    console.log('🔍 Home Page - Wallet State:', { isConnected, address })
+  }, [isConnected, address])
 
   /**
    * Check if user is verified before showing content
@@ -79,24 +86,35 @@ export default function HomePage() {
               Time to get Married
             </h1>
 
-            {/* Button Container */}
-            <div className="bg-[#C4C4C4] rounded-3xl p-8 w-full space-y-4">
-              {/* Make a Proposal Button */}
-              <Link
-                href="/marriage/create"
-                className="block w-full bg-black text-white px-8 py-4 rounded-full text-lg font-normal hover:bg-black/90 transition-all duration-200"
-              >
-                Make a Proposal
-              </Link>
+            {/* Button Container - Only show if wallet is connected */}
+            {isConnected ? (
+              <div className="bg-[#C4C4C4] rounded-3xl p-8 w-full space-y-4">
+                {/* Make a Proposal Button */}
+                <Link
+                  href="/marriage/create"
+                  className="block w-full bg-black text-white px-8 py-4 rounded-full text-lg font-normal hover:bg-black/90 transition-all duration-200"
+                >
+                  Make a Proposal
+                </Link>
 
-              {/* Accept a Proposal Button */}
-              <Link
-                href="/marriage/accept"
-                className="block w-full bg-black text-white px-8 py-4 rounded-full text-lg font-normal hover:bg-black/90 transition-all duration-200"
-              >
-                Accept a Proposal
-              </Link>
-            </div>
+                {/* Accept a Proposal Button */}
+                <Link
+                  href="/marriage/accept"
+                  className="block w-full bg-black text-white px-8 py-4 rounded-full text-lg font-normal hover:bg-black/90 transition-all duration-200"
+                >
+                  Accept a Proposal
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center gap-4">
+                <p className="text-black/60 text-base">
+                  Connect your wallet to continue
+                </p>
+                <p className="text-black/40 text-sm">
+                  👆 Use the button in the top right
+                </p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex flex-col items-center text-center space-y-8">

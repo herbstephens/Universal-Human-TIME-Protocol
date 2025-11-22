@@ -25,9 +25,12 @@ export type VerificationData = {
 type AuthState = {
   isVerified: boolean
   verificationData: VerificationData | null
+  walletAddress: string | null
   
   // Actions
   setVerified: (data: VerificationData) => void
+  setWalletAddress: (address: string) => void
+  clearWallet: () => void
   clearVerification: () => void
   checkVerificationExpiry: () => boolean
 }
@@ -41,6 +44,7 @@ export const useAuthStore = create<AuthState>()(
     (set, get) => ({
       isVerified: false,
       verificationData: null,
+      walletAddress: null,
 
       /**
        * Set user as verified
@@ -53,12 +57,31 @@ export const useAuthStore = create<AuthState>()(
       },
 
       /**
+       * Set wallet address
+       */
+      setWalletAddress: (address: string) => {
+        set({
+          walletAddress: address,
+        })
+      },
+
+      /**
+       * Clear wallet connection
+       */
+      clearWallet: () => {
+        set({
+          walletAddress: null,
+        })
+      },
+
+      /**
        * Clear verification (logout)
        */
       clearVerification: () => {
         set({
           isVerified: false,
           verificationData: null,
+          walletAddress: null,
         })
       },
 

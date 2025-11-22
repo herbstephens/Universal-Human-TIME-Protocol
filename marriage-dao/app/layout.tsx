@@ -1,14 +1,21 @@
 /**
- * Purpose: Root layout with MiniKit provider for World App integration
- * Wraps the entire app with MiniKitProvider to enable World ID verification
- * and Mini App functionality throughout the application
+ * Purpose: Root layout with providers for World App and blockchain integration
+ * Wraps the entire app with:
+ * - MiniKitProvider: Enables World ID verification and wallet auth
+ * - WagmiProvider: Enables Worldchain blockchain integration
+ * - QueryClientProvider: Required by wagmi for data fetching
  */
 
-import type { Metadata } from "next";
+'use client'
+
 import { Geist, Geist_Mono } from "next/font/google";
 import { MiniKitProvider } from "@worldcoin/minikit-js/minikit-provider";
+import { WagmiProvider } from "wagmi";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { wagmiConfig } from "@/lib/wagmi/config";
 import { WorldAppChecker } from "./components/WorldAppChecker";
 import "./globals.css";
+import { useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,27 +27,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Marriage DAO - Get Married On Chain",
-  description: "Smart Agreement DAO - Create your on-chain marriage proof with World ID verification",
-};
-
+/**
+ * Root Layout Component
+ * 
+ * Provider hierarchy:
+ * 1. MiniKitProvider - World App integration (outermost)
+ * 2. WagmiProvider - Blockchain connection
+ * 3. QueryClientProvider - Data fetching for wagmi
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Create QueryClient instance (must be in client component)
+  const [queryClient] = useState(() => new QueryClient())
+
   return (
     <html lang="en">
       {/* MiniKitProvider enables World App functionality */}
       <MiniKitProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {/* Automatically checks if in World App and redirects to store if not */}
-          <WorldAppChecker />
-          {children}
-        </body>
+        {/* WagmiProvider enables blockchain interactions */}
+        <WagmiProvider config={wagmiConfig}>
+          {/* QueryClientProvider required by wagmi */}
+          <QueryClientProvider client={queryClient}>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+            >
+              {/* Automatically checks if in World App and redirects to store if not */}
+              <WorldAppChecker />
+              {children}
+            </body>
+          </QueryClientProvider>
+        </WagmiProvider>
       </MiniKitProvider>
     </html>
   );
