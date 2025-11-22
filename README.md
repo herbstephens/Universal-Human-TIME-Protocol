@@ -1,4 +1,4 @@
-# marriagePROOF on TIMEdao
+# marriagePROOF
 ETHGlobal Buenos Aires 2025 hackathon submission
 
 ## Table of Contents
