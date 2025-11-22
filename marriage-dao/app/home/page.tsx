@@ -1,15 +1,58 @@
 /**
- * Purpose: Home page for Marriage DAO
+ * Purpose: Home page for Marriage DAO (Protected Route)
  * Shows two options: Make a Proposal or Accept a Proposal
  * If user is already married, shows "You are already married" message
+ * Requires World ID verification to access
  */
+
+'use client'
 
 import { Header } from "../components/Header";
 import Link from "next/link";
+import { useAuthStore } from "@/state/authStore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const router = useRouter();
+  const { isVerified, checkVerificationExpiry, verificationData } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(true);
+
   // TODO: Check if user is married when blockchain is integrated
   const isMarried = false;
+
+  /**
+   * Check if user is verified before showing content
+   * Redirect to landing page if not verified
+   */
+  useEffect(() => {
+    // Check verification status
+    const isValid = checkVerificationExpiry();
+
+    if (!isVerified || !isValid) {
+      // Not verified or verification expired - redirect to landing
+      router.replace("/");
+      return;
+    }
+
+    // User is verified - show content
+    setIsLoading(false);
+  }, [isVerified, checkVerificationExpiry, router]);
+
+  // Show loading state while checking verification
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#E8E8E8] flex flex-col">
+        <Header />
+        <main className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+            <p className="text-black/70">Checking verification...</p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#E8E8E8] flex flex-col">
@@ -20,6 +63,17 @@ export default function HomePage() {
       <main className="flex-1 flex flex-col items-center justify-center px-6">
         {!isMarried ? (
           <div className="flex flex-col items-center text-center space-y-8 max-w-md w-full">
+            {/* Verification Badge */}
+            <div className="flex items-center gap-2 px-4 py-2 bg-green-100 border border-green-400 rounded-full text-green-700 text-sm">
+              <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+              <span>Verified Human</span>
+              {verificationData?.verification_level && (
+                <span className="text-xs opacity-70">
+                  ({verificationData.verification_level})
+                </span>
+              )}
+            </div>
+
             {/* Title */}
             <h1 className="text-4xl md:text-5xl font-normal text-black tracking-tight">
               Time to get Married

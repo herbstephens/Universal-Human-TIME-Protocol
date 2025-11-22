@@ -1,5 +1,12 @@
+/**
+ * Purpose: Root layout with MiniKit provider for World App integration
+ * Wraps the entire app with MiniKitProvider to enable World ID verification
+ * and Mini App functionality throughout the application
+ */
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { MiniKitProvider } from "@worldcoin/minikit-js/minikit-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,11 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      {/* MiniKitProvider enables World App functionality */}
+      <MiniKitProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </MiniKitProvider>
     </html>
   );
 }
