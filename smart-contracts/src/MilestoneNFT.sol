@@ -11,6 +11,8 @@ import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
  *         Only the HumanBond contract can mint new NFTs automatically.
  */
 contract MilestoneNFT is ERC721, Ownable {
+    error SoulboundNFT__TransfersDisabled();
+
     /* -------------------------------------------------------------------------- */
     /*                                 STATE VARS                                 */
     /* -------------------------------------------------------------------------- */
@@ -132,5 +134,25 @@ contract MilestoneNFT is ERC721, Ownable {
         if (bytes(milestoneURIs[year]).length == 0)
             revert MilestoneNFT__URI_NotFound(year);
         return milestoneURIs[year];
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                             SOULBOUND OVERRIDES                             */
+    /* -------------------------------------------------------------------------- */
+
+    function _update(
+        address to,
+        uint256 tokenId,
+        address auth
+    ) internal override returns (address) {
+        // Allow mint (from == 0x0)
+        address from = _ownerOf(tokenId);
+
+        // If NOT minting and NOT burning, forbid transfers
+        if (from != address(0) && to != from) {
+            revert SoulboundNFT__TransfersDisabled();
+        }
+
+        return super._update(to, tokenId, auth);
     }
 }

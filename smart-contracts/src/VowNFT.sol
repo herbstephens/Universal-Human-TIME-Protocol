@@ -11,6 +11,7 @@ import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
  */
 contract VowNFT is ERC721, Ownable {
     error VowNFT__UnauthorizedMinter();
+    error VowNFT__TransfersDisabled();
     uint256 public tokenId;
     string public metadataTokenURI;
     address public humanBondContract; //authorized minter address
@@ -51,5 +52,22 @@ contract VowNFT is ERC721, Ownable {
     ) public view override returns (string memory) {
         _requireOwned(idOfToken);
         return metadataTokenURI;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                             SOULBOUND OVERRIDES                             */
+    /* -------------------------------------------------------------------------- */
+    function _update(
+        address to,
+        uint256 tokenIdd,
+        address auth
+    ) internal override returns (address) {
+        address from = _ownerOf(tokenIdd);
+
+        if (from != address(0) && to != from) {
+            revert VowNFT__TransfersDisabled();
+        }
+
+        return super._update(to, tokenIdd, auth);
     }
 }
