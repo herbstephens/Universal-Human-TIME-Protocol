@@ -70,12 +70,12 @@ contract AutomationFlowTest is Test {
         vm.deal(bob, 10 ether);
     }
 
-    // function test__CannotProposeToSelf() public {
-    //     vm.startPrank(alice);
-    //     vm.expectRevert();
-    //     humanBond.propose(alice, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-    // }
+    function test__CannotProposeToSelf() public {
+        vm.startPrank(alice);
+        vm.expectRevert();
+        humanBond.propose(alice, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        vm.stopPrank();
+    }
 
     function test__proposal_CannotProposeTwice() public {
         vm.startPrank(alice);
@@ -386,7 +386,7 @@ contract AutomationFlowTest is Test {
         vm.startPrank(alice);
         humanBond.divorce(bob);
 
-        vm.expectRevert("No active marriage");
+        vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
         humanBond.divorce(bob);
         vm.stopPrank();
     }
@@ -452,5 +452,63 @@ contract AutomationFlowTest is Test {
         // New initial TIME token allocation should be present
         assertEq(timeToken.balanceOf(alice), 1 ether + 1 ether); // first mint + second mint
         assertEq(timeToken.balanceOf(bob), 1 ether + 1 ether);
+    }
+
+    //=============== GETTERS TESTS ===============//
+    function test__GetMarriageView() public {
+        // marry
+        vm.startPrank(alice);
+        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        vm.stopPrank();
+
+        vm.startPrank(bob);
+        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        vm.stopPrank();
+
+        // warp 3 days
+        vm.warp(block.timestamp + 3 days);
+
+        HumanBond.MarriageView memory v = humanBond.getMarriageView(alice, bob);
+
+        assertEq(v.partnerA, alice);
+        assertEq(v.partnerB, bob);
+        assertEq(v.nullifierA, 1111);
+        assertEq(v.nullifierB, 2222);
+        assertEq(v.active, true);
+        assertEq(v.pendingYield, 3 ether); // 3 days
+    }
+
+    function test__UserDashboard() public {
+        // proposal
+        vm.startPrank(alice);
+        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        vm.stopPrank();
+
+        // BEFORE ACCEPT — Alice has proposal, not married
+        {
+            HumanBond.UserDashboard memory d1 = humanBond.getUserDashboard(
+                alice
+            );
+            assertTrue(d1.hasProposal);
+            assertFalse(d1.isMarried);
+            assertEq(d1.partner, address(0));
+        }
+
+        // accept
+        vm.startPrank(bob);
+        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        vm.stopPrank();
+
+        // warp 5 days → 5 tokens pending
+        vm.warp(block.timestamp + 5 days);
+
+        // AFTER ACCEPT — married, partner detected
+        HumanBond.UserDashboard memory d2 = humanBond.getUserDashboard(alice);
+
+        assertTrue(d2.isMarried);
+        assertFalse(d2.hasProposal);
+        assertEq(d2.partner, bob);
+        assertEq(d2.pendingYield, 5 ether);
+        assertEq(d2.timeBalance, 1 ether); // initial mint
     }
 }
