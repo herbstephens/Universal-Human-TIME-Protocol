@@ -1,5 +1,6 @@
 deploy:
 	forge script script/Deploy.s.sol:DeployScript --rpc-url http://localhost:8545 --broadcast
+	forge script script/Deploy.s.sol:DeployScript --rpc-url https://worldchain-sepolia.g.alchemy.com/v2/hr0u6gssX4yzR3YaMJd5n29e7Cwk79LT --private-key $SEPOLIA_PK --broadcast
 
 propose:
 	cast send 0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6 \

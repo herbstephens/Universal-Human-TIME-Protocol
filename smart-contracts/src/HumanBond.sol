@@ -309,7 +309,8 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
     function _pendingYield(bytes32 marriageId) internal view returns (uint256) {
         Marriage storage marriage = marriages[marriageId];
         if (!marriage.active) return 0;
-        uint256 daysElapsed = (block.timestamp - marriage.lastClaim) / 1 days;
+        uint256 daysElapsed = (block.timestamp - marriage.lastClaim) /
+            1 minutes;
         return daysElapsed * 1 ether; // 1 DAY token per full day
     }
 
@@ -355,7 +356,7 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
 
             if (m.active) {
                 uint256 yearsTogether = (block.timestamp - m.bondStart) /
-                    365 days;
+                    2 minutes;
 
                 if (
                     yearsTogether > m.lastMilestoneYear &&
@@ -389,7 +390,7 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
             if (!marriage.active) continue;
 
             uint256 yearsTogether = (block.timestamp - marriage.bondStart) /
-                365 days;
+                2 minutes;
             if (
                 yearsTogether > marriage.lastMilestoneYear &&
                 yearsTogether <= milestoneNFT.latestYear()

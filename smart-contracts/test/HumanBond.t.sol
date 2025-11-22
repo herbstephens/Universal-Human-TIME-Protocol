@@ -152,8 +152,8 @@ contract AutomationFlowTest is Test {
         humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
         vm.stopPrank();
 
-        // warp 100 days (100 TIME)
-        vm.warp(block.timestamp + 100 days);
+        // warp minutes (100 TIME)
+        vm.warp(block.timestamp + 100 minutes);
 
         // withdraw yield — but the correct method is claimYield(partner)
         vm.startPrank(alice);
@@ -176,7 +176,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         // warp 1 day
-        vm.warp(block.timestamp + 1 days);
+        vm.warp(block.timestamp + 1 minutes);
 
         // Correct ordering: caller is alice, partner is bob
         vm.startPrank(alice);
@@ -188,15 +188,15 @@ contract AutomationFlowTest is Test {
         assertEq(timeToken.balanceOf(bob), 1 ether + 0.5 ether);
 
         // warp another day
-        vm.warp(block.timestamp + 1 days);
+        vm.warp(block.timestamp + 1 minutes);
 
         // claim again
         vm.startPrank(bob);
         humanBond.claimYield(alice);
         vm.stopPrank();
 
-        assertEq(timeToken.balanceOf(alice), 1 ether + 1 ether);
-        assertEq(timeToken.balanceOf(bob), 1 ether + 1 ether);
+        assertEq(timeToken.balanceOf(alice), 2 ether);
+        assertEq(timeToken.balanceOf(bob), 2 ether);
     }
 
     function test__OnlyHumanBondCanMintMilestone() public {
@@ -225,7 +225,7 @@ contract AutomationFlowTest is Test {
         );
         vm.stopPrank();
 
-        vm.warp(block.timestamp + 300 days);
+        vm.warp(block.timestamp + 1 minutes);
 
         (bool needed, ) = humanBond.checkUpkeep("");
         assertFalse(needed);
@@ -250,7 +250,7 @@ contract AutomationFlowTest is Test {
         );
         vm.stopPrank();
 
-        vm.warp(block.timestamp + 380 days);
+        vm.warp(block.timestamp + 2 minutes);
 
         (, bytes memory data) = humanBond.checkUpkeep("");
         humanBond.performUpkeep(data);
@@ -279,7 +279,7 @@ contract AutomationFlowTest is Test {
         );
         vm.stopPrank();
 
-        vm.warp(block.timestamp + 380 days);
+        vm.warp(block.timestamp + 2 minutes);
         (, bytes memory data) = humanBond.checkUpkeep("");
         humanBond.performUpkeep(data);
 
@@ -304,7 +304,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         // 3. Warp time more than 1 year
-        vm.warp(block.timestamp + 380 days);
+        vm.warp(block.timestamp + 2 minutes);
 
         // 4. Call checkUpkeep()
         (bool upkeepNeeded, bytes memory performData) = humanBond.checkUpkeep(
@@ -362,7 +362,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         // warp 10 days → 10 TIME yield
-        vm.warp(block.timestamp + 10 days);
+        vm.warp(block.timestamp + 10 minutes);
 
         vm.startPrank(alice);
         humanBond.divorce(bob);
@@ -466,7 +466,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         // warp 3 days
-        vm.warp(block.timestamp + 3 days);
+        vm.warp(block.timestamp + 3 minutes);
 
         HumanBond.MarriageView memory v = humanBond.getMarriageView(alice, bob);
 
@@ -475,7 +475,7 @@ contract AutomationFlowTest is Test {
         assertEq(v.nullifierA, 1111);
         assertEq(v.nullifierB, 2222);
         assertEq(v.active, true);
-        assertEq(v.pendingYield, 3 ether); // 3 days
+        assertEq(v.pendingYield, 3 ether);
     }
 
     function test__UserDashboard() public {
@@ -500,7 +500,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         // warp 5 days → 5 tokens pending
-        vm.warp(block.timestamp + 5 days);
+        vm.warp(block.timestamp + 5 minutes);
 
         // AFTER ACCEPT — married, partner detected
         HumanBond.UserDashboard memory d2 = humanBond.getUserDashboard(alice);
