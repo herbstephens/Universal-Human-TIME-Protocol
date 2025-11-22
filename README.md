@@ -14,13 +14,13 @@ marriagePROOF enables two verified humans to get married on chain.  In addition 
 ## Features
 - **World ID** proof-of-personhood.
 - **Chainklink** oracles and automation.
-- **Filecoin** 
+- **Filecoin** "Best dApps powered by Filecoin Onchain Cloud" category.
 - **Top-Ten** 
 
 ## Technologies Used & Prizes Sought
-- **World:** Used as the 'proof of personhood' identification protocol.
-- **Chainlink:** 
-- **Filecoin:** 
+- **World:** "Best Mini App" category. 
+- **Chainlink:** "Connect the World with Chainlink" category. 
+- **Filecoin:** "Best dApps powered by Filecoin Onchain Cloud" category.
 - **TOP TEN:**
 
 ## Contributors
