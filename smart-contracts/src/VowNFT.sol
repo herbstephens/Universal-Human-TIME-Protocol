@@ -5,12 +5,12 @@ import {ERC721} from "openzeppelin-contracts/contracts/token/ERC721/ERC721.sol";
 import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 /**
- * @title BondNFT
+ * @title VowNFT
  * @dev ERC721 token representing a verified human bond.
  *      Uses a single static IPFS metadata URI for all minted tokens.
  */
-contract BondNFT is ERC721, Ownable {
-    error BondNFT__UnauthorizedMinter();
+contract VowNFT is ERC721, Ownable {
+    error VowNFT__UnauthorizedMinter();
     uint256 public tokenId;
     string public metadataTokenURI;
     address public humanBondContract; //authorized minter address
@@ -22,7 +22,7 @@ contract BondNFT is ERC721, Ownable {
 
     function _onlyHumanBond() public view {
         if (msg.sender != humanBondContract) {
-            revert BondNFT__UnauthorizedMinter();
+            revert VowNFT__UnauthorizedMinter();
         }
     }
 
@@ -39,7 +39,7 @@ contract BondNFT is ERC721, Ownable {
 
     /// @notice Mint a Bond NFT to a given address.
     //only HumanBond contract can mint
-    function mintBondNFT(address to) external onlyHumanBond returns (uint256) {
+    function mintVowNFT(address to) external onlyHumanBond returns (uint256) {
         tokenId++;
         _safeMint(to, tokenId);
         return tokenId;
