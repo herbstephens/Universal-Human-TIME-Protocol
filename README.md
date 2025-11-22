@@ -12,10 +12,10 @@ ETHGlobal Buenos Aires 2025 hackathon submission
 marriagePROOF enables two verified humans to get married on chain.  In addition to providing 'Proof of Marriage', marriagePROOF provides the operating environment for what is essentially is a two-person DAO: common treasury, governance and on-chain history.
 
 ## Features
-- **automated marriage proposal and acceptance** Turning getting married into a few clicks. 
-- **joint treasury management** Easing the process of managing money in a joint account.
+- **Automated Marriage Proposal and Acceptance** Turning getting married into a few clicks. 
+- **Joint Treasury Management** Easing the process of managing money in a joint account.
 - **Smart Marriage Registry** Offchain registry of married World IDs, useful to dating apps eliminating 'false-singles'.
-- **instant divorce** Simplifying and reducing costs of the divorcing process. And eliminating lawyers! 
+- **Instant Divorce** Simplifying and reducing costs of the divorcing process. And eliminating lawyers! 
 
 ## Technologies Used & Prizes Sought
 - **World:** "Best Mini App" category. 
