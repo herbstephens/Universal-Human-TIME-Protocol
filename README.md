@@ -13,7 +13,7 @@ marriagePROOF enables two verified humans to get married on chain.  In addition 
 
 ## Features
 - **Automated Marriage Proposal and Acceptance** Turning getting married into a few clicks. 
-- **Joint Treasury Management** Easing the process of managing money in a joint account.
+- **Joint Treasury Management** Easing the process of earning and managing money in a joint account.
 - **Smart Marriage Registry** Offchain registry of married World IDs, useful to dating apps eliminating 'false-singles'.
 - **Instant Divorce** Simplifying and reducing costs of the divorcing process. And eliminating lawyers! 
 
