@@ -25,9 +25,9 @@ marriagePROOF enables two verified humans to get married on chain.  In addition 
 
 ## Contributors
 - Herb Stephens: Lead, Product Manager
-- Franco : Frontend
-- Leticia: Smart Contracts
-- Axel: Full Stack Engineer
+- Franco Amicone: Frontend
+- Leticia Azevedo: Smart Contracts
+- Axel Ország-Krisz: Full Stack Developer
 
 ## Contact
 herb@democracy.earth
