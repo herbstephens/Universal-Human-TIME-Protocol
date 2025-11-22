@@ -11,8 +11,6 @@ import {
   MiniKit, 
   VerifyCommandInput, 
   VerificationLevel,
-  ISuccessResult,
-  MiniAppVerifyActionPayload 
 } from '@worldcoin/minikit-js'
 import { isInWorldApp, type WorldAction } from './initMiniKit'
 
@@ -115,43 +113,8 @@ export const useWorldVerification = () => {
     }
   }, [])
 
-  /**
-   * Verify the proof on the backend
-   * This should be called after getting the proof from verify()
-   * 
-   * @param payload - The success payload from verify()
-   * @param action - The action ID used for verification
-   * @param signal - The signal used for verification (optional)
-   */
-  const verifyProofOnBackend = useCallback(async (
-    payload: ISuccessResult,
-    action: WorldAction,
-    signal?: string
-  ): Promise<boolean> => {
-    try {
-      const response = await fetch('/api/verify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          payload,
-          action,
-          signal,
-        }),
-      })
-
-      const result = await response.json()
-      return result.status === 200 && result.verifyRes?.success
-    } catch (err) {
-      console.error('Backend verification failed:', err)
-      return false
-    }
-  }, [])
-
   return {
     verify,
-    verifyProofOnBackend,
     isVerifying: state.isVerifying,
     error: state.error,
   }

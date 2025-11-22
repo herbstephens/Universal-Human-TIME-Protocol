@@ -55,8 +55,10 @@ export default function Home() {
         return;
       }
 
-      // Save verification to store
+      // Save verification to store (including proof for on-chain verification)
       setVerified({
+        proof: result.proof!,
+        merkle_root: result.merkle_root!,
         nullifier_hash: result.nullifier_hash!,
         verification_level: result.verification_level!,
         verified_at: Date.now(),

@@ -9,11 +9,14 @@ import { persist } from 'zustand/middleware'
 
 /**
  * User verification data
+ * Includes all World ID proof data needed for on-chain verification
  */
 export type VerificationData = {
-  nullifier_hash: string
-  verification_level: string
-  verified_at: number // timestamp
+  proof: string                    // Zero-knowledge proof for on-chain verification
+  merkle_root: string              // Merkle root of the identity tree
+  nullifier_hash: string           // Unique identifier for this verification
+  verification_level: string       // 'orb' or 'device'
+  verified_at: number              // timestamp
 }
 
 /**

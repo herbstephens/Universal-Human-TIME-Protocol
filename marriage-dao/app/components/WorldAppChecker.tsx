@@ -52,32 +52,43 @@ export function WorldAppChecker() {
   const [platform, setPlatform] = useState<'ios' | 'android' | 'desktop'>('desktop')
 
   useEffect(() => {
-    // Check if running in World App after mount
+    // Mark component as mounted
     setIsMounted(true)
-    const inWorldApp = isInWorldApp()
-    setIsInWorld(inWorldApp)
     
-    // Detect platform
+    // Detect platform immediately
     const userPlatform = detectPlatform()
     setPlatform(userPlatform)
 
-    // If NOT in World App, show dialog and start countdown
-    if (!inWorldApp) {
-      setShowDialog(true)
-      
-      // Start countdown timer
-      const countdownInterval = setInterval(() => {
-        setCountdown((prev) => {
-          if (prev <= 1) {
-            clearInterval(countdownInterval)
-            redirectToWorldApp(userPlatform)
-            return 0
-          }
-          return prev - 1
-        })
-      }, 1000)
+    let countdownInterval: NodeJS.Timeout | null = null
 
-      return () => clearInterval(countdownInterval)
+    // Wait a bit for MiniKit to fully initialize before checking
+    // This prevents false negatives where MiniKit hasn't loaded yet
+    const checkTimeout = setTimeout(() => {
+      const inWorldApp = isInWorldApp()
+      console.log('World App check result:', inWorldApp)
+      setIsInWorld(inWorldApp)
+
+      // If NOT in World App, show dialog and start countdown
+      if (!inWorldApp) {
+        setShowDialog(true)
+        
+        // Start countdown timer
+        countdownInterval = setInterval(() => {
+          setCountdown((prev) => {
+            if (prev <= 1) {
+              if (countdownInterval) clearInterval(countdownInterval)
+              redirectToWorldApp(userPlatform)
+              return 0
+            }
+            return prev - 1
+          })
+        }, 1000)
+      }
+    }, 500) // Wait 500ms for MiniKit to initialize
+
+    return () => {
+      clearTimeout(checkTimeout)
+      if (countdownInterval) clearInterval(countdownInterval)
     }
   }, [])
 
