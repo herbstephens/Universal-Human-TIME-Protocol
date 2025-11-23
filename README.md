@@ -1,4 +1,4 @@
-# marriagePROOF
+# marriageDAO
 ETHGlobal Buenos Aires 2025 hackathon submission
 
 ## Table of Contents
@@ -9,19 +9,19 @@ ETHGlobal Buenos Aires 2025 hackathon submission
 5. [Contact](#contact)
 
 ## Introduction
-marriagePROOF enables two verified humans to get married on chain.  In addition to providing 'Proof of Marriage', marriagePROOF provides the operating environment for what is essentially is a two-person DAO: common treasury, governance and on-chain history.
+marriageDAO enables two verified humans to get married on chain.  In addition to providing 'Proof of Marriage', marriageDAO provides the operating environment for what is essentially is a two-person DAO: common treasury and multi-sig wallet, governance and on-chain history.
 
 ## Features
 - **Automated Marriage Proposal and Acceptance:**  Turning getting married into a few clicks. 
 - **Joint Treasury Management:**  Easing the process of managing money in a joint account.
 - **Smart Marriage Registry:**  Offchain registry of married World IDs, useful to dating apps eliminating 'false-singles'.
-- **Instant Divorce:**  Simplifying and reducing costs of the divorcing process. And eliminating lawyers! 
+- **Instant Divorce:**  Simplifying and reducing costs of the divorcing process - while helping to eliminating lawyers! 
 
 ## Technologies Used & Prizes Sought
-- **World:** "Best Mini App" category. 
-- **Chainlink:** "Connect the World with Chainlink" category. 
-- **Filecoin:** "Best dApps powered by Filecoin Onchain Cloud" category. Filecoin used to manage an immutable, decentralized, privacy-preserving registry of married World IDs that any dating app (Tinder, Bumble, Hinge, etc.) can query with one API call.
-- **TOP TEN:**
+- **World:**  "Best Mini App" category. 
+- **Chainlink:**  "Connect the World with Chainlink" category. 
+- **Filecoin:**  "Best dApps powered by Filecoin Onchain Cloud" category. Filecoin used to manage an immutable, decentralized, privacy-preserving registry of married World IDs that any dating app (Tinder, Bumble, Hinge, etc.) can query with one API call.
+- **TOP TEN:** 
 
 ## Contributors
 - Herb Stephens: Lead, Product Manager
@@ -33,4 +33,4 @@ marriagePROOF enables two verified humans to get married on chain.  In addition 
 herb@democracy.earth
 
 ## NOTE
-This Github repro and MIT License was created over a month ago in anticipation of the hackathon, however, no code or other elements were created or sumbitted prior to the start of the ETH Global hackathon.
+This Github repro and MIT License was created over a month ago in anticipation of the hackathon, however, no code or other elements were created or sumbitted prior to the start of the ETH Global Buenos Aires hackathon.
