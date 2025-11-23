@@ -31,6 +31,7 @@ marriageDAO enables two verified humans to get married on chain.  In addition to
 
 ## Contact
 herb@democracy.earth
+herbstephens.eth
 
 ## NOTE
 This Github repro and MIT License was created over a month ago in anticipation of the hackathon, however, no code or other elements were created or sumbitted prior to the start of the ETH Global Buenos Aires hackathon.
