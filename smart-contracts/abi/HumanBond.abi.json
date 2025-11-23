@@ -23,7 +23,12 @@
         "internalType": "address"
       },
       {
-        "name": "_externalNullifier",
+        "name": "_externalNullifierPropose",
+        "type": "uint256",
+        "internalType": "uint256"
+      },
+      {
+        "name": "_externalNullifierAccept",
         "type": "uint256",
         "internalType": "uint256"
       }
@@ -116,30 +121,6 @@
   },
   {
     "type": "function",
-    "name": "checkUpkeep",
-    "inputs": [
-      {
-        "name": "",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
-    ],
-    "outputs": [
-      {
-        "name": "upkeepNeeded",
-        "type": "bool",
-        "internalType": "bool"
-      },
-      {
-        "name": "performData",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
-    ],
-    "stateMutability": "view"
-  },
-  {
-    "type": "function",
     "name": "claimYield",
     "inputs": [
       {
@@ -166,7 +147,20 @@
   },
   {
     "type": "function",
-    "name": "externalNullifier",
+    "name": "externalNullifierAccept",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "externalNullifierPropose",
     "inputs": [],
     "outputs": [
       {
@@ -542,6 +536,13 @@
   },
   {
     "type": "function",
+    "name": "manualCheckAndMint",
+    "inputs": [],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
     "name": "marriageIds",
     "inputs": [
       {
@@ -638,19 +639,6 @@
       }
     ],
     "stateMutability": "view"
-  },
-  {
-    "type": "function",
-    "name": "performUpkeep",
-    "inputs": [
-      {
-        "name": "performData",
-        "type": "bytes",
-        "internalType": "bytes"
-      }
-    ],
-    "outputs": [],
-    "stateMutability": "nonpayable"
   },
   {
     "type": "function",

@@ -51,15 +51,21 @@ contract DeployScript is Script {
         milestoneNFT.freezeMilestones();
 
         // Step 3: Deploy HumanBond main contract
-        // uint256 externalNullifier = 12345; // replace if needed
-        uint256 externalNullifier = uint256(keccak256("marriage-proposal-v1"));
+        uint256 externalNullifierPropose = uint256(
+            keccak256("create-marriage-proposal")
+        );
+
+        uint256 externalNullifierAccept = uint256(
+            keccak256("accept-marriage-proposal")
+        );
 
         HumanBond humanBond = new HumanBond(
             0x17B354dD2595411ff79041f930e491A4Df39A278, // REAL WORLD ID ROUTER
             address(vowNFT),
             address(timeToken),
             address(milestoneNFT),
-            externalNullifier
+            externalNullifierPropose,
+            externalNullifierAccept
         );
 
         milestoneNFT.setHumanBondContract(address(humanBond)); //Link MilestoneNFT to HumanBond

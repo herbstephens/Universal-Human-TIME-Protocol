@@ -5,7 +5,8 @@ import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 import {VowNFT} from "./VowNFT.sol";
 import {TimeToken} from "./TimeToken.sol";
 import {MilestoneNFT} from "./MilestoneNFT.sol";
-import {AutomationCompatibleInterface} from "../lib/chainlink-brownie-contracts/contracts/src/v0.8/automation/AutomationCompatible.sol";
+
+// import {AutomationCompatibleInterface} from "../lib/chainlink-brownie-contracts/contracts/src/v0.8/automation/AutomationCompatible.sol";
 
 /* ---------------------------- INTERFACE --------------------------- */
 /// @notice Interface for the official World ID verifier contract.
@@ -28,7 +29,7 @@ interface IWorldID {
  * @dev Uses World ID verification to confirm both users are real humans,
  *      then mints static metadata NFTs and TIME ERC-20 token for each verified bond.
  */
-contract HumanBond is Ownable, AutomationCompatibleInterface {
+contract HumanBond is Ownable {
     error HumanBond__UserAlreadyMarried();
     error HumanBond__InvalidAddress();
     error HumanBond__ProposalAlreadyExists();
@@ -95,7 +96,9 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
     VowNFT public immutable vowNFT;
     TimeToken public immutable timeToken;
     MilestoneNFT public immutable milestoneNFT;
-    uint256 public immutable externalNullifier;
+    // uint256 public immutable externalNullifier;
+    uint256 public immutable externalNullifierPropose;
+    uint256 public immutable externalNullifierAccept;
 
     uint256 public constant GROUP_ID = 1;
     /* ----------------------------- EVENTS ----------------------------- */
@@ -124,13 +127,15 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
         address _VowNFT,
         address _TimeToken,
         address _milestoneNFT,
-        uint256 _externalNullifier
+        uint256 _externalNullifierPropose,
+        uint256 _externalNullifierAccept
     ) Ownable(msg.sender) {
         worldId = IWorldID(_worldId);
         vowNFT = VowNFT(_VowNFT);
         timeToken = TimeToken(_TimeToken);
         milestoneNFT = MilestoneNFT(_milestoneNFT);
-        externalNullifier = _externalNullifier;
+        externalNullifierPropose = _externalNullifierPropose;
+        externalNullifierAccept = _externalNullifierAccept;
     }
 
     /* ---------------------------- FUNCTIONS --------------------------- */
@@ -168,7 +173,7 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
             GROUP_ID,
             uint256(uint160(msg.sender)), // signal = sender address
             proposerNullifier,
-            externalNullifier,
+            externalNullifierPropose,
             proof
         );
 
@@ -217,7 +222,7 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
             GROUP_ID,
             uint256(uint160(msg.sender)), // signal = sender address
             acceptorNullifier,
-            externalNullifier,
+            externalNullifierAccept,
             proof
         );
 
@@ -334,73 +339,32 @@ contract HumanBond is Ownable, AutomationCompatibleInterface {
     }
 
     /* -------------------------------------------------------------------------- */
-    /*                           CHAINLINK AUTOMATION LOGIC                       */
+    /*                           NFT MILESTONE LOGIC                              */
     /* -------------------------------------------------------------------------- */
 
-    function checkUpkeep(
-        bytes calldata
-    )
-        external
-        view
-        override
-        returns (bool upkeepNeeded, bytes memory performData)
-    {
+    function manualCheckAndMint() external {
         uint256 length = marriageIds.length;
-        bytes32[] memory ready = new bytes32[](length);
-        uint256 count;
         uint256 maxYear = milestoneNFT.latestYear();
 
-        for (uint256 i = 0; i < length; ) {
+        for (uint256 i = 0; i < length; i++) {
             bytes32 id = marriageIds[i];
-            Marriage memory m = marriages[id];
+            Marriage storage m = marriages[id];
 
-            if (m.active) {
-                uint256 yearsTogether = (block.timestamp - m.bondStart) /
-                    2 minutes;
+            if (!m.active) continue;
 
-                if (
-                    yearsTogether > m.lastMilestoneYear &&
-                    yearsTogether <= maxYear
-                ) {
-                    ready[count++] = id;
-                }
-            }
+            uint256 yearsTogether = (block.timestamp - m.bondStart) / 2 minutes;
 
-            unchecked {
-                i++;
-            }
-        }
-
-        upkeepNeeded = count > 0;
-        performData = abi.encode(ready, count);
-    }
-
-    /**
-     * @notice Called by Chainlink when upkeep is needed.
-     * @dev Mints milestone NFTs for couples reaching new anniversaries.
-     */
-    function performUpkeep(bytes calldata performData) external override {
-        (bytes32[] memory ready, uint256 count) = abi.decode(
-            performData,
-            (bytes32[], uint256)
-        );
-
-        for (uint256 j = 0; j < count; j++) {
-            Marriage storage marriage = marriages[ready[j]];
-            if (!marriage.active) continue;
-
-            uint256 yearsTogether = (block.timestamp - marriage.bondStart) /
-                2 minutes;
             if (
-                yearsTogether > marriage.lastMilestoneYear &&
-                yearsTogether <= milestoneNFT.latestYear()
+                yearsTogether > m.lastMilestoneYear && yearsTogether <= maxYear
             ) {
-                milestoneNFT.mintMilestone(marriage.partnerA, yearsTogether);
-                milestoneNFT.mintMilestone(marriage.partnerB, yearsTogether);
-                marriage.lastMilestoneYear = yearsTogether;
+                milestoneNFT.mintMilestone(m.partnerA, yearsTogether);
+                milestoneNFT.mintMilestone(m.partnerB, yearsTogether);
+
+                m.lastMilestoneYear = yearsTogether;
+
                 emit AnniversaryAchieved(
-                    marriage.partnerA,
-                    marriage.partnerB,
+                    m.partnerA,
+                    m.partnerB,
                     yearsTogether,
                     block.timestamp
                 );

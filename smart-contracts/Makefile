@@ -1,6 +1,5 @@
 deploy:
 	forge script script/Deploy.s.sol:DeployScript --rpc-url http://localhost:8545 --broadcast
-
 propose:
 	cast send 0x2279b7a0a67db372996a5fab50d91eaa73d2ebe6 \
 "propose(address,uint256,uint256,uint256[8])" \

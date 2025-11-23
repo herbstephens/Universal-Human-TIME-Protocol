@@ -204,127 +204,40 @@ contract AutomationFlowTest is Test {
         milestoneNFT.mintMilestone(alice, 1);
     }
 
-    //////////------------------CHAINLINK TESTS------------------//////////
+    //============================ MILESTONE NFT  ============================//
+    function testManualCheckAndMint() public {
+        address A = address(0x1);
+        address B = address(0x2);
 
-    function test__AutomationNotTriggeredBeforeOneYear() public {
-        vm.startPrank(alice);
-        humanBond.propose(
-            bob,
-            1,
-            1111,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
+        uint256 root = 1;
+        uint256 nullA = 10;
+        uint256 nullB = 20;
+        uint256[8] memory proof;
+
+        // A proposes
+        vm.startPrank(A);
+        humanBond.propose(B, root, nullA, proof);
         vm.stopPrank();
 
-        vm.startPrank(bob);
-        humanBond.accept(
-            alice,
-            1,
-            2222,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
+        // B accepts
+        vm.startPrank(B);
+        humanBond.accept(A, root, nullB, proof);
         vm.stopPrank();
 
-        vm.warp(block.timestamp + 1 minutes);
+        // warp forward to satisfy 1 "year" (2 minutes)
+        vm.warp(block.timestamp + 2 minutes + 1);
 
-        (bool needed, ) = humanBond.checkUpkeep("");
-        assertFalse(needed);
-    }
+        // call manual function
+        humanBond.manualCheckAndMint();
 
-    function test__CannotMintMilestoneTwice() public {
-        // marry
-        vm.startPrank(alice);
-        humanBond.propose(
-            bob,
-            1,
-            1111,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
-        vm.stopPrank();
-        vm.startPrank(bob);
-        humanBond.accept(
-            alice,
-            1,
-            2222,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
-        vm.stopPrank();
+        // check milestone minted (ERC721)
+        assertEq(milestoneNFT.balanceOf(A), 1, "A should have 1 milestone NFT");
+        assertEq(milestoneNFT.balanceOf(B), 1, "B should have 1 milestone NFT");
 
-        vm.warp(block.timestamp + 2 minutes);
+        // verify state updated
+        HumanBond.Marriage memory m = humanBond.getMarriage(A, B);
 
-        (, bytes memory data) = humanBond.checkUpkeep("");
-        humanBond.performUpkeep(data);
-
-        // second call should mint nothing
-        (bool needed2, ) = humanBond.checkUpkeep("");
-        assertFalse(needed2);
-    }
-
-    function test__MilestoneTokenURI() public {
-        vm.startPrank(alice);
-        humanBond.propose(
-            bob,
-            1,
-            1111,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
-        vm.stopPrank();
-
-        vm.startPrank(bob);
-        humanBond.accept(
-            alice,
-            1,
-            2222,
-            uint256[8]([uint256(0), 0, 0, 0, 0, 0, 0, 0])
-        );
-        vm.stopPrank();
-
-        vm.warp(block.timestamp + 2 minutes);
-        (, bytes memory data) = humanBond.checkUpkeep("");
-        humanBond.performUpkeep(data);
-
-        string memory uri = milestoneNFT.tokenURI(0);
-        assertEq(uri, "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8");
-    }
-
-    function test__ChainlinkAutomationFlow() public {
-        //1. Alice proposes to Bob
-        vm.startPrank(alice);
-        humanBond.propose(
-            bob,
-            1, // marriageId
-            1111, // nullifier
-            [uint256(0), 0, 0, 0, 0, 0, 0, 0] // mock proof
-        );
-        vm.stopPrank();
-
-        // 2. Bob accepts proposal
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        // 3. Warp time more than 1 year
-        vm.warp(block.timestamp + 2 minutes);
-
-        // 4. Call checkUpkeep()
-        (bool upkeepNeeded, bytes memory performData) = humanBond.checkUpkeep(
-            ""
-        );
-
-        assertTrue(upkeepNeeded, "Upkeep should be needed after 1y");
-
-        // 5. Call performUpkeep()
-        humanBond.performUpkeep(performData);
-
-        // 6. Assert milestone NFTs were minted
-        uint256 aliceToken = 0;
-        uint256 bobToken = 1;
-
-        assertEq(milestoneNFT.ownerOf(aliceToken), alice);
-        assertEq(milestoneNFT.ownerOf(bobToken), bob);
-
-        assertEq(milestoneNFT.tokenYear(0), 1);
-        assertEq(milestoneNFT.tokenYear(1), 1);
+        assertEq(m.lastMilestoneYear, 1, "Milestone year should update");
     }
 
     //============================ DIVORCE TESTS ============================//
