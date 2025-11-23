@@ -21,7 +21,7 @@ marriageDAO enables two verified humans to get married on chain.  In addition to
 - **World:**  "Best Mini App" category. 
 - **Chainlink:**  "Connect the World with Chainlink" category. 
 - **Filecoin:**  "Best dApps powered by Filecoin Onchain Cloud" category. Filecoin used to manage an immutable, decentralized, privacy-preserving registry of married World IDs that any dating app (Tinder, Bumble, Hinge, etc.) can query with one API call.
-- **TOP TEN:** 
+- **Top Ten Finalist:**  
 
 ## Contributors
 - Herb Stephens: Lead, Product Manager
