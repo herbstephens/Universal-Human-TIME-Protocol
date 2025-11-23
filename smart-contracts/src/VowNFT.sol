@@ -47,9 +47,7 @@ contract VowNFT is ERC721, Ownable {
     }
 
     /// @notice Returns the static IPFS metadata URI for all tokens.
-    function tokenURI(
-        uint256 idOfToken
-    ) public view override returns (string memory) {
+    function tokenURI(uint256 idOfToken) public view override returns (string memory) {
         _requireOwned(idOfToken);
         return metadataTokenURI;
     }
@@ -57,11 +55,7 @@ contract VowNFT is ERC721, Ownable {
     /* -------------------------------------------------------------------------- */
     /*                             SOULBOUND OVERRIDES                             */
     /* -------------------------------------------------------------------------- */
-    function _update(
-        address to,
-        uint256 tokenIdd,
-        address auth
-    ) internal override returns (address) {
+    function _update(address to, uint256 tokenIdd, address auth) internal override returns (address) {
         address from = _ownerOf(tokenIdd);
 
         if (from != address(0) && to != from) {

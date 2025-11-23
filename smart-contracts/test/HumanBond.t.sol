@@ -10,14 +10,7 @@ import {MarriageIdHelper} from "./utils/MarriageHelper.sol";
 
 // Dummy verifier (same used in deploy)
 contract DummyWorldID is IWorldID {
-    function verifyProof(
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256[8] calldata
-    ) external pure override {}
+    function verifyProof(uint256, uint256, uint256, uint256, uint256, uint256[8] calldata) external pure override {}
 }
 
 contract AutomationFlowTest is Test {
@@ -38,23 +31,12 @@ contract AutomationFlowTest is Test {
         timeToken = new TimeToken();
 
         // Set milestone URIs (required or mint will revert)
-        milestoneNFT.setMilestoneURI(
-            1,
-            "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8"
-        );
-        milestoneNFT.setMilestoneURI(
-            2,
-            "ipfs://QmPTuKXg64EaeyreUFe4PJ1istspMd4G2oe2ArRYrtBGYn"
-        );
+        milestoneNFT.setMilestoneURI(1, "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8");
+        milestoneNFT.setMilestoneURI(2, "ipfs://QmPTuKXg64EaeyreUFe4PJ1istspMd4G2oe2ArRYrtBGYn");
 
         // Deploy HumanBond
-        humanBond = new HumanBond(
-            address(worldId),
-            address(vowNFT),
-            address(timeToken),
-            address(milestoneNFT),
-            12345
-        );
+        humanBond =
+            new HumanBond(address(worldId), address(vowNFT), address(timeToken), address(milestoneNFT), 12345, 67890);
 
         // Link contracts
         milestoneNFT.setHumanBondContract(address(humanBond));
@@ -83,12 +65,7 @@ contract AutomationFlowTest is Test {
         humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
 
         vm.expectRevert(); // expecting double proposal revert
-        humanBond.propose(
-            address(0xB5),
-            1,
-            1111,
-            [uint256(0), 0, 0, 0, 0, 0, 0, 0]
-        );
+        humanBond.propose(address(0xB5), 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
 
         vm.stopPrank();
     }
@@ -257,7 +234,7 @@ contract AutomationFlowTest is Test {
         vm.stopPrank();
 
         bytes32 id = humanBond._getMarriageId(alice, bob);
-        (, , , , , , , bool active) = humanBond.marriages(id);
+        (,,,,,,, bool active) = humanBond.marriages(id);
 
         assertFalse(active, "Marriage should be inactive after divorce");
         assertFalse(humanBond.isHumanMarried(1111), "Nullifier A not freed");
@@ -355,7 +332,7 @@ contract AutomationFlowTest is Test {
 
         // Marriage must be active again
         bytes32 id = humanBond._getMarriageId(alice, bob);
-        (, , , , , , , bool active) = humanBond.marriages(id);
+        (,,,,,,, bool active) = humanBond.marriages(id);
         assertTrue(active, "Should be active after remarrying");
 
         // Both must have received new VowNFTs
@@ -399,9 +376,7 @@ contract AutomationFlowTest is Test {
 
         // BEFORE ACCEPT — Alice has proposal, not married
         {
-            HumanBond.UserDashboard memory d1 = humanBond.getUserDashboard(
-                alice
-            );
+            HumanBond.UserDashboard memory d1 = humanBond.getUserDashboard(alice);
             assertTrue(d1.hasProposal);
             assertFalse(d1.isMarried);
             assertEq(d1.partner, address(0));

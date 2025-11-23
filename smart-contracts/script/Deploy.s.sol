@@ -9,14 +9,7 @@ import {TimeToken} from "../src/TimeToken.sol";
 
 /// @notice Dummy World ID verifier for local testing. Replace with the real one on testnet.
 contract DummyWorldID is IWorldID {
-    function verifyProof(
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256[8] calldata
-    ) external pure override {}
+    function verifyProof(uint256, uint256, uint256, uint256, uint256, uint256[8] calldata) external pure override {}
 }
 
 /// @title Deploy Script for HumanBond Protocol
@@ -32,32 +25,16 @@ contract DeployScript is Script {
         TimeToken timeToken = new TimeToken();
 
         // Step 2: Set milestone metadata URIs BEFORE ownership transfer
-        milestoneNFT.setMilestoneURI(
-            1,
-            "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8"
-        );
-        milestoneNFT.setMilestoneURI(
-            2,
-            "ipfs://QmPTuKXg64EaeyreUFe4PJ1istspMd4G2oe2ArRYrtBGYn"
-        );
-        milestoneNFT.setMilestoneURI(
-            3,
-            "ipfs://Qma32oBrwNNQVR3KS14RHqt3QhgYMsGKabQv4jusdtgsKN"
-        );
-        milestoneNFT.setMilestoneURI(
-            4,
-            "ipfs://QmSw9ixqCVc7VPQzDdX1ZCdWWJwAfLHRdJsi831PsC94uh"
-        );
+        milestoneNFT.setMilestoneURI(1, "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8");
+        milestoneNFT.setMilestoneURI(2, "ipfs://QmPTuKXg64EaeyreUFe4PJ1istspMd4G2oe2ArRYrtBGYn");
+        milestoneNFT.setMilestoneURI(3, "ipfs://Qma32oBrwNNQVR3KS14RHqt3QhgYMsGKabQv4jusdtgsKN");
+        milestoneNFT.setMilestoneURI(4, "ipfs://QmSw9ixqCVc7VPQzDdX1ZCdWWJwAfLHRdJsi831PsC94uh");
         milestoneNFT.freezeMilestones();
 
         // Step 3: Deploy HumanBond main contract
-        uint256 externalNullifierPropose = uint256(
-            keccak256("create-marriage-proposal")
-        );
+        uint256 externalNullifierPropose = uint256(keccak256("create-marriage-proposal"));
 
-        uint256 externalNullifierAccept = uint256(
-            keccak256("accept-marriage-proposal")
-        );
+        uint256 externalNullifierAccept = uint256(keccak256("accept-marriage-proposal"));
 
         HumanBond humanBond = new HumanBond(
             0x17B354dD2595411ff79041f930e491A4Df39A278, // REAL WORLD ID ROUTER
