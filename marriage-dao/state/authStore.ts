@@ -26,7 +26,7 @@ type AuthState = {
   isVerified: boolean
   verificationData: VerificationData | null
   walletAddress: string | null
-  
+
   // Actions
   setVerified: (data: VerificationData) => void
   setWalletAddress: (address: string) => void
@@ -91,16 +91,17 @@ export const useAuthStore = create<AuthState>()(
        */
       checkVerificationExpiry: () => {
         const { verificationData } = get()
-        
+
         if (!verificationData) {
           return false
         }
 
         const now = Date.now()
         const hoursSinceVerification = (now - verificationData.verified_at) / (1000 * 60 * 60)
-        
+
         // Expire after 24 hours
-        if (hoursSinceVerification > 24) {
+        if (hoursSinceVerification > 24
+        ) {
           get().clearVerification()
           return false
         }

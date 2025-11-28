@@ -88,14 +88,12 @@ export enum WorldVerificationLevel {
  * Format: action-name-in-kebab-case
  * 
  * Actions created:
- * - app-access: Unlimited verifications for general app access
- * - create-marriage-proposal: Unique (1 per user) for creating proposals
- * - accept-marriage-proposal: Unique (1 per user) for accepting proposals
+ * - propose-bond: For creating marriage proposals (on-chain verification)
+ * - accept-bond: For accepting marriage proposals (on-chain verification)
  */
 export const WORLD_ACTIONS = {
-  APP_ACCESS: 'app-access',
-  CREATE_PROPOSAL: 'create-marriage-proposal',
-  ACCEPT_PROPOSAL: 'accept-marriage-proposal',
+  PROPOSE_BOND: 'propose-bond',
+  ACCEPT_BOND: 'accept-bond',
 } as const
 
 export type WorldAction = typeof WORLD_ACTIONS[keyof typeof WORLD_ACTIONS]
