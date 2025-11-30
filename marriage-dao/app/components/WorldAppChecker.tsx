@@ -7,7 +7,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { isInWorldApp } from '@/lib/worldcoin/initMiniKit'
+
 import {
   Dialog,
   DialogContent,
@@ -28,68 +28,38 @@ const WORLD_APP_LINKS = {
 // Detect user's platform
 const detectPlatform = (): 'ios' | 'android' | 'desktop' => {
   if (typeof window === 'undefined') return 'desktop'
-  
+
   const userAgent = navigator.userAgent || navigator.vendor
-  
+
   // Detect iOS
   if (/iPad|iPhone|iPod/.test(userAgent)) {
     return 'ios'
   }
-  
+
   // Detect Android
   if (/android/i.test(userAgent)) {
     return 'android'
   }
-  
+
   return 'desktop'
 }
 
-export function WorldAppChecker() {
-  const [isInWorld, setIsInWorld] = useState<boolean>(false)
+export interface WorldAppCheckerProps {
+  isOpen: boolean
+  onOpenChange: (open: boolean) => void
+}
+
+export function WorldAppChecker({ isOpen, onOpenChange }: WorldAppCheckerProps) {
   const [isMounted, setIsMounted] = useState(false)
-  const [showDialog, setShowDialog] = useState(false)
-  const [countdown, setCountdown] = useState(5)
   const [platform, setPlatform] = useState<'ios' | 'android' | 'desktop'>('desktop')
 
   useEffect(() => {
     // Mark component as mounted
     setIsMounted(true)
-    
+
     // Detect platform immediately
     const userPlatform = detectPlatform()
     setPlatform(userPlatform)
-
-    let countdownInterval: NodeJS.Timeout | null = null
-
-    // Wait a bit for MiniKit to fully initialize before checking
-    // This prevents false negatives where MiniKit hasn't loaded yet
-    const checkTimeout = setTimeout(() => {
-      const inWorldApp = isInWorldApp()
-      console.log('World App check result:', inWorldApp)
-      setIsInWorld(inWorldApp)
-
-      // If NOT in World App, show dialog and start countdown
-      if (!inWorldApp) {
-        setShowDialog(true)
-        
-        // Start countdown timer
-        countdownInterval = setInterval(() => {
-          setCountdown((prev) => {
-            if (prev <= 1) {
-              if (countdownInterval) clearInterval(countdownInterval)
-              redirectToWorldApp(userPlatform)
-              return 0
-            }
-            return prev - 1
-          })
-        }, 1000)
-      }
-    }, 500) // Wait 500ms for MiniKit to initialize
-
-    return () => {
-      clearTimeout(checkTimeout)
-      if (countdownInterval) clearInterval(countdownInterval)
-    }
   }, [])
 
   /**
@@ -97,13 +67,13 @@ export function WorldAppChecker() {
    */
   const redirectToWorldApp = (userPlatform: 'ios' | 'android' | 'desktop') => {
     let redirectUrl = WORLD_APP_LINKS.fallback
-    
+
     if (userPlatform === 'ios') {
       redirectUrl = WORLD_APP_LINKS.ios
     } else if (userPlatform === 'android') {
       redirectUrl = WORLD_APP_LINKS.android
     }
-    
+
     window.location.href = redirectUrl
   }
 
@@ -134,20 +104,8 @@ export function WorldAppChecker() {
 
   return (
     <>
-      {/* Success indicator when in World App (optional - can be removed in production) */}
-      {isInWorld && (
-        <div className="fixed bottom-4 right-4 z-50">
-          <div className="px-4 py-2 rounded-lg shadow-lg text-sm font-medium bg-black text-white border border-gray-800">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-              Running in World App ✓
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Redirect Dialog when NOT in World App */}
-      <Dialog open={showDialog} onOpenChange={setShowDialog}>
+      <Dialog open={isOpen} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <div className="flex justify-center mb-4">
@@ -162,13 +120,10 @@ export function WorldAppChecker() {
               <p className="text-base text-gray-700">
                 This app must be opened through <span className="font-semibold text-black">World App</span> to work properly.
               </p>
-              
+
               <div className="bg-gray-100 p-4 rounded-lg border border-gray-300">
                 <p className="text-sm text-gray-700">
-                  You will be redirected to the <span className="font-semibold">{getStoreIcon()} {getStoreText()}</span> in:
-                </p>
-                <p className="text-4xl font-bold text-black mt-2">
-                  {countdown}s
+                  Please open this application in the World App to continue.
                 </p>
               </div>
 
@@ -177,7 +132,7 @@ export function WorldAppChecker() {
               </p>
             </DialogDescription>
           </DialogHeader>
-          
+
           <DialogFooter className="flex-col sm:flex-col gap-2">
             <Button
               onClick={handleRedirectNow}

@@ -42,27 +42,27 @@ export const isInWorldApp = (): boolean => {
   if (typeof window === 'undefined') {
     return false
   }
-  
+
   try {
     // Check multiple indicators that we're in World App
-    
+
     // 1. Check user agent for World App
     const userAgent = navigator.userAgent || ''
     if (userAgent.includes('MiniKit') || userAgent.includes('WorldApp')) {
       return true
     }
-    
+
     // 2. Check if MiniKit is injected into window
     const windowWithMiniKit = window as any
     if (windowWithMiniKit.MiniKit) {
       return true
     }
-    
+
     // 3. Check if MiniKit exists and is properly initialized
     if (!MiniKit || typeof MiniKit.isInstalled !== 'function') {
       return false
     }
-    
+
     return MiniKit.isInstalled()
   } catch (error) {
     // MiniKit throws an error when not running in World App
@@ -92,6 +92,7 @@ export enum WorldVerificationLevel {
  * - accept-bond: For accepting marriage proposals (on-chain verification)
  */
 export const WORLD_ACTIONS = {
+  APP_ACCESS: 'app-access',
   PROPOSE_BOND: 'propose-bond',
   ACCEPT_BOND: 'accept-bond',
 } as const

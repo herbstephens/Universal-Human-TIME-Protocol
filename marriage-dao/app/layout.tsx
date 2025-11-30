@@ -13,7 +13,7 @@ import { MiniKitProvider } from "@worldcoin/minikit-js/minikit-provider";
 import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { wagmiConfig } from "@/lib/wagmi/config";
-import { WorldAppChecker } from "./components/WorldAppChecker";
+
 import "./globals.css";
 import { useState } from "react";
 
@@ -54,8 +54,7 @@ export default function RootLayout({
             <body
               className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-              {/* Automatically checks if in World App and redirects to store if not */}
-              <WorldAppChecker />
+
               {children}
             </body>
           </QueryClientProvider>

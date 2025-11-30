@@ -7,6 +7,7 @@
 'use client'
 
 import { Header } from "./components/Header";
+import { WorldAppChecker } from "./components/WorldAppChecker";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useWorldVerification } from "@/lib/worldcoin/useWorldVerification";
@@ -19,6 +20,7 @@ export default function Home() {
   const { verify, isVerifying, error } = useWorldVerification();
   const { setVerified, isVerified, checkVerificationExpiry } = useAuthStore();
   const [showError, setShowError] = useState<string | null>(null);
+  const [showWorldAppDialog, setShowWorldAppDialog] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   /**
@@ -35,6 +37,12 @@ export default function Home() {
    */
   const handleGetStarted = async () => {
     setShowError(null);
+
+    // Check if running in World App
+    if (!isInWorldApp()) {
+      setShowWorldAppDialog(true);
+      return;
+    }
 
     // If already verified, just navigate
     if (isVerified && checkVerificationExpiry()) {
@@ -115,11 +123,11 @@ export default function Home() {
             disabled={isVerifying}
             className="mt-4 bg-black text-white px-12 py-4 rounded-full text-lg font-medium hover:bg-black/90 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isVerifying 
-              ? "Verifying..." 
+            {isVerifying
+              ? "Verifying..."
               : isVerified && checkVerificationExpiry()
-              ? "Continue"
-              : "Get started"}
+                ? "Continue"
+                : "Get started"}
           </button>
 
           {/* Error message */}
@@ -130,6 +138,11 @@ export default function Home() {
           )}
         </div>
       </main>
+
+      <WorldAppChecker
+        isOpen={showWorldAppDialog}
+        onOpenChange={setShowWorldAppDialog}
+      />
     </div>
   );
 }
