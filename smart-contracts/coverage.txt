@@ -1,0 +1,1646 @@
+Compiling 55 files with Solc 0.8.30
+Solc 0.8.30 finished in 917.89ms
+Compiler run successful with warnings:
+Warning (2072): Unused local variable.
+  --> script/Deploy.s.sol:20:9:
+   |
+20 |         address WORLD_ID_ROUTER_FOR_TESTING = 0x469449f251692E0779667583026b5A1E99512157; // World ID Router on Sepolia
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Analysing contracts...
+Running tests...
+
+Ran 1 test for test/integrations/Deploytest.t.sol:DeployTest
+[PASS] test_deploymentFlow() (gas: 10034669)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 3.61ms (1.60ms CPU time)
+
+Ran 10 tests for test/MilestoneNFTtest.t.sol:MilestoneNFTTest
+[PASS] test_freezeBlocksFurtherChanges() (gas: 85358)
+[PASS] test_mintMilestone_onlyHumanBond() (gas: 172817)
+[PASS] test_ownerCanSetMilestoneURI() (gas: 64924)
+[PASS] test_revert_mintMilestone_missingURI() (gas: 20020)
+[PASS] test_revert_mintMilestone_wrongCaller() (gas: 67198)
+[PASS] test_revert_setMilestoneURI_nonOwner() (gas: 12284)
+[PASS] test_revert_setMilestoneURI_zeroYear() (gas: 14700)
+[PASS] test_revert_tokenURI_notMinted() (gas: 13695)
+[PASS] test_revert_transfer_soulbound() (gas: 171207)
+[PASS] test_tokenURI_returnsCorrectURI() (gas: 172662)
+Suite result: ok. 10 passed; 0 failed; 0 skipped; finished in 6.90ms (5.29ms CPU time)
+
+Ran 8 tests for test/VowNFTtest.t.sol:VowNFTTest
+[PASS] test_console_log_tokenURI_for_manual_inspection() (gas: 314847)
+[PASS] test_mint_recordsMetadataAndMapping_slot0() (gas: 212787)
+[PASS] test_secondMint_fillsSlot1() (gas: 374371)
+[PASS] test_setHumanBondContract_onlyOwner() (gas: 17406)
+[PASS] test_setImageCID_onlyOwner() (gas: 20983)
+[PASS] test_thirdMint_reverts_with_max_two() (gas: 519419)
+[PASS] test_tokenURI_hasDataPrefixAndImageCID() (gas: 319343)
+[PASS] test_transfer_reverts_with_VowNFT__TransfersDisabled() (gas: 210814)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 7.04ms (3.70ms CPU time)
+
+Ran 31 tests for test/HumanBond.t.sol:AutomationFlowTest
+[PASS] test_accept_changeAcceptToTrue() (gas: 811101)
+[PASS] test_accept_deletes_allPreviousProposals() (gas: 849487)
+[PASS] test_accept_getMarriageId_recordsMarriageIdSymmetryAndPushToArray() (gas: 4192989)
+[PASS] test_accept_reverts_ifNotCorrectPartnerAccept() (gas: 169313)
+[PASS] test_accpet_MintsVowNFTandSendTokens() (gas: 820071)
+[PASS] test_cancelProposal_clearsProposalCorrectly() (gas: 132672)
+[PASS] test_cancelProposal_reverts_ifNoProposal() (gas: 22075)
+[PASS] test_checkAndMintMilestone_mintsWhenYearReached() (gas: 1027475)
+[PASS] test_checkAndMintMilestone_reverts_ifAlreadyMintedForYear() (gas: 1023217)
+[PASS] test_checkAndMintMilestone_reverts_ifNoActiveMarriage() (gas: 16798)
+[PASS] test_checkAndMintMilestone_reverts_ifYearNotReached() (gas: 817789)
+[PASS] test_claimYield_splitsTokensEvenlyAndResetsCounter() (gas: 834914)
+[PASS] test_divorce_claimsPendingYieldAndSplitsEvenly() (gas: 775710)
+[PASS] test_divorce_resetsActiveMarriageMapping() (gas: 759608)
+[PASS] test_divorce_reverts_ifNotActiveMarriage() (gas: 16814)
+[PASS] test_divorce_reverts_ifNotYourMarriage() (gas: 815350)
+[PASS] test_getBondStart_returnsCorrectTimestamp() (gas: 818165)
+[PASS] test_getCurrentMilestoneYear_returnsCorrectYear() (gas: 1021059)
+[PASS] test_getMarriageView_returnsCorrectData() (gas: 820206)
+[PASS] test_getPendingYield_returnsCorrectValue() (gas: 813198)
+[PASS] test_getProposal_returnsCorrectData() (gas: 166592)
+[PASS] test_getUserDashboard_marriedUser() (gas: 817463)
+[PASS] test_milestone_reverts_ifYearExceedsMax() (gas: 822245)
+[PASS] test_pendingYield_recordsBalanceCorrectly() (gas: 813271)
+[PASS] test_propose_emits_ProposalCreated() (gas: 164010)
+[PASS] test_propose_reverts_ifAlreadyHasProposalOpen() (gas: 170164)
+[PASS] test_propose_reverts_ifAlreadyMarried() (gas: 825655)
+[PASS] test_propose_reverts_ifProposeToInvalidAddress() (gas: 33277)
+[PASS] test_propose_reverts_ifUsingSameNullifier() (gas: 142901)
+[PASS] test_propose_reverts_whenProposeToYourself() (gas: 33533)
+[PASS] test_propose_sucessfully_storeProposal() (gas: 166603)
+Suite result: ok. 31 passed; 0 failed; 0 skipped; finished in 7.55ms (25.34ms CPU time)
+
+Ran 4 test suites in 129.62ms (25.10ms CPU time): 50 tests passed, 0 failed, 0 skipped (50 total tests)
+script/Deploy.s.sol:
+- Line (location: (source ID: 43, lines: 13..65, bytes: 472..2697), hits: 0) -> "function run() external {\n      ...g(\"Deployment complete!\");\n    }"
+- Function "run" (location: (source ID: 43, lines: 13..65, bytes: 472..2697), hits: 0) -> "function run() external {\n      ...g(\"Deployment complete!\");\n    }"
+- Line (location: (source ID: 43, lines: 14..15, bytes: 506..525), hits: 0) -> "vm.startBroadcast()"
+- Statement (location: (source ID: 43, lines: 14..15, bytes: 506..525), hits: 0) -> "vm.startBroadcast()"
+- Line (location: (source ID: 43, lines: 17..18, bytes: 574..602), hits: 0) -> "VowNFT vowNFT = new VowNFT()"
+- Statement (location: (source ID: 43, lines: 17..18, bytes: 574..602), hits: 0) -> "VowNFT vowNFT = new VowNFT()"
+- Statement (location: (source ID: 43, lines: 17..18, bytes: 590..602), hits: 0) -> "new VowNFT()"
+- Line (location: (source ID: 43, lines: 18..19, bytes: 612..658), hits: 0) -> "MilestoneNFT milestoneNFT = new MilestoneNFT()"
+- Statement (location: (source ID: 43, lines: 18..19, bytes: 612..658), hits: 0) -> "MilestoneNFT milestoneNFT = new MilestoneNFT()"
+- Statement (location: (source ID: 43, lines: 18..19, bytes: 640..658), hits: 0) -> "new MilestoneNFT()"
+- Line (location: (source ID: 43, lines: 19..20, bytes: 668..705), hits: 0) -> "TimeToken timeToken = new TimeToken()"
+- Statement (location: (source ID: 43, lines: 19..20, bytes: 668..705), hits: 0) -> "TimeToken timeToken = new TimeToken()"
+- Statement (location: (source ID: 43, lines: 19..20, bytes: 690..705), hits: 0) -> "new TimeToken()"
+- Line (location: (source ID: 43, lines: 20..21, bytes: 715..795), hits: 0) -> "address WORLD_ID_ROUTER_FOR_TEST...51692E0779667583026b5A1E99512157"
+- Statement (location: (source ID: 43, lines: 20..21, bytes: 715..795), hits: 0) -> "address WORLD_ID_ROUTER_FOR_TEST...51692E0779667583026b5A1E99512157"
+- Line (location: (source ID: 43, lines: 23..24, bytes: 901..989), hits: 0) -> "milestoneNFT.setMilestoneURI(1, ...Ap34CqTa13VfKkEZkZak8d6E4MJio8\")"
+- Statement (location: (source ID: 43, lines: 23..24, bytes: 901..989), hits: 0) -> "milestoneNFT.setMilestoneURI(1, ...Ap34CqTa13VfKkEZkZak8d6E4MJio8\")"
+- Line (location: (source ID: 43, lines: 24..25, bytes: 999..1087), hits: 0) -> "milestoneNFT.setMilestoneURI(2, ...UFe4PJ1istspMd4G2oe2ArRYrtBGYn\")"
+- Statement (location: (source ID: 43, lines: 24..25, bytes: 999..1087), hits: 0) -> "milestoneNFT.setMilestoneURI(2, ...UFe4PJ1istspMd4G2oe2ArRYrtBGYn\")"
+- Line (location: (source ID: 43, lines: 25..26, bytes: 1097..1185), hits: 0) -> "milestoneNFT.setMilestoneURI(3, ...S14RHqt3QhgYMsGKabQv4jusdtgsKN\")"
+- Statement (location: (source ID: 43, lines: 25..26, bytes: 1097..1185), hits: 0) -> "milestoneNFT.setMilestoneURI(3, ...S14RHqt3QhgYMsGKabQv4jusdtgsKN\")"
+- Line (location: (source ID: 43, lines: 26..27, bytes: 1195..1283), hits: 0) -> "milestoneNFT.setMilestoneURI(4, ...DdX1ZCdWWJwAfLHRdJsi831PsC94uh\")"
+- Statement (location: (source ID: 43, lines: 26..27, bytes: 1195..1283), hits: 0) -> "milestoneNFT.setMilestoneURI(4, ...DdX1ZCdWWJwAfLHRdJsi831PsC94uh\")"
+- Line (location: (source ID: 43, lines: 27..28, bytes: 1293..1324), hits: 0) -> "milestoneNFT.freezeMilestones()"
+- Statement (location: (source ID: 43, lines: 27..28, bytes: 1293..1324), hits: 0) -> "milestoneNFT.freezeMilestones()"
+- Line (location: (source ID: 43, lines: 30..31, bytes: 1385..1445), hits: 0) -> "string memory appId = \"app_bfc3261816aeadc589f9c6f80a98f5df\""
+- Statement (location: (source ID: 43, lines: 30..31, bytes: 1385..1445), hits: 0) -> "string memory appId = \"app_bfc3261816aeadc589f9c6f80a98f5df\""
+- Line (location: (source ID: 43, lines: 31..32, bytes: 1455..1499), hits: 0) -> "string memory actionPropose = \"propose-bond\""
+- Statement (location: (source ID: 43, lines: 31..32, bytes: 1455..1499), hits: 0) -> "string memory actionPropose = \"propose-bond\""
+- Line (location: (source ID: 43, lines: 32..33, bytes: 1509..1551), hits: 0) -> "string memory actionAccept = \"accept-bond\""
+- Statement (location: (source ID: 43, lines: 32..33, bytes: 1509..1551), hits: 0) -> "string memory actionAccept = \"accept-bond\""
+- Line (location: (source ID: 43, lines: 35..46, bytes: 1603..1941), hits: 0) -> "HumanBond humanBond = new HumanB...\n            3 minutes\n        )"
+- Statement (location: (source ID: 43, lines: 35..46, bytes: 1603..1941), hits: 0) -> "HumanBond humanBond = new HumanB...\n            3 minutes\n        )"
+- Statement (location: (source ID: 43, lines: 35..46, bytes: 1625..1941), hits: 0) -> "new HumanBond(\n            0x17B...\n            3 minutes\n        )"
+- Line (location: (source ID: 43, lines: 48..49, bytes: 1977..2030), hits: 0) -> "milestoneNFT.setHumanBondContract(address(humanBond))"
+- Statement (location: (source ID: 43, lines: 48..49, bytes: 1977..2030), hits: 0) -> "milestoneNFT.setHumanBondContract(address(humanBond))"
+- Line (location: (source ID: 43, lines: 49..50, bytes: 2073..2120), hits: 0) -> "vowNFT.setHumanBondContract(address(humanBond))"
+- Statement (location: (source ID: 43, lines: 49..50, bytes: 2073..2120), hits: 0) -> "vowNFT.setHumanBondContract(address(humanBond))"
+- Line (location: (source ID: 43, lines: 52..53, bytes: 2169..2213), hits: 0) -> "vowNFT.transferOwnership(address(humanBond))"
+- Statement (location: (source ID: 43, lines: 52..53, bytes: 2169..2213), hits: 0) -> "vowNFT.transferOwnership(address(humanBond))"
+- Line (location: (source ID: 43, lines: 53..54, bytes: 2223..2270), hits: 0) -> "timeToken.transferOwnership(address(humanBond))"
+- Statement (location: (source ID: 43, lines: 53..54, bytes: 2223..2270), hits: 0) -> "timeToken.transferOwnership(address(humanBond))"
+- Line (location: (source ID: 43, lines: 54..55, bytes: 2280..2330), hits: 0) -> "milestoneNFT.transferOwnership(address(humanBond))"
+- Statement (location: (source ID: 43, lines: 54..55, bytes: 2280..2330), hits: 0) -> "milestoneNFT.transferOwnership(address(humanBond))"
+- Line (location: (source ID: 43, lines: 56..57, bytes: 2341..2359), hits: 0) -> "vm.stopBroadcast()"
+- Statement (location: (source ID: 43, lines: 56..57, bytes: 2341..2359), hits: 0) -> "vm.stopBroadcast()"
+- Line (location: (source ID: 43, lines: 59..60, bytes: 2386..2437), hits: 0) -> "console.log(\"VowNFT deployed at:\", address(vowNFT))"
+- Statement (location: (source ID: 43, lines: 59..60, bytes: 2386..2437), hits: 0) -> "console.log(\"VowNFT deployed at:\", address(vowNFT))"
+- Line (location: (source ID: 43, lines: 60..61, bytes: 2447..2510), hits: 0) -> "console.log(\"MilestoneNFT deployed at:\", address(milestoneNFT))"
+- Statement (location: (source ID: 43, lines: 60..61, bytes: 2447..2510), hits: 0) -> "console.log(\"MilestoneNFT deployed at:\", address(milestoneNFT))"
+- Line (location: (source ID: 43, lines: 61..62, bytes: 2520..2577), hits: 0) -> "console.log(\"HumanBond deployed at:\", address(humanBond))"
+- Statement (location: (source ID: 43, lines: 61..62, bytes: 2520..2577), hits: 0) -> "console.log(\"HumanBond deployed at:\", address(humanBond))"
+- Line (location: (source ID: 43, lines: 62..63, bytes: 2587..2645), hits: 0) -> "console.log(\"Time Token deployed at:\", address(timeToken))"
+- Statement (location: (source ID: 43, lines: 62..63, bytes: 2587..2645), hits: 0) -> "console.log(\"Time Token deployed at:\", address(timeToken))"
+- Line (location: (source ID: 43, lines: 63..64, bytes: 2655..2690), hits: 0) -> "console.log(\"Deployment complete!\")"
+- Statement (location: (source ID: 43, lines: 63..64, bytes: 2655..2690), hits: 0) -> "console.log(\"Deployment complete!\")"
+
+src/HumanBond.sol:
+- Line (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33) -> "constructor(\n        address _wo...day;\n        YEAR = _year;\n    }"
+- Function "constructor" (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33) -> "constructor(\n        address _wo...day;\n        YEAR = _year;\n    }"
+- Line (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33) -> "worldId = IWorldID(_worldId)"
+- Statement (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33) -> "worldId = IWorldID(_worldId)"
+- Line (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33) -> "vowNFT = VowNFT(_VowNFT)"
+- Statement (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33) -> "vowNFT = VowNFT(_VowNFT)"
+- Line (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33) -> "timeToken = TimeToken(_TimeToken)"
+- Statement (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33) -> "timeToken = TimeToken(_TimeToken)"
+- Line (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33) -> "milestoneNFT = MilestoneNFT(_milestoneNFT)"
+- Statement (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33) -> "milestoneNFT = MilestoneNFT(_milestoneNFT)"
+- Line (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33) -> "externalNullifierPropose = abi\n ...    )\n            .hashToField()"
+- Statement (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33) -> "externalNullifierPropose = abi\n ...    )\n            .hashToField()"
+- Line (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33) -> "externalNullifierAccept = abi\n  ...cept)\n            .hashToField()"
+- Statement (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33) -> "externalNullifierAccept = abi\n  ...cept)\n            .hashToField()"
+- Line (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33) -> "DAY = _day"
+- Statement (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33) -> "DAY = _day"
+- Line (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33) -> "YEAR = _year"
+- Statement (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33) -> "YEAR = _year"
+- Line (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33) -> "function propose(\n        addres...ted(msg.sender, proposed);\n    }"
+- Function "propose" (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33) -> "function propose(\n        addres...ted(msg.sender, proposed);\n    }"
+- Line (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33) -> "uint256 signalHash = abi.encodePacked(msg.sender).hashToField()"
+- Statement (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33) -> "uint256 signalHash = abi.encodePacked(msg.sender).hashToField()"
+- Statement (location: (source ID: 44, lines: 162..163, bytes: 5777..5819), hits: 33) -> "abi.encodePacked(msg.sender).hashToField()"
+- Line (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33) -> "proposed == address(0)"
+- Statement (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33) -> "proposed == address(0)"
+- Branch (branch: 0, path: 0) (location: (source ID: 44, lines: 164..167, bytes: 5887..5946), hits: 1) -> "{\n            revert HumanBond__InvalidAddress();\n        }"
+- Line (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1) -> "revert HumanBond__InvalidAddress()"
+- Statement (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1) -> "revert HumanBond__InvalidAddress()"
+- Line (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32) -> "proposed == msg.sender"
+- Statement (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32) -> "proposed == msg.sender"
+- Branch (branch: 1, path: 0) (location: (source ID: 44, lines: 167..170, bytes: 5983..6047), hits: 1) -> "{\n            revert HumanBond__CannotProposeToSelf();\n        }"
+- Line (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1) -> "revert HumanBond__CannotProposeToSelf()"
+- Statement (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1) -> "revert HumanBond__CannotProposeToSelf()"
+- Line (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31) -> "proposals[msg.sender].proposer != address(0)"
+- Statement (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31) -> "proposals[msg.sender].proposer != address(0)"
+- Branch (branch: 2, path: 0) (location: (source ID: 44, lines: 171..174, bytes: 6107..6173), hits: 1) -> "{\n            revert HumanBond__...oposalAlreadyExists();\n        }"
+- Line (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1) -> "revert HumanBond__ProposalAlreadyExists()"
+- Statement (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1) -> "revert HumanBond__ProposalAlreadyExists()"
+- Line (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30) -> "activeMarriageOf[msg.sender] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30) -> "activeMarriageOf[msg.sender] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 176..178, bytes: 6200..6298), hits: 30) -> "activeMarriageOf[msg.sender] != ...rriageOf[proposed] != bytes32(0)"
+- Line (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28) -> "activeMarriageOf[proposed] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28) -> "activeMarriageOf[proposed] != bytes32(0)"
+- Line (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Branch (branch: 3, path: 0) (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Line (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2) -> "revert HumanBond__UserAlreadyMarried()"
+- Statement (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2) -> "revert HumanBond__UserAlreadyMarried()"
+- Line (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1) -> "{\n            revert HumanBond__InvalidNullifier();\n        }"
+- Branch (branch: 4, path: 0) (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1) -> "{\n            revert HumanBond__InvalidNullifier();\n        }"
+- Line (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1) -> "revert HumanBond__InvalidNullifier()"
+- Statement (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1) -> "revert HumanBond__InvalidNullifier()"
+- Line (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27) -> "worldId.verifyProof(\n           ...ose,\n            proof\n        )"
+- Statement (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27) -> "worldId.verifyProof(\n           ...ose,\n            proof\n        )"
+- Line (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27) -> "usedNullifier[externalNullifierP...opose][proposerNullifier] = true"
+- Statement (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27) -> "usedNullifier[externalNullifierP...opose][proposerNullifier] = true"
+- Line (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27) -> "proposals[msg.sender] = Proposal...tamp: block.timestamp\n        })"
+- Statement (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27) -> "proposals[msg.sender] = Proposal...tamp: block.timestamp\n        })"
+- Line (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27) -> "emit ProposalCreated(msg.sender, proposed)"
+- Statement (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27) -> "emit ProposalCreated(msg.sender, proposed)"
+- Line (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20) -> "function accept(\n        address...ted(proposer, msg.sender);\n    }"
+- Function "accept" (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20) -> "function accept(\n        address...ted(proposer, msg.sender);\n    }"
+- Line (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20) -> "Proposal storage proposalOfProposer = proposals[proposer]"
+- Statement (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20) -> "Proposal storage proposalOfProposer = proposals[proposer]"
+- Line (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20) -> "uint256 signalHash = abi.encodePacked(msg.sender).hashToField()"
+- Statement (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20) -> "uint256 signalHash = abi.encodePacked(msg.sender).hashToField()"
+- Statement (location: (source ID: 44, lines: 220..221, bytes: 7876..7918), hits: 20) -> "abi.encodePacked(msg.sender).hashToField()"
+- Line (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20) -> "proposalOfProposer.proposed != msg.sender"
+- Statement (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20) -> "proposalOfProposer.proposed != msg.sender"
+- Branch (branch: 5, path: 0) (location: (source ID: 44, lines: 222..225, bytes: 7976..8037), hits: 1) -> "{\n            revert HumanBond__NotProposedToYou();\n        }"
+- Line (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1) -> "revert HumanBond__NotProposedToYou()"
+- Statement (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1) -> "revert HumanBond__NotProposedToYou()"
+- Line (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0) -> "{\n            revert HumanBond__InvalidNullifier();\n        }"
+- Branch (branch: 6, path: 0) (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0) -> "{\n            revert HumanBond__InvalidNullifier();\n        }"
+- Line (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0) -> "revert HumanBond__InvalidNullifier()"
+- Statement (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0) -> "revert HumanBond__InvalidNullifier()"
+- Line (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19) -> "activeMarriageOf[proposer] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19) -> "activeMarriageOf[proposer] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 229..231, bytes: 8254..8352), hits: 19) -> "activeMarriageOf[proposer] != by...iageOf[msg.sender] != bytes32(0)"
+- Line (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19) -> "activeMarriageOf[msg.sender] != bytes32(0)"
+- Statement (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19) -> "activeMarriageOf[msg.sender] != bytes32(0)"
+- Line (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Branch (branch: 7, path: 0) (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Line (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0) -> "revert HumanBond__UserAlreadyMarried()"
+- Statement (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0) -> "revert HumanBond__UserAlreadyMarried()"
+- Line (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19) -> "worldId.verifyProof(\n           ...ept,\n            proof\n        )"
+- Statement (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19) -> "worldId.verifyProof(\n           ...ept,\n            proof\n        )"
+- Line (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19) -> "bytes32 marriageId = _getMarriageId(proposer, msg.sender)"
+- Statement (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19) -> "bytes32 marriageId = _getMarriageId(proposer, msg.sender)"
+- Statement (location: (source ID: 44, lines: 244..245, bytes: 8722..8758), hits: 19) -> "_getMarriageId(proposer, msg.sender)"
+- Line (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Branch (branch: 8, path: 0) (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0) -> "{\n            revert HumanBond__UserAlreadyMarried();\n        }"
+- Line (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0) -> "revert HumanBond__UserAlreadyMarried()"
+- Statement (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0) -> "revert HumanBond__UserAlreadyMarried()"
+- Line (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19) -> "proposalOfProposer.accepted = true"
+- Statement (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19) -> "proposalOfProposer.accepted = true"
+- Line (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19) -> "usedNullifier[externalNullifierAccept][acceptorNullifier] = true"
+- Statement (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19) -> "usedNullifier[externalNullifierAccept][acceptorNullifier] = true"
+- Line (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19) -> "marriages[marriageId] = Marriage...         active: true\n        })"
+- Statement (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19) -> "marriages[marriageId] = Marriage...         active: true\n        })"
+- Line (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19) -> "activeMarriageOf[proposer] = marriageId"
+- Statement (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19) -> "activeMarriageOf[proposer] = marriageId"
+- Line (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19) -> "activeMarriageOf[msg.sender] = marriageId"
+- Statement (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19) -> "activeMarriageOf[msg.sender] = marriageId"
+- Line (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19) -> "marriageIds.push(marriageId)"
+- Statement (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19) -> "marriageIds.push(marriageId)"
+- Line (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19) -> "vowNFT.mintVowNFT(\n            p...            marriageId\n        )"
+- Statement (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19) -> "vowNFT.mintVowNFT(\n            p...            marriageId\n        )"
+- Line (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19) -> "vowNFT.mintVowNFT(\n            m...            marriageId\n        )"
+- Statement (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19) -> "vowNFT.mintVowNFT(\n            m...            marriageId\n        )"
+- Line (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19) -> "timeToken.mint(proposer, 1 ether)"
+- Statement (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19) -> "timeToken.mint(proposer, 1 ether)"
+- Line (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19) -> "timeToken.mint(msg.sender, 1 ether)"
+- Statement (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19) -> "timeToken.mint(msg.sender, 1 ether)"
+- Line (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19) -> "emit ProposalAccepted(proposer, msg.sender)"
+- Statement (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19) -> "emit ProposalAccepted(proposer, msg.sender)"
+- Line (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4) -> "function divorce(address partner...block.timestamp\n        );\n    }"
+- Function "divorce" (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4) -> "function divorce(address partner...block.timestamp\n        );\n    }"
+- Line (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4) -> "bytes32 marriageId = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4) -> "bytes32 marriageId = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 304..305, bytes: 10681..10716), hits: 4) -> "_getMarriageId(msg.sender, partner)"
+- Line (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4) -> "Marriage storage marriage = marriages[marriageId]"
+- Statement (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4) -> "Marriage storage marriage = marriages[marriageId]"
+- Line (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4) -> "marriage.active == false"
+- Statement (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4) -> "marriage.active == false"
+- Branch (branch: 9, path: 0) (location: (source ID: 44, lines: 307..310, bytes: 10855..10916), hits: 2) -> "{\n            revert HumanBond__NoActiveMarriage();\n        }"
+- Line (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2) -> "revert HumanBond__NoActiveMarriage()"
+- Statement (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2) -> "revert HumanBond__NoActiveMarriage()"
+- Line (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2) -> "msg.sender != marriage.partnerA"
+- Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2) -> "msg.sender != marriage.partnerA"
+- Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..11009), hits: 2) -> "msg.sender != marriage.partnerA ... msg.sender != marriage.partnerB"
+- Statement (location: (source ID: 44, lines: 312..313, bytes: 10978..11009), hits: 0) -> "msg.sender != marriage.partnerB"
+- Line (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0) -> "{\n            revert HumanBond__NotYourMarriage();\n        }"
+- Branch (branch: 10, path: 0) (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0) -> "{\n            revert HumanBond__NotYourMarriage();\n        }"
+- Line (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0) -> "revert HumanBond__NotYourMarriage()"
+- Statement (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0) -> "revert HumanBond__NotYourMarriage()"
+- Line (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2) -> "uint256 reward = _pendingYield(marriageId)"
+- Statement (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2) -> "uint256 reward = _pendingYield(marriageId)"
+- Statement (location: (source ID: 44, lines: 317..318, bytes: 11107..11132), hits: 2) -> "_pendingYield(marriageId)"
+- Line (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2) -> "reward > 0"
+- Statement (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2) -> "reward > 0"
+- Branch (branch: 11, path: 0) (location: (source ID: 44, lines: 319..324, bytes: 11285..11444), hits: 1) -> "{\n            uint256 split = re...iage.partnerB, split);\n        }"
+- Line (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1) -> "uint256 split = reward / 2"
+- Statement (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1) -> "uint256 split = reward / 2"
+- Statement (location: (source ID: 44, lines: 320..321, bytes: 11315..11325), hits: 1) -> "reward / 2"
+- Line (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1) -> "timeToken.mint(marriage.partnerA, split)"
+- Statement (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1) -> "timeToken.mint(marriage.partnerA, split)"
+- Line (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1) -> "timeToken.mint(marriage.partnerB, split)"
+- Statement (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1) -> "timeToken.mint(marriage.partnerB, split)"
+- Line (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2) -> "marriage.active = false"
+- Statement (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2) -> "marriage.active = false"
+- Line (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2) -> "marriage.lastClaim = block.timestamp"
+- Statement (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2) -> "marriage.lastClaim = block.timestamp"
+- Line (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2) -> "activeMarriageOf[marriage.partnerA] = bytes32(0)"
+- Statement (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2) -> "activeMarriageOf[marriage.partnerA] = bytes32(0)"
+- Line (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2) -> "activeMarriageOf[marriage.partnerB] = bytes32(0)"
+- Statement (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2) -> "activeMarriageOf[marriage.partnerB] = bytes32(0)"
+- Line (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2) -> "emit MarriageDissolved(\n        ...       block.timestamp\n        )"
+- Statement (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2) -> "emit MarriageDissolved(\n        ...       block.timestamp\n        )"
+- Line (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8) -> "function _pendingYield(bytes32 m.../ 1 DAY token per full day\n    }"
+- Function "_pendingYield" (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8) -> "function _pendingYield(bytes32 m.../ 1 DAY token per full day\n    }"
+- Line (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8) -> "Marriage storage marriage = marriages[marriageId]"
+- Statement (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8) -> "Marriage storage marriage = marriages[marriageId]"
+- Line (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8) -> "!marriage.active"
+- Statement (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8) -> "!marriage.active"
+- Statement (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0) -> "return 0"
+- Branch (branch: 12, path: 0) (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0) -> "return 0"
+- Line (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8) -> "uint256 daysElapsed = (block.tim...tamp - marriage.lastClaim) / DAY"
+- Statement (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8) -> "uint256 daysElapsed = (block.tim...tamp - marriage.lastClaim) / DAY"
+- Statement (location: (source ID: 44, lines: 344..345, bytes: 12164..12208), hits: 8) -> "(block.timestamp - marriage.lastClaim) / DAY"
+- Line (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8) -> "return daysElapsed * 1 ether"
+- Statement (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8) -> "return daysElapsed * 1 ether"
+- Statement (location: (source ID: 44, lines: 345..346, bytes: 12225..12246), hits: 8) -> "daysElapsed * 1 ether"
+- Line (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1) -> "function claimYield(address part...marriage.partnerB, split);\n    }"
+- Function "claimYield" (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1) -> "function claimYield(address part...marriage.partnerB, split);\n    }"
+- Line (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1) -> "bytes32 marriageId = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1) -> "bytes32 marriageId = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 349..350, bytes: 12364..12399), hits: 1) -> "_getMarriageId(msg.sender, partner)"
+- Line (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1) -> "Marriage storage marriage = marriages[marriageId]"
+- Statement (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1) -> "Marriage storage marriage = marriages[marriageId]"
+- Line (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1) -> "!marriage.active"
+- Statement (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1) -> "!marriage.active"
+- Statement (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0) -> "revert HumanBond__NoActiveMarriage()"
+- Branch (branch: 13, path: 0) (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0) -> "revert HumanBond__NoActiveMarriage()"
+- Line (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1) -> "uint256 reward = _pendingYield(marriageId)"
+- Statement (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1) -> "uint256 reward = _pendingYield(marriageId)"
+- Statement (location: (source ID: 44, lines: 353..354, bytes: 12554..12579), hits: 1) -> "_pendingYield(marriageId)"
+- Line (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1) -> "reward == 0"
+- Statement (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1) -> "reward == 0"
+- Branch (branch: 14, path: 0) (location: (source ID: 44, lines: 354..357, bytes: 12606..12665), hits: 0) -> "{\n            revert HumanBond__NothingToClaim();\n        }"
+- Line (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0) -> "revert HumanBond__NothingToClaim()"
+- Statement (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0) -> "revert HumanBond__NothingToClaim()"
+- Line (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1) -> "uint256 split = reward / 2"
+- Statement (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1) -> "uint256 split = reward / 2"
+- Statement (location: (source ID: 44, lines: 358..359, bytes: 12691..12701), hits: 1) -> "reward / 2"
+- Line (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1) -> "timeToken.mint(marriage.partnerA, split)"
+- Statement (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1) -> "timeToken.mint(marriage.partnerA, split)"
+- Line (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1) -> "timeToken.mint(marriage.partnerB, split)"
+- Statement (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1) -> "timeToken.mint(marriage.partnerB, split)"
+- Line (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1) -> "marriage.lastClaim = block.timestamp"
+- Statement (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1) -> "marriage.lastClaim = block.timestamp"
+- Line (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1) -> "emit YieldClaimed(marriage.partnerA, marriage.partnerB, split)"
+- Statement (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1) -> "emit YieldClaimed(marriage.partnerA, marriage.partnerB, split)"
+- Line (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7) -> "function manualCheckAndMint(addr...block.timestamp\n        );\n    }"
+- Function "manualCheckAndMint" (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7) -> "function manualCheckAndMint(addr...block.timestamp\n        );\n    }"
+- Line (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7) -> "bytes32 id = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7) -> "bytes32 id = _getMarriageId(msg.sender, partner)"
+- Statement (location: (source ID: 44, lines: 372..373, bytes: 13267..13302), hits: 7) -> "_getMarriageId(msg.sender, partner)"
+- Line (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7) -> "Marriage storage m = marriages[id]"
+- Statement (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7) -> "Marriage storage m = marriages[id]"
+- Line (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7) -> "!m.active"
+- Statement (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7) -> "!m.active"
+- Branch (branch: 15, path: 0) (location: (source ID: 44, lines: 375..378, bytes: 13372..13433), hits: 1) -> "{\n            revert HumanBond__NoActiveMarriage();\n        }"
+- Line (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1) -> "revert HumanBond__NoActiveMarriage()"
+- Statement (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1) -> "revert HumanBond__NoActiveMarriage()"
+- Line (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6) -> "msg.sender != m.partnerA"
+- Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6) -> "msg.sender != m.partnerA"
+- Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13498), hits: 6) -> "msg.sender != m.partnerA && msg.sender != m.partnerB"
+- Statement (location: (source ID: 44, lines: 378..379, bytes: 13474..13498), hits: 0) -> "msg.sender != m.partnerB"
+- Branch (branch: 16, path: 0) (location: (source ID: 44, lines: 378..381, bytes: 13500..13600), hits: 0) -> "{\n            revert HumanBond__...is one of the partners\n        }"
+- Line (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0) -> "revert HumanBond__NotYourMarriage()"
+- Statement (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0) -> "revert HumanBond__NotYourMarriage()"
+- Line (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6) -> "uint256 yearsTogether = (block.timestamp - m.bondStart) / YEAR"
+- Statement (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6) -> "uint256 yearsTogether = (block.timestamp - m.bondStart) / YEAR"
+- Statement (location: (source ID: 44, lines: 382..383, bytes: 13634..13672), hits: 6) -> "(block.timestamp - m.bondStart) / YEAR"
+- Line (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6) -> "uint256 maxYear = milestoneNFT.latestYear()"
+- Statement (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6) -> "uint256 maxYear = milestoneNFT.latestYear()"
+- Statement (location: (source ID: 44, lines: 383..384, bytes: 13700..13725), hits: 6) -> "milestoneNFT.latestYear()"
+- Line (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6) -> "yearsTogether <= m.lastMilestoneYear"
+- Statement (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6) -> "yearsTogether <= m.lastMilestoneYear"
+- Statement (location: (source ID: 44, lines: 387..390, bytes: 13785..13894), hits: 6) -> "yearsTogether <= m.lastMilestone...         yearsTogether > maxYear"
+- Line (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3) -> "yearsTogether == 0"
+- Statement (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3) -> "yearsTogether == 0"
+- Statement (location: (source ID: 44, lines: 388..390, bytes: 13837..13894), hits: 3) -> "yearsTogether == 0 ||\n            yearsTogether > maxYear"
+- Line (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3) -> "yearsTogether > maxYear"
+- Statement (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3) -> "yearsTogether > maxYear"
+- Line (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3) -> "{\n            revert HumanBond__NothingToClaim();\n        }"
+- Branch (branch: 17, path: 0) (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3) -> "{\n            revert HumanBond__NothingToClaim();\n        }"
+- Line (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3) -> "revert HumanBond__NothingToClaim()"
+- Statement (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3) -> "revert HumanBond__NothingToClaim()"
+- Line (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3) -> "milestoneNFT.mintMilestone(m.partnerA, yearsTogether)"
+- Statement (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3) -> "milestoneNFT.mintMilestone(m.partnerA, yearsTogether)"
+- Line (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3) -> "milestoneNFT.mintMilestone(m.partnerB, yearsTogether)"
+- Statement (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3) -> "milestoneNFT.mintMilestone(m.partnerB, yearsTogether)"
+- Line (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3) -> "m.lastMilestoneYear = yearsTogether"
+- Statement (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3) -> "m.lastMilestoneYear = yearsTogether"
+- Line (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3) -> "emit AnniversaryAchieved(\n      ...       block.timestamp\n        )"
+- Statement (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3) -> "emit AnniversaryAchieved(\n      ...       block.timestamp\n        )"
+- Line (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0) -> "function _getMarriageId(\n       ...6(abi.encodePacked(b, a));\n    }"
+- Function "_getMarriageId" (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0) -> "function _getMarriageId(\n       ...6(abi.encodePacked(b, a));\n    }"
+- Line (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44) -> "return\n            a < b\n       ...eccak256(abi.encodePacked(b, a))"
+- Statement (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44) -> "return\n            a < b\n       ...eccak256(abi.encodePacked(b, a))"
+- Line (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44) -> "a < b\n                ? keccak25...eccak256(abi.encodePacked(b, a))"
+- Statement (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44) -> "a < b\n                ? keccak25...eccak256(abi.encodePacked(b, a))"
+- Line (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3) -> "function cancelProposal() extern...posalOfProposer.proposed);\n    }"
+- Function "cancelProposal" (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3) -> "function cancelProposal() extern...posalOfProposer.proposed);\n    }"
+- Line (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3) -> "Proposal memory proposalOfProposer = proposals[msg.sender]"
+- Statement (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3) -> "Proposal memory proposalOfProposer = proposals[msg.sender]"
+- Line (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3) -> "proposalOfProposer.proposer == address(0)"
+- Statement (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3) -> "proposalOfProposer.proposer == address(0)"
+- Branch (branch: 18, path: 0) (location: (source ID: 44, lines: 424..427, bytes: 14946..15005), hits: 1) -> "{\n            revert HumanBond__InvalidAddress();\n        }"
+- Line (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1) -> "revert HumanBond__InvalidAddress()"
+- Statement (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1) -> "revert HumanBond__InvalidAddress()"
+- Line (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2) -> "emit ProposalCancelled(msg.sender, proposalOfProposer.proposed)"
+- Statement (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2) -> "emit ProposalCancelled(msg.sender, proposalOfProposer.proposed)"
+- Line (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1) -> "function getMarriage(\n        ad...ges[_getMarriageId(a, b)];\n    }"
+- Function "getMarriage" (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1) -> "function getMarriage(\n        ad...ges[_getMarriageId(a, b)];\n    }"
+- Line (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1) -> "return marriages[_getMarriageId(a, b)]"
+- Statement (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1) -> "return marriages[_getMarriageId(a, b)]"
+- Line (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2) -> "function isMarried(address a, ad...tMarriageId(a, b)].active;\n    }"
+- Function "isMarried" (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2) -> "function isMarried(address a, ad...tMarriageId(a, b)].active;\n    }"
+- Line (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2) -> "return marriages[_getMarriageId(a, b)].active"
+- Statement (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2) -> "return marriages[_getMarriageId(a, b)].active"
+- Line (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4) -> "function getProposal(\n        ad...eturn proposals[proposer];\n    }"
+- Function "getProposal" (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4) -> "function getProposal(\n        ad...eturn proposals[proposer];\n    }"
+- Line (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4) -> "return proposals[proposer]"
+- Statement (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4) -> "return proposals[proposer]"
+- Line (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0) -> "function hasPendingProposal(addr...r].proposer != address(0);\n    }"
+- Function "hasPendingProposal" (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0) -> "function hasPendingProposal(addr...r].proposer != address(0);\n    }"
+- Line (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0) -> "return proposals[proposer].proposer != address(0)"
+- Statement (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0) -> "return proposals[proposer].proposer != address(0)"
+- Statement (location: (source ID: 44, lines: 464..465, bytes: 16182..16224), hits: 0) -> "proposals[proposer].proposer != address(0)"
+- Line (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3) -> "function getPendingYield(\n      ...eld(_getMarriageId(a, b));\n    }"
+- Function "getPendingYield" (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3) -> "function getPendingYield(\n      ...eld(_getMarriageId(a, b));\n    }"
+- Line (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3) -> "return _pendingYield(_getMarriageId(a, b))"
+- Statement (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3) -> "return _pendingYield(_getMarriageId(a, b))"
+- Statement (location: (source ID: 44, lines: 474..475, bytes: 16426..16461), hits: 3) -> "_pendingYield(_getMarriageId(a, b))"
+- Line (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2) -> "function getCurrentMilestoneYear...(a, b)].lastMilestoneYear;\n    }"
+- Function "getCurrentMilestoneYear" (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2) -> "function getCurrentMilestoneYear...(a, b)].lastMilestoneYear;\n    }"
+- Line (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2) -> "return marriages[_getMarriageId(a, b)].lastMilestoneYear"
+- Statement (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2) -> "return marriages[_getMarriageId(a, b)].lastMilestoneYear"
+- Line (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1) -> "function getBondStart(\n        a...rriageId(a, b)].bondStart;\n    }"
+- Function "getBondStart" (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1) -> "function getBondStart(\n        a...rriageId(a, b)].bondStart;\n    }"
+- Line (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1) -> "return marriages[_getMarriageId(a, b)].bondStart"
+- Statement (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1) -> "return marriages[_getMarriageId(a, b)].bondStart"
+- Line (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1) -> "function getMarriageView(\n      ...rriageId(a, b)\n        });\n    }"
+- Function "getMarriageView" (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1) -> "function getMarriageView(\n      ...rriageId(a, b)\n        });\n    }"
+- Line (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1) -> "bytes32 id = _getMarriageId(a, b)"
+- Statement (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1) -> "bytes32 id = _getMarriageId(a, b)"
+- Statement (location: (source ID: 44, lines: 504..505, bytes: 17191..17211), hits: 1) -> "_getMarriageId(a, b)"
+- Line (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1) -> "Marriage memory m = marriages[id]"
+- Statement (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1) -> "Marriage memory m = marriages[id]"
+- Line (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1) -> "v = MarriageView({\n            p... _getMarriageId(a, b)\n        })"
+- Statement (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1) -> "v = MarriageView({\n            p... _getMarriageId(a, b)\n        })"
+- Line (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1) -> "function getUserDashboard(\n     ..._pendingYield(marriageId);\n    }"
+- Function "getUserDashboard" (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1) -> "function getUserDashboard(\n     ..._pendingYield(marriageId);\n    }"
+- Line (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1) -> "Proposal memory p = proposals[user]"
+- Statement (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1) -> "Proposal memory p = proposals[user]"
+- Line (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1) -> "bytes32 marriageId = activeMarriageOf[user]"
+- Statement (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1) -> "bytes32 marriageId = activeMarriageOf[user]"
+- Line (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1) -> "d.hasProposal = p.proposer != address(0)"
+- Statement (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1) -> "d.hasProposal = p.proposer != address(0)"
+- Line (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1) -> "d.timeBalance = timeToken.balanceOf(user)"
+- Statement (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1) -> "d.timeBalance = timeToken.balanceOf(user)"
+- Line (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1) -> "marriageId == bytes32(0)"
+- Statement (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1) -> "marriageId == bytes32(0)"
+- Branch (branch: 19, path: 0) (location: (source ID: 44, lines: 532..539, bytes: 18152..18321), hits: 0) -> "{\n            // User is NOT mar...\n            return d;\n        }"
+- Line (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0) -> "d.isMarried = false"
+- Statement (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0) -> "d.isMarried = false"
+- Line (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0) -> "d.partner = address(0)"
+- Statement (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0) -> "d.partner = address(0)"
+- Line (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0) -> "d.pendingYield = 0"
+- Statement (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0) -> "d.pendingYield = 0"
+- Line (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0) -> "return d"
+- Statement (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0) -> "return d"
+- Line (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1) -> "Marriage storage m = marriages[marriageId]"
+- Statement (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1) -> "Marriage storage m = marriages[marriageId]"
+- Line (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1) -> "d.isMarried = m.active"
+- Statement (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1) -> "d.isMarried = m.active"
+- Line (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1) -> "d.partner = (m.partnerA == user) ? m.partnerB : m.partnerA"
+- Statement (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1) -> "d.partner = (m.partnerA == user) ? m.partnerB : m.partnerA"
+- Line (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1) -> "d.pendingYield = _pendingYield(marriageId)"
+- Statement (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1) -> "d.pendingYield = _pendingYield(marriageId)"
+
+src/MilestoneNFT.sol:
+- Line (location: (source ID: 45, lines: 42..45, bytes: 2074..2172), hits: 42) -> "constructor() ERC721(\"Milestone ...{\n        totalSupply = 0;\n    }"
+- Function "constructor" (location: (source ID: 45, lines: 42..45, bytes: 2074..2172), hits: 42) -> "constructor() ERC721(\"Milestone ...{\n        totalSupply = 0;\n    }"
+- Line (location: (source ID: 45, lines: 43..44, bytes: 2150..2165), hits: 42) -> "totalSupply = 0"
+- Statement (location: (source ID: 45, lines: 43..44, bytes: 2150..2165), hits: 42) -> "totalSupply = 0"
+- Line (location: (source ID: 45, lines: 50..54, bytes: 2434..2503), hits: 11) -> "modifier onlyHumanBond() {\n     ...nlyHumanBond();\n        _;\n    }"
+- Function "onlyHumanBond" (location: (source ID: 45, lines: 50..54, bytes: 2434..2503), hits: 11) -> "modifier onlyHumanBond() {\n     ...nlyHumanBond();\n        _;\n    }"
+- Line (location: (source ID: 45, lines: 51..52, bytes: 2469..2485), hits: 11) -> "_onlyHumanBond()"
+- Statement (location: (source ID: 45, lines: 51..52, bytes: 2469..2485), hits: 11) -> "_onlyHumanBond()"
+- Line (location: (source ID: 45, lines: 55..60, bytes: 2509..2663), hits: 11) -> "function _onlyHumanBond() intern...NotAuthorized();\n        }\n    }"
+- Function "_onlyHumanBond" (location: (source ID: 45, lines: 55..60, bytes: 2509..2663), hits: 11) -> "function _onlyHumanBond() intern...NotAuthorized();\n        }\n    }"
+- Line (location: (source ID: 45, lines: 56..57, bytes: 2563..2594), hits: 11) -> "msg.sender != humanBondContract"
+- Statement (location: (source ID: 45, lines: 56..57, bytes: 2563..2594), hits: 11) -> "msg.sender != humanBondContract"
+- Branch (branch: 0, path: 0) (location: (source ID: 45, lines: 56..59, bytes: 2596..2657), hits: 1) -> "{\n            revert MilestoneNFT__NotAuthorized();\n        }"
+- Line (location: (source ID: 45, lines: 57..58, bytes: 2610..2646), hits: 1) -> "revert MilestoneNFT__NotAuthorized()"
+- Statement (location: (source ID: 45, lines: 57..58, bytes: 2610..2646), hits: 1) -> "revert MilestoneNFT__NotAuthorized()"
+- Line (location: (source ID: 45, lines: 61..65, bytes: 2669..2730), hits: 32) -> "modifier notFrozen() {\n        _notFrozen();\n        _;\n    }"
+- Function "notFrozen" (location: (source ID: 45, lines: 61..65, bytes: 2669..2730), hits: 32) -> "modifier notFrozen() {\n        _notFrozen();\n        _;\n    }"
+- Line (location: (source ID: 45, lines: 62..63, bytes: 2700..2712), hits: 32) -> "_notFrozen()"
+- Statement (location: (source ID: 45, lines: 62..63, bytes: 2700..2712), hits: 32) -> "_notFrozen()"
+- Line (location: (source ID: 45, lines: 66..69, bytes: 2736..2830), hits: 165) -> "function _notFrozen() internal v...rt MilestoneNFT__Frozen();\n    }"
+- Function "_notFrozen" (location: (source ID: 45, lines: 66..69, bytes: 2736..2830), hits: 165) -> "function _notFrozen() internal v...rt MilestoneNFT__Frozen();\n    }"
+- Line (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1) -> "revert MilestoneNFT__Frozen()"
+- Statement (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1) -> "revert MilestoneNFT__Frozen()"
+- Branch (branch: 1, path: 0) (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1) -> "revert MilestoneNFT__Frozen()"
+- Line (location: (source ID: 45, lines: 75..78, bytes: 3176..3302), hits: 42) -> "function setHumanBondContract(ad...ontract = contractAddress;\n    }"
+- Function "setHumanBondContract" (location: (source ID: 45, lines: 75..78, bytes: 3176..3302), hits: 42) -> "function setHumanBondContract(ad...ontract = contractAddress;\n    }"
+- Line (location: (source ID: 45, lines: 76..77, bytes: 3260..3295), hits: 42) -> "humanBondContract = contractAddress"
+- Statement (location: (source ID: 45, lines: 76..77, bytes: 3260..3295), hits: 42) -> "humanBondContract = contractAddress"
+- Line (location: (source ID: 45, lines: 81..87, bytes: 3448..3734), hits: 134) -> "function setMilestoneURI(uint256...ilestoneURISet(year, uri);\n    }"
+- Function "setMilestoneURI" (location: (source ID: 45, lines: 81..87, bytes: 3448..3734), hits: 134) -> "function setMilestoneURI(uint256...ilestoneURISet(year, uri);\n    }"
+- Line (location: (source ID: 45, lines: 82..83, bytes: 3551..3560), hits: 132) -> "year == 0"
+- Statement (location: (source ID: 45, lines: 82..83, bytes: 3551..3560), hits: 132) -> "year == 0"
+- Statement (location: (source ID: 45, lines: 82..83, bytes: 3562..3601), hits: 1) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Branch (branch: 2, path: 0) (location: (source ID: 45, lines: 82..83, bytes: 3562..3601), hits: 1) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Line (location: (source ID: 45, lines: 83..84, bytes: 3611..3636), hits: 131) -> "milestoneURIs[year] = uri"
+- Statement (location: (source ID: 45, lines: 83..84, bytes: 3611..3636), hits: 131) -> "milestoneURIs[year] = uri"
+- Line (location: (source ID: 45, lines: 84..85, bytes: 3650..3667), hits: 131) -> "year > latestYear"
+- Statement (location: (source ID: 45, lines: 84..85, bytes: 3650..3667), hits: 131) -> "year > latestYear"
+- Statement (location: (source ID: 45, lines: 84..85, bytes: 3669..3686), hits: 131) -> "latestYear = year"
+- Branch (branch: 3, path: 0) (location: (source ID: 45, lines: 84..85, bytes: 3669..3686), hits: 131) -> "latestYear = year"
+- Line (location: (source ID: 45, lines: 85..86, bytes: 3696..3727), hits: 131) -> "emit MilestoneURISet(year, uri)"
+- Statement (location: (source ID: 45, lines: 85..86, bytes: 3696..3727), hits: 131) -> "emit MilestoneURISet(year, uri)"
+- Line (location: (source ID: 45, lines: 89..93, bytes: 3809..3929), hits: 32) -> "function freezeMilestones() exte...  emit MilestonesFrozen();\n    }"
+- Function "freezeMilestones" (location: (source ID: 45, lines: 89..93, bytes: 3809..3929), hits: 32) -> "function freezeMilestones() exte...  emit MilestonesFrozen();\n    }"
+- Line (location: (source ID: 45, lines: 90..91, bytes: 3876..3889), hits: 32) -> "frozen = true"
+- Statement (location: (source ID: 45, lines: 90..91, bytes: 3876..3889), hits: 32) -> "frozen = true"
+- Line (location: (source ID: 45, lines: 91..92, bytes: 3899..3922), hits: 32) -> "emit MilestonesFrozen()"
+- Statement (location: (source ID: 45, lines: 91..92, bytes: 3899..3922), hits: 32) -> "emit MilestonesFrozen()"
+- Line (location: (source ID: 45, lines: 100..112, bytes: 4323..4767), hits: 11) -> "function mintMilestone(address t...);\n        return tokenId;\n    }"
+- Function "mintMilestone" (location: (source ID: 45, lines: 100..112, bytes: 4323..4767), hits: 11) -> "function mintMilestone(address t...);\n        return tokenId;\n    }"
+- Line (location: (source ID: 45, lines: 101..102, bytes: 4423..4462), hits: 10) -> "string memory uri = milestoneURIs[year]"
+- Statement (location: (source ID: 45, lines: 101..102, bytes: 4423..4462), hits: 10) -> "string memory uri = milestoneURIs[year]"
+- Line (location: (source ID: 45, lines: 102..103, bytes: 4476..4498), hits: 10) -> "bytes(uri).length == 0"
+- Statement (location: (source ID: 45, lines: 102..103, bytes: 4476..4498), hits: 10) -> "bytes(uri).length == 0"
+- Statement (location: (source ID: 45, lines: 102..103, bytes: 4500..4539), hits: 1) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Branch (branch: 4, path: 0) (location: (source ID: 45, lines: 102..103, bytes: 4500..4539), hits: 1) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Line (location: (source ID: 45, lines: 104..105, bytes: 4550..4563), hits: 9) -> "totalSupply++"
+- Statement (location: (source ID: 45, lines: 104..105, bytes: 4550..4563), hits: 9) -> "totalSupply++"
+- Line (location: (source ID: 45, lines: 105..106, bytes: 4573..4602), hits: 9) -> "uint256 tokenId = totalSupply"
+- Statement (location: (source ID: 45, lines: 105..106, bytes: 4573..4602), hits: 9) -> "uint256 tokenId = totalSupply"
+- Line (location: (source ID: 45, lines: 106..107, bytes: 4612..4637), hits: 9) -> "tokenYear[tokenId] = year"
+- Statement (location: (source ID: 45, lines: 106..107, bytes: 4612..4637), hits: 9) -> "tokenYear[tokenId] = year"
+- Line (location: (source ID: 45, lines: 107..108, bytes: 4647..4669), hits: 9) -> "_safeMint(to, tokenId)"
+- Statement (location: (source ID: 45, lines: 107..108, bytes: 4647..4669), hits: 9) -> "_safeMint(to, tokenId)"
+- Line (location: (source ID: 45, lines: 109..110, bytes: 4680..4736), hits: 9) -> "emit MilestoneMinted(to, year, tokenId, block.timestamp)"
+- Statement (location: (source ID: 45, lines: 109..110, bytes: 4680..4736), hits: 9) -> "emit MilestoneMinted(to, year, tokenId, block.timestamp)"
+- Line (location: (source ID: 45, lines: 110..111, bytes: 4746..4760), hits: 9) -> "return tokenId"
+- Statement (location: (source ID: 45, lines: 110..111, bytes: 4746..4760), hits: 9) -> "return tokenId"
+- Line (location: (source ID: 45, lines: 118..126, bytes: 5109..5424), hits: 2) -> "function tokenURI(uint256 tokenI...eturn milestoneURIs[year];\n    }"
+- Function "tokenURI" (location: (source ID: 45, lines: 118..126, bytes: 5109..5424), hits: 2) -> "function tokenURI(uint256 tokenI...eturn milestoneURIs[year];\n    }"
+- Line (location: (source ID: 45, lines: 119..120, bytes: 5199..5221), hits: 2) -> "_requireOwned(tokenId)"
+- Statement (location: (source ID: 45, lines: 119..120, bytes: 5199..5221), hits: 2) -> "_requireOwned(tokenId)"
+- Line (location: (source ID: 45, lines: 120..121, bytes: 5231..5264), hits: 1) -> "uint256 year = tokenYear[tokenId]"
+- Statement (location: (source ID: 45, lines: 120..121, bytes: 5231..5264), hits: 1) -> "uint256 year = tokenYear[tokenId]"
+- Line (location: (source ID: 45, lines: 121..122, bytes: 5278..5316), hits: 1) -> "bytes(milestoneURIs[year]).length == 0"
+- Statement (location: (source ID: 45, lines: 121..122, bytes: 5278..5316), hits: 1) -> "bytes(milestoneURIs[year]).length == 0"
+- Branch (branch: 5, path: 0) (location: (source ID: 45, lines: 121..124, bytes: 5318..5382), hits: 0) -> "{\n            revert MilestoneNFT__URI_NotFound(year);\n        }"
+- Line (location: (source ID: 45, lines: 122..123, bytes: 5332..5371), hits: 0) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Statement (location: (source ID: 45, lines: 122..123, bytes: 5332..5371), hits: 0) -> "revert MilestoneNFT__URI_NotFound(year)"
+- Line (location: (source ID: 45, lines: 124..125, bytes: 5391..5417), hits: 1) -> "return milestoneURIs[year]"
+- Statement (location: (source ID: 45, lines: 124..125, bytes: 5391..5417), hits: 1) -> "return milestoneURIs[year]"
+- Line (location: (source ID: 45, lines: 131..142, bytes: 5687..6091), hits: 10) -> "function _update(address to, uin...update(to, tokenId, auth);\n    }"
+- Function "_update" (location: (source ID: 45, lines: 131..142, bytes: 5687..6091), hits: 10) -> "function _update(address to, uin...update(to, tokenId, auth);\n    }"
+- Line (location: (source ID: 45, lines: 133..134, bytes: 5829..5861), hits: 10) -> "address from = _ownerOf(tokenId)"
+- Statement (location: (source ID: 45, lines: 133..134, bytes: 5829..5861), hits: 10) -> "address from = _ownerOf(tokenId)"
+- Statement (location: (source ID: 45, lines: 133..134, bytes: 5844..5861), hits: 10) -> "_ownerOf(tokenId)"
+- Line (location: (source ID: 45, lines: 136..137, bytes: 5936..5954), hits: 10) -> "from != address(0)"
+- Statement (location: (source ID: 45, lines: 136..137, bytes: 5936..5954), hits: 10) -> "from != address(0)"
+- Statement (location: (source ID: 45, lines: 136..137, bytes: 5936..5968), hits: 10) -> "from != address(0) && to != from"
+- Statement (location: (source ID: 45, lines: 136..137, bytes: 5958..5968), hits: 1) -> "to != from"
+- Branch (branch: 6, path: 0) (location: (source ID: 45, lines: 136..139, bytes: 5970..6035), hits: 1) -> "{\n            revert MilestoneNF...__TransfersDisabled();\n        }"
+- Line (location: (source ID: 45, lines: 137..138, bytes: 5984..6024), hits: 1) -> "revert MilestoneNFT__TransfersDisabled()"
+- Statement (location: (source ID: 45, lines: 137..138, bytes: 5984..6024), hits: 1) -> "revert MilestoneNFT__TransfersDisabled()"
+- Line (location: (source ID: 45, lines: 140..141, bytes: 6045..6084), hits: 9) -> "return super._update(to, tokenId, auth)"
+- Statement (location: (source ID: 45, lines: 140..141, bytes: 6045..6084), hits: 9) -> "return super._update(to, tokenId, auth)"
+- Statement (location: (source ID: 45, lines: 140..141, bytes: 6052..6084), hits: 9) -> "super._update(to, tokenId, auth)"
+
+src/TimeToken.sol:
+- Line (location: (source ID: 46, lines: 15..18, bytes: 518..613), hits: 42) -> "function mint(address to, uint25...        _mint(to, amount);\n    }"
+- Function "mint" (location: (source ID: 46, lines: 15..18, bytes: 518..613), hits: 42) -> "function mint(address to, uint25...        _mint(to, amount);\n    }"
+- Line (location: (source ID: 46, lines: 16..17, bytes: 589..606), hits: 42) -> "_mint(to, amount)"
+- Statement (location: (source ID: 46, lines: 16..17, bytes: 589..606), hits: 42) -> "_mint(to, amount)"
+
+src/VowNFT.sol:
+- Line (location: (source ID: 47, lines: 33..37, bytes: 1279..1348), hits: 47) -> "modifier onlyHumanBond() {\n     ...nlyHumanBond();\n        _;\n    }"
+- Function "onlyHumanBond" (location: (source ID: 47, lines: 33..37, bytes: 1279..1348), hits: 47) -> "modifier onlyHumanBond() {\n     ...nlyHumanBond();\n        _;\n    }"
+- Line (location: (source ID: 47, lines: 34..35, bytes: 1314..1330), hits: 47) -> "_onlyHumanBond()"
+- Statement (location: (source ID: 47, lines: 34..35, bytes: 1314..1330), hits: 47) -> "_onlyHumanBond()"
+- Line (location: (source ID: 47, lines: 38..43, bytes: 1354..1505), hits: 0) -> "function _onlyHumanBond() public...horizedMinter();\n        }\n    }"
+- Function "_onlyHumanBond" (location: (source ID: 47, lines: 38..43, bytes: 1354..1505), hits: 0) -> "function _onlyHumanBond() public...horizedMinter();\n        }\n    }"
+- Line (location: (source ID: 47, lines: 39..40, bytes: 1406..1437), hits: 47) -> "msg.sender != humanBondContract"
+- Statement (location: (source ID: 47, lines: 39..40, bytes: 1406..1437), hits: 47) -> "msg.sender != humanBondContract"
+- Branch (branch: 0, path: 0) (location: (source ID: 47, lines: 39..42, bytes: 1439..1499), hits: 0) -> "{\n            revert VowNFT__UnauthorizedMinter();\n        }"
+- Line (location: (source ID: 47, lines: 40..41, bytes: 1453..1488), hits: 0) -> "revert VowNFT__UnauthorizedMinter()"
+- Statement (location: (source ID: 47, lines: 40..41, bytes: 1453..1488), hits: 0) -> "revert VowNFT__UnauthorizedMinter()"
+- Line (location: (source ID: 47, lines: 44..47, bytes: 1511..1599), hits: 40) -> "constructor() ERC721(\"Vows\", \"VO...{\n        totalSupply = 0;\n    }"
+- Function "constructor" (location: (source ID: 47, lines: 44..47, bytes: 1511..1599), hits: 40) -> "constructor() ERC721(\"Vows\", \"VO...{\n        totalSupply = 0;\n    }"
+- Line (location: (source ID: 47, lines: 45..46, bytes: 1577..1592), hits: 40) -> "totalSupply = 0"
+- Statement (location: (source ID: 47, lines: 45..46, bytes: 1577..1592), hits: 40) -> "totalSupply = 0"
+- Line (location: (source ID: 47, lines: 50..53, bytes: 1730..1856), hits: 43) -> "function setHumanBondContract(ad...ontract = contractAddress;\n    }"
+- Function "setHumanBondContract" (location: (source ID: 47, lines: 50..53, bytes: 1730..1856), hits: 43) -> "function setHumanBondContract(ad...ontract = contractAddress;\n    }"
+- Line (location: (source ID: 47, lines: 51..52, bytes: 1814..1849), hits: 42) -> "humanBondContract = contractAddress"
+- Statement (location: (source ID: 47, lines: 51..52, bytes: 1814..1849), hits: 42) -> "humanBondContract = contractAddress"
+- Line (location: (source ID: 47, lines: 55..58, bytes: 1909..2007), hits: 2) -> "function setImageCID(string call...        imageCID = newCid;\n    }"
+- Function "setImageCID" (location: (source ID: 47, lines: 55..58, bytes: 1909..2007), hits: 2) -> "function setImageCID(string call...        imageCID = newCid;\n    }"
+- Line (location: (source ID: 47, lines: 56..57, bytes: 1983..2000), hits: 1) -> "imageCID = newCid"
+- Statement (location: (source ID: 47, lines: 56..57, bytes: 1983..2000), hits: 1) -> "imageCID = newCid"
+- Line (location: (source ID: 47, lines: 61..82, bytes: 2127..2938), hits: 47) -> "function mintVowNFT(address to, ...       return totalSupply;\n    }"
+- Function "mintVowNFT" (location: (source ID: 47, lines: 61..82, bytes: 2127..2938), hits: 47) -> "function mintVowNFT(address to, ...       return totalSupply;\n    }"
+- Line (location: (source ID: 47, lines: 66..67, bytes: 2317..2330), hits: 47) -> "totalSupply++"
+- Statement (location: (source ID: 47, lines: 66..67, bytes: 2317..2330), hits: 47) -> "totalSupply++"
+- Line (location: (source ID: 47, lines: 68..70, bytes: 2341..2487), hits: 47) -> "tokenMetadata[totalSupply] =\n   ...Start, marriageId: _marriageId})"
+- Statement (location: (source ID: 47, lines: 68..70, bytes: 2341..2487), hits: 47) -> "tokenMetadata[totalSupply] =\n   ...Start, marriageId: _marriageId})"
+- Line (location: (source ID: 47, lines: 70..71, bytes: 2497..2523), hits: 47) -> "_safeMint(to, totalSupply)"
+- Statement (location: (source ID: 47, lines: 70..71, bytes: 2497..2523), hits: 47) -> "_safeMint(to, totalSupply)"
+- Line (location: (source ID: 47, lines: 73..74, bytes: 2595..2631), hits: 47) -> "marriageToToken[_marriageId][0] == 0"
+- Statement (location: (source ID: 47, lines: 73..74, bytes: 2595..2631), hits: 47) -> "marriageToToken[_marriageId][0] == 0"
+- Branch (branch: 1, path: 0) (location: (source ID: 47, lines: 73..76, bytes: 2633..2703), hits: 25) -> "{\n            marriageToToken[_m...eId][0] = totalSupply;\n        }"
+- Branch (branch: 1, path: 1) (location: (source ID: 47, lines: 73..79, bytes: 2591..2850), hits: 21) -> "if (marriageToToken[_marriageId]...eId][1] = totalSupply;\n        }"
+- Line (location: (source ID: 47, lines: 74..75, bytes: 2647..2692), hits: 25) -> "marriageToToken[_marriageId][0] = totalSupply"
+- Statement (location: (source ID: 47, lines: 74..75, bytes: 2647..2692), hits: 25) -> "marriageToToken[_marriageId][0] = totalSupply"
+- Line (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 22) -> "require(marriageToToken[_marriageId][1] == 0, \"max is 2\")"
+- Statement (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 22) -> "require(marriageToToken[_marriageId][1] == 0, \"max is 2\")"
+- Branch (branch: 2, path: 0) (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 1) -> "require(marriageToToken[_marriageId][1] == 0, \"max is 2\")"
+- Branch (branch: 2, path: 1) (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 21) -> "require(marriageToToken[_marriageId][1] == 0, \"max is 2\")"
+- Line (location: (source ID: 47, lines: 77..78, bytes: 2794..2839), hits: 21) -> "marriageToToken[_marriageId][1] = totalSupply"
+- Statement (location: (source ID: 47, lines: 77..78, bytes: 2794..2839), hits: 21) -> "marriageToToken[_marriageId][1] = totalSupply"
+- Line (location: (source ID: 47, lines: 79..80, bytes: 2859..2903), hits: 46) -> "emit VowMinted(_marriageId, totalSupply, to)"
+- Statement (location: (source ID: 47, lines: 79..80, bytes: 2859..2903), hits: 46) -> "emit VowMinted(_marriageId, totalSupply, to)"
+- Line (location: (source ID: 47, lines: 80..81, bytes: 2913..2931), hits: 46) -> "return totalSupply"
+- Statement (location: (source ID: 47, lines: 80..81, bytes: 2913..2931), hits: 46) -> "return totalSupply"
+- Line (location: (source ID: 47, lines: 84..126, bytes: 3033..4620), hits: 2) -> "function tokenURI(uint256 id) pu.../json;base64,\", encoded));\n    }"
+- Function "tokenURI" (location: (source ID: 47, lines: 84..126, bytes: 3033..4620), hits: 2) -> "function tokenURI(uint256 id) pu.../json;base64,\", encoded));\n    }"
+- Line (location: (source ID: 47, lines: 85..86, bytes: 3118..3135), hits: 2) -> "_requireOwned(id)"
+- Statement (location: (source ID: 47, lines: 85..86, bytes: 3118..3135), hits: 2) -> "_requireOwned(id)"
+- Line (location: (source ID: 47, lines: 87..88, bytes: 3176..3218), hits: 2) -> "TokenMetadata memory m = tokenMetadata[id]"
+- Statement (location: (source ID: 47, lines: 87..88, bytes: 3176..3218), hits: 2) -> "TokenMetadata memory m = tokenMetadata[id]"
+- Line (location: (source ID: 47, lines: 90..108, bytes: 3309..3999), hits: 2) -> "string memory attrs = string(\n  ...     \"]\"\n            )\n        )"
+- Statement (location: (source ID: 47, lines: 90..108, bytes: 3309..3999), hits: 2) -> "string memory attrs = string(\n  ...     \"]\"\n            )\n        )"
+- Line (location: (source ID: 47, lines: 109..122, bytes: 4010..4469), hits: 2) -> "string memory json = string(\n   ...     \"}\"\n            )\n        )"
+- Statement (location: (source ID: 47, lines: 109..122, bytes: 4010..4469), hits: 2) -> "string memory json = string(\n   ...     \"}\"\n            )\n        )"
+- Line (location: (source ID: 47, lines: 123..124, bytes: 4480..4530), hits: 2) -> "string memory encoded = Base64.encode(bytes(json))"
+- Statement (location: (source ID: 47, lines: 123..124, bytes: 4480..4530), hits: 2) -> "string memory encoded = Base64.encode(bytes(json))"
+- Statement (location: (source ID: 47, lines: 123..124, bytes: 4504..4530), hits: 2) -> "Base64.encode(bytes(json))"
+- Line (location: (source ID: 47, lines: 124..125, bytes: 4540..4613), hits: 2) -> "return string(abi.encodePacked(\"...ication/json;base64,\", encoded))"
+- Statement (location: (source ID: 47, lines: 124..125, bytes: 4540..4613), hits: 2) -> "return string(abi.encodePacked(\"...ication/json;base64,\", encoded))"
+- Line (location: (source ID: 47, lines: 131..140, bytes: 4924..5226), hits: 48) -> "function _update(address to, uin...update(to, tokenId, auth);\n    }"
+- Function "_update" (location: (source ID: 47, lines: 131..140, bytes: 4924..5226), hits: 48) -> "function _update(address to, uin...update(to, tokenId, auth);\n    }"
+- Line (location: (source ID: 47, lines: 132..133, bytes: 5030..5062), hits: 48) -> "address from = _ownerOf(tokenId)"
+- Statement (location: (source ID: 47, lines: 132..133, bytes: 5030..5062), hits: 48) -> "address from = _ownerOf(tokenId)"
+- Statement (location: (source ID: 47, lines: 132..133, bytes: 5045..5062), hits: 48) -> "_ownerOf(tokenId)"
+- Line (location: (source ID: 47, lines: 134..135, bytes: 5077..5095), hits: 48) -> "from != address(0)"
+- Statement (location: (source ID: 47, lines: 134..135, bytes: 5077..5095), hits: 48) -> "from != address(0)"
+- Statement (location: (source ID: 47, lines: 134..135, bytes: 5077..5109), hits: 48) -> "from != address(0) && to != from"
+- Statement (location: (source ID: 47, lines: 134..135, bytes: 5099..5109), hits: 1) -> "to != from"
+- Branch (branch: 3, path: 0) (location: (source ID: 47, lines: 134..137, bytes: 5111..5170), hits: 1) -> "{\n            revert VowNFT__TransfersDisabled();\n        }"
+- Line (location: (source ID: 47, lines: 135..136, bytes: 5125..5159), hits: 1) -> "revert VowNFT__TransfersDisabled()"
+- Statement (location: (source ID: 47, lines: 135..136, bytes: 5125..5159), hits: 1) -> "revert VowNFT__TransfersDisabled()"
+- Line (location: (source ID: 47, lines: 138..139, bytes: 5180..5219), hits: 47) -> "return super._update(to, tokenId, auth)"
+- Statement (location: (source ID: 47, lines: 138..139, bytes: 5180..5219), hits: 47) -> "return super._update(to, tokenId, auth)"
+- Statement (location: (source ID: 47, lines: 138..139, bytes: 5187..5219), hits: 47) -> "super._update(to, tokenId, auth)"
+- Line (location: (source ID: 47, lines: 142..151, bytes: 5285..5603), hits: 1) -> "function getTokenMetadata(uint25....bondStart, m.marriageId);\n    }"
+- Function "getTokenMetadata" (location: (source ID: 47, lines: 142..151, bytes: 5285..5603), hits: 1) -> "function getTokenMetadata(uint25....bondStart, m.marriageId);\n    }"
+- Line (location: (source ID: 47, lines: 147..148, bytes: 5459..5476), hits: 1) -> "_requireOwned(id)"
+- Statement (location: (source ID: 47, lines: 147..148, bytes: 5459..5476), hits: 1) -> "_requireOwned(id)"
+- Line (location: (source ID: 47, lines: 148..149, bytes: 5486..5528), hits: 1) -> "TokenMetadata memory m = tokenMetadata[id]"
+- Statement (location: (source ID: 47, lines: 148..149, bytes: 5486..5528), hits: 1) -> "TokenMetadata memory m = tokenMetadata[id]"
+- Line (location: (source ID: 47, lines: 149..150, bytes: 5538..5596), hits: 1) -> "return (m.partnerA, m.partnerB, m.bondStart, m.marriageId)"
+- Statement (location: (source ID: 47, lines: 149..150, bytes: 5538..5596), hits: 1) -> "return (m.partnerA, m.partnerB, m.bondStart, m.marriageId)"
+- Line (location: (source ID: 47, lines: 153..156, bytes: 5700..5842), hits: 2) -> "function getTokensByMarriage(byt...rriageToToken[marriageId];\n    }"
+- Function "getTokensByMarriage" (location: (source ID: 47, lines: 153..156, bytes: 5700..5842), hits: 2) -> "function getTokensByMarriage(byt...rriageToToken[marriageId];\n    }"
+- Line (location: (source ID: 47, lines: 154..155, bytes: 5801..5835), hits: 2) -> "return marriageToToken[marriageId]"
+- Statement (location: (source ID: 47, lines: 154..155, bytes: 5801..5835), hits: 2) -> "return marriageToToken[marriageId]"
+
+src/helpers/ByteHasher.sol:
+- Line (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185) -> "function hashToField(bytes memor...56(keccak256(value)) >> 8;\n    }"
+- Function "hashToField" (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185) -> "function hashToField(bytes memor...56(keccak256(value)) >> 8;\n    }"
+- Line (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185) -> "return uint256(keccak256(value)) >> 8"
+- Statement (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185) -> "return uint256(keccak256(value)) >> 8"
+- Statement (location: (source ID: 48, lines: 9..10, bytes: 320..350), hits: 185) -> "uint256(keccak256(value)) >> 8"
+
+test/utils/MarriageHelper.sol:
+- Line (location: (source ID: 53, lines: 10..13, bytes: 297..426), hits: 2) -> "function exposed_getMarriageId(a...turn _getMarriageId(a, b);\n    }"
+- Function "exposed_getMarriageId" (location: (source ID: 53, lines: 10..13, bytes: 297..426), hits: 2) -> "function exposed_getMarriageId(a...turn _getMarriageId(a, b);\n    }"
+- Line (location: (source ID: 53, lines: 11..12, bytes: 392..419), hits: 2) -> "return _getMarriageId(a, b)"
+- Statement (location: (source ID: 53, lines: 11..12, bytes: 392..419), hits: 2) -> "return _getMarriageId(a, b)"
+- Statement (location: (source ID: 53, lines: 11..12, bytes: 399..419), hits: 2) -> "_getMarriageId(a, b)"
+
+test/utils/MockWorldId.sol:
+- Line (location: (source ID: 54, lines: 9..12, bytes: 212..297), hits: 0) -> "function setShouldRevert(bool _v...    shouldRevert = _value;\n    }"
+- Function "setShouldRevert" (location: (source ID: 54, lines: 9..12, bytes: 212..297), hits: 0) -> "function setShouldRevert(bool _v...    shouldRevert = _value;\n    }"
+- Line (location: (source ID: 54, lines: 10..11, bytes: 269..290), hits: 0) -> "shouldRevert = _value"
+- Statement (location: (source ID: 54, lines: 10..11, bytes: 269..290), hits: 0) -> "shouldRevert = _value"
+- Line (location: (source ID: 54, lines: 13..18, bytes: 303..499), hits: 46) -> "function verifyProof(uint256, ui...invalid proof\");\n        }\n    }"
+- Function "verifyProof" (location: (source ID: 54, lines: 13..18, bytes: 303..499), hits: 46) -> "function verifyProof(uint256, ui...invalid proof\");\n        }\n    }"
+- Line (location: (source ID: 54, lines: 14..17, bytes: 432..493), hits: 0) -> "{\n            revert(\"MockWorldID: invalid proof\");\n        }"
+- Branch (branch: 0, path: 0) (location: (source ID: 54, lines: 14..17, bytes: 432..493), hits: 0) -> "{\n            revert(\"MockWorldID: invalid proof\");\n        }"
+- Line (location: (source ID: 54, lines: 15..16, bytes: 446..482), hits: 0) -> "revert(\"MockWorldID: invalid proof\")"
+- Statement (location: (source ID: 54, lines: 15..16, bytes: 446..482), hits: 0) -> "revert(\"MockWorldID: invalid proof\")"
+
+Anchors for Contract "MarriageIdHelper" (solc 0.8.30, source ID 53):
+- creation IC 22 -> Item 56: Line (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33)
+- creation IC 22 -> Item 57: Function "constructor" (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33)
+- creation IC 198 -> Item 58: Line (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33)
+- creation IC 198 -> Item 59: Statement (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33)
+- creation IC 250 -> Item 60: Line (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33)
+- creation IC 250 -> Item 61: Statement (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33)
+- creation IC 302 -> Item 62: Line (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33)
+- creation IC 302 -> Item 63: Statement (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33)
+- creation IC 354 -> Item 64: Line (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33)
+- creation IC 354 -> Item 65: Statement (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33)
+- creation IC 406 -> Item 66: Line (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33)
+- creation IC 406 -> Item 67: Statement (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33)
+- creation IC 507 -> Item 68: Line (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33)
+- creation IC 507 -> Item 69: Statement (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33)
+- creation IC 608 -> Item 70: Line (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33)
+- creation IC 608 -> Item 71: Statement (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33)
+- creation IC 617 -> Item 72: Line (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33)
+- creation IC 617 -> Item 73: Statement (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33)
+- creation IC 832 -> Item 577: Line (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+- creation IC 832 -> Item 578: Function "hashToField" (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+- creation IC 834 -> Item 579: Line (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+- creation IC 834 -> Item 580: Statement (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+- creation IC 834 -> Item 581: Statement (location: (source ID: 48, lines: 9..10, bytes: 320..350), hits: 185)
+-  runtime IC 963 -> Item 582: Line (location: (source ID: 53, lines: 10..13, bytes: 297..426), hits: 2)
+-  runtime IC 963 -> Item 583: Function "exposed_getMarriageId" (location: (source ID: 53, lines: 10..13, bytes: 297..426), hits: 2)
+-  runtime IC 8146 -> Item 584: Line (location: (source ID: 53, lines: 11..12, bytes: 392..419), hits: 2)
+-  runtime IC 8146 -> Item 585: Statement (location: (source ID: 53, lines: 11..12, bytes: 392..419), hits: 2)
+-  runtime IC 8146 -> Item 586: Statement (location: (source ID: 53, lines: 11..12, bytes: 399..419), hits: 2)
+-  runtime IC 763 -> Item 74: Line (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33)
+-  runtime IC 763 -> Item 75: Function "propose" (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33)
+-  runtime IC 5264 -> Item 76: Line (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33)
+-  runtime IC 5264 -> Item 77: Statement (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33)
+-  runtime IC 5265 -> Item 78: Statement (location: (source ID: 44, lines: 162..163, bytes: 5777..5819), hits: 33)
+-  runtime IC 5307 -> Item 79: Line (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33)
+-  runtime IC 5307 -> Item 80: Statement (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33)
+-  runtime IC 5358 -> Item 81: Branch (branch: 0, path: 0) (location: (source ID: 44, lines: 164..167, bytes: 5887..5946), hits: 1)
+-  runtime IC 5358 -> Item 82: Line (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1)
+-  runtime IC 5358 -> Item 83: Statement (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1)
+-  runtime IC 5408 -> Item 84: Line (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32)
+-  runtime IC 5408 -> Item 85: Statement (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32)
+-  runtime IC 5459 -> Item 86: Branch (branch: 1, path: 0) (location: (source ID: 44, lines: 167..170, bytes: 5983..6047), hits: 1)
+-  runtime IC 5459 -> Item 87: Line (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1)
+-  runtime IC 5459 -> Item 88: Statement (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1)
+-  runtime IC 5509 -> Item 89: Line (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31)
+-  runtime IC 5509 -> Item 90: Statement (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31)
+-  runtime IC 5654 -> Item 91: Branch (branch: 2, path: 0) (location: (source ID: 44, lines: 171..174, bytes: 6107..6173), hits: 1)
+-  runtime IC 5654 -> Item 92: Line (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1)
+-  runtime IC 5654 -> Item 93: Statement (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1)
+-  runtime IC 5704 -> Item 94: Line (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30)
+-  runtime IC 5704 -> Item 95: Statement (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30)
+-  runtime IC 5704 -> Item 96: Statement (location: (source ID: 44, lines: 176..178, bytes: 6200..6298), hits: 30)
+-  runtime IC 5777 -> Item 97: Line (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28)
+-  runtime IC 5777 -> Item 98: Statement (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28)
+-  runtime IC 5850 -> Item 99: Line (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2)
+-  runtime IC 5850 -> Item 100: Branch (branch: 3, path: 0) (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2)
+-  runtime IC 5850 -> Item 101: Line (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2)
+-  runtime IC 5850 -> Item 102: Statement (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2)
+-  runtime IC 5982 -> Item 103: Line (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1)
+-  runtime IC 5982 -> Item 104: Branch (branch: 4, path: 0) (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1)
+-  runtime IC 5982 -> Item 105: Line (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1)
+-  runtime IC 5982 -> Item 106: Statement (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1)
+-  runtime IC 6032 -> Item 107: Line (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27)
+-  runtime IC 6032 -> Item 108: Statement (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27)
+-  runtime IC 6206 -> Item 109: Line (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27)
+-  runtime IC 6206 -> Item 110: Statement (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27)
+-  runtime IC 6294 -> Item 111: Line (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27)
+-  runtime IC 6294 -> Item 112: Statement (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27)
+-  runtime IC 6632 -> Item 113: Line (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27)
+-  runtime IC 6632 -> Item 114: Statement (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27)
+-  runtime IC 557 -> Item 115: Line (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20)
+-  runtime IC 557 -> Item 116: Function "accept" (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20)
+-  runtime IC 1798 -> Item 117: Line (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20)
+-  runtime IC 1798 -> Item 118: Statement (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20)
+-  runtime IC 1862 -> Item 119: Line (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20)
+-  runtime IC 1862 -> Item 120: Statement (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20)
+-  runtime IC 1863 -> Item 121: Statement (location: (source ID: 44, lines: 220..221, bytes: 7876..7918), hits: 20)
+-  runtime IC 1905 -> Item 122: Line (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20)
+-  runtime IC 1905 -> Item 123: Statement (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20)
+-  runtime IC 1991 -> Item 124: Branch (branch: 5, path: 0) (location: (source ID: 44, lines: 222..225, bytes: 7976..8037), hits: 1)
+-  runtime IC 1991 -> Item 125: Line (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1)
+-  runtime IC 1991 -> Item 126: Statement (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1)
+-  runtime IC 2123 -> Item 127: Line (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0)
+-  runtime IC 2123 -> Item 128: Branch (branch: 6, path: 0) (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0)
+-  runtime IC 2123 -> Item 129: Line (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0)
+-  runtime IC 2123 -> Item 130: Statement (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0)
+-  runtime IC 2173 -> Item 131: Line (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19)
+-  runtime IC 2173 -> Item 132: Statement (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19)
+-  runtime IC 2173 -> Item 133: Statement (location: (source ID: 44, lines: 229..231, bytes: 8254..8352), hits: 19)
+-  runtime IC 2246 -> Item 134: Line (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19)
+-  runtime IC 2246 -> Item 135: Statement (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19)
+-  runtime IC 2319 -> Item 136: Line (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0)
+-  runtime IC 2319 -> Item 137: Branch (branch: 7, path: 0) (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0)
+-  runtime IC 2319 -> Item 138: Line (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0)
+-  runtime IC 2319 -> Item 139: Statement (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0)
+-  runtime IC 2369 -> Item 140: Line (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19)
+-  runtime IC 2369 -> Item 141: Statement (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19)
+-  runtime IC 2543 -> Item 142: Line (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19)
+-  runtime IC 2543 -> Item 143: Statement (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19)
+-  runtime IC 2544 -> Item 144: Statement (location: (source ID: 44, lines: 244..245, bytes: 8722..8758), hits: 19)
+-  runtime IC 2594 -> Item 145: Line (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0)
+-  runtime IC 2594 -> Item 146: Branch (branch: 8, path: 0) (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0)
+-  runtime IC 2594 -> Item 147: Line (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0)
+-  runtime IC 2594 -> Item 148: Statement (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0)
+-  runtime IC 2644 -> Item 149: Line (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19)
+-  runtime IC 2644 -> Item 150: Statement (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19)
+-  runtime IC 2672 -> Item 151: Line (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19)
+-  runtime IC 2672 -> Item 152: Statement (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19)
+-  runtime IC 2760 -> Item 153: Line (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19)
+-  runtime IC 2760 -> Item 154: Statement (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19)
+-  runtime IC 3108 -> Item 155: Line (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19)
+-  runtime IC 3108 -> Item 156: Statement (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19)
+-  runtime IC 3174 -> Item 157: Line (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19)
+-  runtime IC 3174 -> Item 158: Statement (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19)
+-  runtime IC 3584 -> Item 159: Line (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19)
+-  runtime IC 3584 -> Item 160: Statement (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19)
+-  runtime IC 3622 -> Item 161: Line (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19)
+-  runtime IC 3622 -> Item 162: Statement (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19)
+-  runtime IC 3784 -> Item 163: Line (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19)
+-  runtime IC 3784 -> Item 164: Statement (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19)
+-  runtime IC 3946 -> Item 165: Line (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19)
+-  runtime IC 3946 -> Item 166: Statement (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19)
+-  runtime IC 4090 -> Item 167: Line (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19)
+-  runtime IC 4090 -> Item 168: Statement (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19)
+-  runtime IC 4234 -> Item 169: Line (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19)
+-  runtime IC 4234 -> Item 170: Statement (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19)
+-  runtime IC 1264 -> Item 171: Line (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4)
+-  runtime IC 1264 -> Item 172: Function "divorce" (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4)
+-  runtime IC 9887 -> Item 173: Line (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4)
+-  runtime IC 9887 -> Item 174: Statement (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4)
+-  runtime IC 9888 -> Item 175: Statement (location: (source ID: 44, lines: 304..305, bytes: 10681..10716), hits: 4)
+-  runtime IC 9900 -> Item 176: Line (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4)
+-  runtime IC 9900 -> Item 177: Statement (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4)
+-  runtime IC 9920 -> Item 178: Line (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4)
+-  runtime IC 9920 -> Item 179: Statement (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4)
+-  runtime IC 9947 -> Item 180: Branch (branch: 9, path: 0) (location: (source ID: 44, lines: 307..310, bytes: 10855..10916), hits: 2)
+-  runtime IC 9947 -> Item 181: Line (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2)
+-  runtime IC 9947 -> Item 182: Statement (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2)
+-  runtime IC 9997 -> Item 183: Line (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2)
+-  runtime IC 9997 -> Item 184: Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2)
+-  runtime IC 9997 -> Item 185: Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..11009), hits: 2)
+-  runtime IC 10086 -> Item 186: Statement (location: (source ID: 44, lines: 312..313, bytes: 10978..11009), hits: 0)
+-  runtime IC 10175 -> Item 187: Line (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0)
+-  runtime IC 10175 -> Item 188: Branch (branch: 10, path: 0) (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0)
+-  runtime IC 10175 -> Item 189: Line (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0)
+-  runtime IC 10175 -> Item 190: Statement (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0)
+-  runtime IC 10225 -> Item 191: Line (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2)
+-  runtime IC 10225 -> Item 192: Statement (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2)
+-  runtime IC 10226 -> Item 193: Statement (location: (source ID: 44, lines: 317..318, bytes: 11107..11132), hits: 2)
+-  runtime IC 10237 -> Item 194: Line (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2)
+-  runtime IC 10237 -> Item 195: Statement (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2)
+-  runtime IC 10245 -> Item 196: Branch (branch: 11, path: 0) (location: (source ID: 44, lines: 319..324, bytes: 11285..11444), hits: 1)
+-  runtime IC 10245 -> Item 197: Line (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1)
+-  runtime IC 10245 -> Item 198: Statement (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1)
+-  runtime IC 10246 -> Item 199: Statement (location: (source ID: 44, lines: 320..321, bytes: 11315..11325), hits: 1)
+-  runtime IC 10261 -> Item 200: Line (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1)
+-  runtime IC 10261 -> Item 201: Statement (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1)
+-  runtime IC 10431 -> Item 202: Line (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1)
+-  runtime IC 10431 -> Item 203: Statement (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1)
+-  runtime IC 10604 -> Item 204: Line (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2)
+-  runtime IC 10604 -> Item 205: Statement (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2)
+-  runtime IC 10631 -> Item 206: Line (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2)
+-  runtime IC 10631 -> Item 207: Statement (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2)
+-  runtime IC 10640 -> Item 208: Line (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2)
+-  runtime IC 10640 -> Item 209: Statement (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2)
+-  runtime IC 10742 -> Item 210: Line (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2)
+-  runtime IC 10742 -> Item 211: Statement (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2)
+-  runtime IC 10845 -> Item 212: Line (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2)
+-  runtime IC 10845 -> Item 213: Statement (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2)
+-  runtime IC 12838 -> Item 214: Line (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8)
+-  runtime IC 12838 -> Item 215: Function "_pendingYield" (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8)
+-  runtime IC 12840 -> Item 216: Line (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8)
+-  runtime IC 12840 -> Item 217: Statement (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8)
+-  runtime IC 12860 -> Item 218: Line (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8)
+-  runtime IC 12860 -> Item 219: Statement (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8)
+-  runtime IC 12881 -> Item 220: Statement (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0)
+-  runtime IC 12881 -> Item 221: Branch (branch: 12, path: 0) (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0)
+-  runtime IC 12890 -> Item 222: Line (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8)
+-  runtime IC 12890 -> Item 223: Statement (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8)
+-  runtime IC 12891 -> Item 224: Statement (location: (source ID: 44, lines: 344..345, bytes: 12164..12208), hits: 8)
+-  runtime IC 12952 -> Item 225: Line (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8)
+-  runtime IC 12952 -> Item 226: Statement (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8)
+-  runtime IC 12952 -> Item 227: Statement (location: (source ID: 44, lines: 345..346, bytes: 12225..12246), hits: 8)
+-  runtime IC 1236 -> Item 228: Line (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1)
+-  runtime IC 1236 -> Item 229: Function "claimYield" (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1)
+-  runtime IC 9171 -> Item 230: Line (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1)
+-  runtime IC 9171 -> Item 231: Statement (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1)
+-  runtime IC 9172 -> Item 232: Statement (location: (source ID: 44, lines: 349..350, bytes: 12364..12399), hits: 1)
+-  runtime IC 9184 -> Item 233: Line (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1)
+-  runtime IC 9184 -> Item 234: Statement (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1)
+-  runtime IC 9204 -> Item 235: Line (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1)
+-  runtime IC 9204 -> Item 236: Statement (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1)
+-  runtime IC 9225 -> Item 237: Statement (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0)
+-  runtime IC 9225 -> Item 238: Branch (branch: 13, path: 0) (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0)
+-  runtime IC 9275 -> Item 239: Line (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1)
+-  runtime IC 9275 -> Item 240: Statement (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1)
+-  runtime IC 9276 -> Item 241: Statement (location: (source ID: 44, lines: 353..354, bytes: 12554..12579), hits: 1)
+-  runtime IC 9287 -> Item 242: Line (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1)
+-  runtime IC 9287 -> Item 243: Statement (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1)
+-  runtime IC 9294 -> Item 244: Branch (branch: 14, path: 0) (location: (source ID: 44, lines: 354..357, bytes: 12606..12665), hits: 0)
+-  runtime IC 9294 -> Item 245: Line (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0)
+-  runtime IC 9294 -> Item 246: Statement (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0)
+-  runtime IC 9344 -> Item 247: Line (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1)
+-  runtime IC 9344 -> Item 248: Statement (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1)
+-  runtime IC 9345 -> Item 249: Statement (location: (source ID: 44, lines: 358..359, bytes: 12691..12701), hits: 1)
+-  runtime IC 9360 -> Item 250: Line (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1)
+-  runtime IC 9360 -> Item 251: Statement (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1)
+-  runtime IC 9530 -> Item 252: Line (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1)
+-  runtime IC 9530 -> Item 253: Statement (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1)
+-  runtime IC 9701 -> Item 254: Line (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1)
+-  runtime IC 9701 -> Item 255: Statement (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1)
+-  runtime IC 9710 -> Item 256: Line (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1)
+-  runtime IC 9710 -> Item 257: Statement (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1)
+-  runtime IC 887 -> Item 258: Line (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7)
+-  runtime IC 887 -> Item 259: Function "manualCheckAndMint" (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7)
+-  runtime IC 6916 -> Item 260: Line (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7)
+-  runtime IC 6916 -> Item 261: Statement (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7)
+-  runtime IC 6917 -> Item 262: Statement (location: (source ID: 44, lines: 372..373, bytes: 13267..13302), hits: 7)
+-  runtime IC 6929 -> Item 263: Line (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7)
+-  runtime IC 6929 -> Item 264: Statement (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7)
+-  runtime IC 6949 -> Item 265: Line (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7)
+-  runtime IC 6949 -> Item 266: Statement (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7)
+-  runtime IC 6970 -> Item 267: Branch (branch: 15, path: 0) (location: (source ID: 44, lines: 375..378, bytes: 13372..13433), hits: 1)
+-  runtime IC 6970 -> Item 268: Line (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1)
+-  runtime IC 6970 -> Item 269: Statement (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1)
+-  runtime IC 7020 -> Item 270: Line (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6)
+-  runtime IC 7020 -> Item 271: Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6)
+-  runtime IC 7020 -> Item 272: Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13498), hits: 6)
+-  runtime IC 7109 -> Item 273: Statement (location: (source ID: 44, lines: 378..379, bytes: 13474..13498), hits: 0)
+-  runtime IC 7198 -> Item 274: Branch (branch: 16, path: 0) (location: (source ID: 44, lines: 378..381, bytes: 13500..13600), hits: 0)
+-  runtime IC 7198 -> Item 275: Line (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0)
+-  runtime IC 7198 -> Item 276: Statement (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0)
+-  runtime IC 7248 -> Item 277: Line (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6)
+-  runtime IC 7248 -> Item 278: Statement (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6)
+-  runtime IC 7249 -> Item 279: Statement (location: (source ID: 44, lines: 382..383, bytes: 13634..13672), hits: 6)
+-  runtime IC 7310 -> Item 280: Line (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6)
+-  runtime IC 7310 -> Item 281: Statement (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6)
+-  runtime IC 7311 -> Item 282: Statement (location: (source ID: 44, lines: 383..384, bytes: 13700..13725), hits: 6)
+-  runtime IC 7454 -> Item 283: Line (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6)
+-  runtime IC 7454 -> Item 284: Statement (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6)
+-  runtime IC 7454 -> Item 285: Statement (location: (source ID: 44, lines: 387..390, bytes: 13785..13894), hits: 6)
+-  runtime IC 7468 -> Item 286: Line (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3)
+-  runtime IC 7468 -> Item 287: Statement (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3)
+-  runtime IC 7468 -> Item 288: Statement (location: (source ID: 44, lines: 388..390, bytes: 13837..13894), hits: 3)
+-  runtime IC 7478 -> Item 289: Line (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3)
+-  runtime IC 7478 -> Item 290: Statement (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3)
+-  runtime IC 7487 -> Item 291: Line (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3)
+-  runtime IC 7487 -> Item 292: Branch (branch: 17, path: 0) (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3)
+-  runtime IC 7487 -> Item 293: Line (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3)
+-  runtime IC 7487 -> Item 294: Statement (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3)
+-  runtime IC 7537 -> Item 295: Line (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3)
+-  runtime IC 7537 -> Item 296: Statement (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3)
+-  runtime IC 7727 -> Item 297: Line (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3)
+-  runtime IC 7727 -> Item 298: Statement (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3)
+-  runtime IC 7918 -> Item 299: Line (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3)
+-  runtime IC 7918 -> Item 300: Statement (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3)
+-  runtime IC 7927 -> Item 301: Line (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3)
+-  runtime IC 7927 -> Item 302: Statement (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3)
+-  runtime IC 791 -> Item 303: Line (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0)
+-  runtime IC 791 -> Item 304: Function "_getMarriageId" (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0)
+-  runtime IC 6730 -> Item 305: Line (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44)
+-  runtime IC 6730 -> Item 306: Statement (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44)
+-  runtime IC 6730 -> Item 307: Line (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44)
+-  runtime IC 6730 -> Item 308: Statement (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44)
+-  runtime IC 1226 -> Item 309: Line (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3)
+-  runtime IC 1226 -> Item 310: Function "cancelProposal" (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3)
+-  runtime IC 8508 -> Item 311: Line (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3)
+-  runtime IC 8508 -> Item 312: Statement (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3)
+-  runtime IC 8798 -> Item 313: Line (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3)
+-  runtime IC 8798 -> Item 314: Statement (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3)
+-  runtime IC 8852 -> Item 315: Branch (branch: 18, path: 0) (location: (source ID: 44, lines: 424..427, bytes: 14946..15005), hits: 1)
+-  runtime IC 8852 -> Item 316: Line (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1)
+-  runtime IC 8852 -> Item 317: Statement (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1)
+-  runtime IC 9074 -> Item 318: Line (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2)
+-  runtime IC 9074 -> Item 319: Statement (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2)
+-  runtime IC 633 -> Item 320: Line (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1)
+-  runtime IC 633 -> Item 321: Function "getMarriage" (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1)
+-  runtime IC 4813 -> Item 322: Line (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1)
+-  runtime IC 4813 -> Item 323: Statement (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1)
+-  runtime IC 509 -> Item 324: Line (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2)
+-  runtime IC 509 -> Item 325: Function "isMarried" (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2)
+-  runtime IC 1748 -> Item 326: Line (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2)
+-  runtime IC 1748 -> Item 327: Statement (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2)
+-  runtime IC 1526 -> Item 328: Line (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4)
+-  runtime IC 1526 -> Item 329: Function "getProposal" (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4)
+-  runtime IC 11350 -> Item 330: Line (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4)
+-  runtime IC 11350 -> Item 331: Statement (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4)
+-  runtime IC 1448 -> Item 332: Line (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0)
+-  runtime IC 1448 -> Item 333: Function "hasPendingProposal" (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0)
+-  runtime IC 11157 -> Item 334: Line (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0)
+-  runtime IC 11157 -> Item 335: Statement (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0)
+-  runtime IC 11157 -> Item 336: Statement (location: (source ID: 44, lines: 464..465, bytes: 16182..16224), hits: 0)
+-  runtime IC 1650 -> Item 337: Line (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3)
+-  runtime IC 1650 -> Item 338: Function "getPendingYield" (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3)
+-  runtime IC 11809 -> Item 339: Line (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3)
+-  runtime IC 11809 -> Item 340: Statement (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3)
+-  runtime IC 11809 -> Item 341: Statement (location: (source ID: 44, lines: 474..475, bytes: 16426..16461), hits: 3)
+-  runtime IC 839 -> Item 342: Line (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2)
+-  runtime IC 839 -> Item 343: Function "getCurrentMilestoneYear" (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2)
+-  runtime IC 6878 -> Item 344: Line (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2)
+-  runtime IC 6878 -> Item 345: Statement (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2)
+-  runtime IC 915 -> Item 346: Line (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1)
+-  runtime IC 915 -> Item 347: Function "getBondStart" (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1)
+-  runtime IC 8107 -> Item 348: Line (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1)
+-  runtime IC 8107 -> Item 349: Statement (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1)
+-  runtime IC 585 -> Item 350: Line (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1)
+-  runtime IC 585 -> Item 351: Function "getMarriageView" (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1)
+-  runtime IC 4341 -> Item 352: Line (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1)
+-  runtime IC 4341 -> Item 353: Statement (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1)
+-  runtime IC 4342 -> Item 354: Statement (location: (source ID: 44, lines: 504..505, bytes: 17191..17211), hits: 1)
+-  runtime IC 4354 -> Item 355: Line (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1)
+-  runtime IC 4354 -> Item 356: Statement (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1)
+-  runtime IC 4631 -> Item 357: Line (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1)
+-  runtime IC 4631 -> Item 358: Statement (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1)
+-  runtime IC 1698 -> Item 359: Line (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1)
+-  runtime IC 1698 -> Item 360: Function "getUserDashboard" (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1)
+-  runtime IC 11843 -> Item 361: Line (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1)
+-  runtime IC 11843 -> Item 362: Statement (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1)
+-  runtime IC 12133 -> Item 363: Line (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1)
+-  runtime IC 12133 -> Item 364: Statement (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1)
+-  runtime IC 12198 -> Item 365: Line (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1)
+-  runtime IC 12198 -> Item 366: Statement (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1)
+-  runtime IC 12264 -> Item 367: Line (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1)
+-  runtime IC 12264 -> Item 368: Statement (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1)
+-  runtime IC 12425 -> Item 369: Line (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1)
+-  runtime IC 12425 -> Item 370: Statement (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1)
+-  runtime IC 12434 -> Item 371: Branch (branch: 19, path: 0) (location: (source ID: 44, lines: 532..539, bytes: 18152..18321), hits: 0)
+-  runtime IC 12434 -> Item 372: Line (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0)
+-  runtime IC 12434 -> Item 373: Statement (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0)
+-  runtime IC 12449 -> Item 374: Line (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0)
+-  runtime IC 12449 -> Item 375: Statement (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0)
+-  runtime IC 12505 -> Item 376: Line (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0)
+-  runtime IC 12505 -> Item 377: Statement (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0)
+-  runtime IC 12515 -> Item 378: Line (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0)
+-  runtime IC 12515 -> Item 379: Statement (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0)
+-  runtime IC 12522 -> Item 380: Line (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1)
+-  runtime IC 12522 -> Item 381: Statement (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1)
+-  runtime IC 12542 -> Item 382: Line (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1)
+-  runtime IC 12542 -> Item 383: Statement (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1)
+-  runtime IC 12573 -> Item 384: Line (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1)
+-  runtime IC 12573 -> Item 385: Statement (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1)
+-  runtime IC 12790 -> Item 386: Line (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1)
+-  runtime IC 12790 -> Item 387: Statement (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1)
+-  runtime IC 12816 -> Item 577: Line (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+-  runtime IC 12816 -> Item 578: Function "hashToField" (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+-  runtime IC 12818 -> Item 579: Line (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+-  runtime IC 12818 -> Item 580: Statement (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+-  runtime IC 12818 -> Item 581: Statement (location: (source ID: 48, lines: 9..10, bytes: 320..350), hits: 185)
+
+Anchors for Contract "VowNFT" (solc 0.8.30, source ID 47):
+- creation IC 45 -> Item 499: Line (location: (source ID: 47, lines: 44..47, bytes: 1511..1599), hits: 40)
+- creation IC 45 -> Item 500: Function "constructor" (location: (source ID: 47, lines: 44..47, bytes: 1511..1599), hits: 40)
+- creation IC 327 -> Item 501: Line (location: (source ID: 47, lines: 45..46, bytes: 1577..1592), hits: 40)
+- creation IC 327 -> Item 502: Statement (location: (source ID: 47, lines: 45..46, bytes: 1577..1592), hits: 40)
+-  runtime IC 1840 -> Item 488: Line (location: (source ID: 47, lines: 33..37, bytes: 1279..1348), hits: 47)
+-  runtime IC 1840 -> Item 489: Function "onlyHumanBond" (location: (source ID: 47, lines: 33..37, bytes: 1279..1348), hits: 47)
+-  runtime IC 1840 -> Item 490: Line (location: (source ID: 47, lines: 34..35, bytes: 1314..1330), hits: 47)
+-  runtime IC 1840 -> Item 491: Statement (location: (source ID: 47, lines: 34..35, bytes: 1314..1330), hits: 47)
+-  runtime IC 793 -> Item 492: Line (location: (source ID: 47, lines: 38..43, bytes: 1354..1505), hits: 0)
+-  runtime IC 793 -> Item 493: Function "_onlyHumanBond" (location: (source ID: 47, lines: 38..43, bytes: 1354..1505), hits: 0)
+-  runtime IC 2793 -> Item 494: Line (location: (source ID: 47, lines: 39..40, bytes: 1406..1437), hits: 47)
+-  runtime IC 2793 -> Item 495: Statement (location: (source ID: 47, lines: 39..40, bytes: 1406..1437), hits: 47)
+-  runtime IC 2877 -> Item 496: Branch (branch: 0, path: 0) (location: (source ID: 47, lines: 39..42, bytes: 1439..1499), hits: 0)
+-  runtime IC 2877 -> Item 497: Line (location: (source ID: 47, lines: 40..41, bytes: 1453..1488), hits: 0)
+-  runtime IC 2877 -> Item 498: Statement (location: (source ID: 47, lines: 40..41, bytes: 1453..1488), hits: 0)
+-  runtime IC 1205 -> Item 503: Line (location: (source ID: 47, lines: 50..53, bytes: 1730..1856), hits: 43)
+-  runtime IC 1205 -> Item 504: Function "setHumanBondContract" (location: (source ID: 47, lines: 50..53, bytes: 1730..1856), hits: 43)
+-  runtime IC 3998 -> Item 505: Line (location: (source ID: 47, lines: 51..52, bytes: 1814..1849), hits: 42)
+-  runtime IC 3998 -> Item 506: Statement (location: (source ID: 47, lines: 51..52, bytes: 1814..1849), hits: 42)
+-  runtime IC 1089 -> Item 507: Line (location: (source ID: 47, lines: 55..58, bytes: 1909..2007), hits: 2)
+-  runtime IC 1089 -> Item 508: Function "setImageCID" (location: (source ID: 47, lines: 55..58, bytes: 1909..2007), hits: 2)
+-  runtime IC 3762 -> Item 509: Line (location: (source ID: 47, lines: 56..57, bytes: 1983..2000), hits: 1)
+-  runtime IC 3762 -> Item 510: Statement (location: (source ID: 47, lines: 56..57, bytes: 1983..2000), hits: 1)
+-  runtime IC 629 -> Item 511: Line (location: (source ID: 47, lines: 61..82, bytes: 2127..2938), hits: 47)
+-  runtime IC 629 -> Item 512: Function "mintVowNFT" (location: (source ID: 47, lines: 61..82, bytes: 2127..2938), hits: 47)
+-  runtime IC 1848 -> Item 513: Line (location: (source ID: 47, lines: 66..67, bytes: 2317..2330), hits: 47)
+-  runtime IC 1848 -> Item 514: Statement (location: (source ID: 47, lines: 66..67, bytes: 2317..2330), hits: 47)
+-  runtime IC 1871 -> Item 515: Line (location: (source ID: 47, lines: 68..70, bytes: 2341..2487), hits: 47)
+-  runtime IC 1871 -> Item 516: Statement (location: (source ID: 47, lines: 68..70, bytes: 2341..2487), hits: 47)
+-  runtime IC 2128 -> Item 517: Line (location: (source ID: 47, lines: 70..71, bytes: 2497..2523), hits: 47)
+-  runtime IC 2128 -> Item 518: Statement (location: (source ID: 47, lines: 70..71, bytes: 2497..2523), hits: 47)
+-  runtime IC 2140 -> Item 519: Line (location: (source ID: 47, lines: 73..74, bytes: 2595..2631), hits: 47)
+-  runtime IC 2140 -> Item 520: Statement (location: (source ID: 47, lines: 73..74, bytes: 2595..2631), hits: 47)
+-  runtime IC 2183 -> Item 521: Branch (branch: 1, path: 0) (location: (source ID: 47, lines: 73..76, bytes: 2633..2703), hits: 25)
+-  runtime IC 2372 -> Item 522: Branch (branch: 1, path: 1) (location: (source ID: 47, lines: 73..79, bytes: 2591..2850), hits: 21)
+-  runtime IC 2183 -> Item 523: Line (location: (source ID: 47, lines: 74..75, bytes: 2647..2692), hits: 25)
+-  runtime IC 2183 -> Item 524: Statement (location: (source ID: 47, lines: 74..75, bytes: 2647..2692), hits: 25)
+-  runtime IC 2231 -> Item 525: Line (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 22)
+-  runtime IC 2231 -> Item 526: Statement (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 22)
+-  runtime IC 2275 -> Item 527: Branch (branch: 2, path: 0) (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 1)
+-  runtime IC 2333 -> Item 528: Branch (branch: 2, path: 1) (location: (source ID: 47, lines: 76..77, bytes: 2723..2780), hits: 21)
+-  runtime IC 2334 -> Item 529: Line (location: (source ID: 47, lines: 77..78, bytes: 2794..2839), hits: 21)
+-  runtime IC 2334 -> Item 530: Statement (location: (source ID: 47, lines: 77..78, bytes: 2794..2839), hits: 21)
+-  runtime IC 2379 -> Item 531: Line (location: (source ID: 47, lines: 79..80, bytes: 2859..2903), hits: 46)
+-  runtime IC 2379 -> Item 532: Statement (location: (source ID: 47, lines: 79..80, bytes: 2859..2903), hits: 46)
+-  runtime IC 2450 -> Item 533: Line (location: (source ID: 47, lines: 80..81, bytes: 2913..2931), hits: 46)
+-  runtime IC 2450 -> Item 534: Statement (location: (source ID: 47, lines: 80..81, bytes: 2913..2931), hits: 46)
+-  runtime IC 1261 -> Item 535: Line (location: (source ID: 47, lines: 84..126, bytes: 3033..4620), hits: 2)
+-  runtime IC 1261 -> Item 536: Function "tokenURI" (location: (source ID: 47, lines: 84..126, bytes: 3033..4620), hits: 2)
+-  runtime IC 4104 -> Item 537: Line (location: (source ID: 47, lines: 85..86, bytes: 3118..3135), hits: 2)
+-  runtime IC 4104 -> Item 538: Statement (location: (source ID: 47, lines: 85..86, bytes: 3118..3135), hits: 2)
+-  runtime IC 4114 -> Item 539: Line (location: (source ID: 47, lines: 87..88, bytes: 3176..3218), hits: 2)
+-  runtime IC 4114 -> Item 540: Statement (location: (source ID: 47, lines: 87..88, bytes: 3176..3218), hits: 2)
+-  runtime IC 4334 -> Item 541: Line (location: (source ID: 47, lines: 90..108, bytes: 3309..3999), hits: 2)
+-  runtime IC 4334 -> Item 542: Statement (location: (source ID: 47, lines: 90..108, bytes: 3309..3999), hits: 2)
+-  runtime IC 4474 -> Item 543: Line (location: (source ID: 47, lines: 109..122, bytes: 4010..4469), hits: 2)
+-  runtime IC 4474 -> Item 544: Statement (location: (source ID: 47, lines: 109..122, bytes: 4010..4469), hits: 2)
+-  runtime IC 4522 -> Item 545: Line (location: (source ID: 47, lines: 123..124, bytes: 4480..4530), hits: 2)
+-  runtime IC 4522 -> Item 546: Statement (location: (source ID: 47, lines: 123..124, bytes: 4480..4530), hits: 2)
+-  runtime IC 4523 -> Item 547: Statement (location: (source ID: 47, lines: 123..124, bytes: 4504..4530), hits: 2)
+-  runtime IC 4534 -> Item 548: Line (location: (source ID: 47, lines: 124..125, bytes: 4540..4613), hits: 2)
+-  runtime IC 4534 -> Item 549: Statement (location: (source ID: 47, lines: 124..125, bytes: 4540..4613), hits: 2)
+-  runtime IC 5200 -> Item 550: Line (location: (source ID: 47, lines: 131..140, bytes: 4924..5226), hits: 48)
+-  runtime IC 5200 -> Item 551: Function "_update" (location: (source ID: 47, lines: 131..140, bytes: 4924..5226), hits: 48)
+-  runtime IC 5202 -> Item 552: Line (location: (source ID: 47, lines: 132..133, bytes: 5030..5062), hits: 48)
+-  runtime IC 5202 -> Item 553: Statement (location: (source ID: 47, lines: 132..133, bytes: 5030..5062), hits: 48)
+-  runtime IC 5203 -> Item 554: Statement (location: (source ID: 47, lines: 132..133, bytes: 5045..5062), hits: 48)
+-  runtime IC 5214 -> Item 555: Line (location: (source ID: 47, lines: 134..135, bytes: 5077..5095), hits: 48)
+-  runtime IC 5214 -> Item 556: Statement (location: (source ID: 47, lines: 134..135, bytes: 5077..5095), hits: 48)
+-  runtime IC 5214 -> Item 557: Statement (location: (source ID: 47, lines: 134..135, bytes: 5077..5109), hits: 48)
+-  runtime IC 5269 -> Item 558: Statement (location: (source ID: 47, lines: 134..135, bytes: 5099..5109), hits: 1)
+-  runtime IC 5323 -> Item 559: Branch (branch: 3, path: 0) (location: (source ID: 47, lines: 134..137, bytes: 5111..5170), hits: 1)
+-  runtime IC 5323 -> Item 560: Line (location: (source ID: 47, lines: 135..136, bytes: 5125..5159), hits: 1)
+-  runtime IC 5323 -> Item 561: Statement (location: (source ID: 47, lines: 135..136, bytes: 5125..5159), hits: 1)
+-  runtime IC 5373 -> Item 562: Line (location: (source ID: 47, lines: 138..139, bytes: 5180..5219), hits: 47)
+-  runtime IC 5373 -> Item 563: Statement (location: (source ID: 47, lines: 138..139, bytes: 5180..5219), hits: 47)
+-  runtime IC 5373 -> Item 564: Statement (location: (source ID: 47, lines: 138..139, bytes: 5187..5219), hits: 47)
+-  runtime IC 833 -> Item 565: Line (location: (source ID: 47, lines: 142..151, bytes: 5285..5603), hits: 1)
+-  runtime IC 833 -> Item 566: Function "getTokenMetadata" (location: (source ID: 47, lines: 142..151, bytes: 5285..5603), hits: 1)
+-  runtime IC 3073 -> Item 567: Line (location: (source ID: 47, lines: 147..148, bytes: 5459..5476), hits: 1)
+-  runtime IC 3073 -> Item 568: Statement (location: (source ID: 47, lines: 147..148, bytes: 5459..5476), hits: 1)
+-  runtime IC 3083 -> Item 569: Line (location: (source ID: 47, lines: 148..149, bytes: 5486..5528), hits: 1)
+-  runtime IC 3083 -> Item 570: Statement (location: (source ID: 47, lines: 148..149, bytes: 5486..5528), hits: 1)
+-  runtime IC 3303 -> Item 571: Line (location: (source ID: 47, lines: 149..150, bytes: 5538..5596), hits: 1)
+-  runtime IC 3303 -> Item 572: Statement (location: (source ID: 47, lines: 149..150, bytes: 5538..5596), hits: 1)
+-  runtime IC 932 -> Item 573: Line (location: (source ID: 47, lines: 153..156, bytes: 5700..5842), hits: 2)
+-  runtime IC 932 -> Item 574: Function "getTokensByMarriage" (location: (source ID: 47, lines: 153..156, bytes: 5700..5842), hits: 2)
+-  runtime IC 3363 -> Item 575: Line (location: (source ID: 47, lines: 154..155, bytes: 5801..5835), hits: 2)
+-  runtime IC 3363 -> Item 576: Statement (location: (source ID: 47, lines: 154..155, bytes: 5801..5835), hits: 2)
+
+Anchors for Contract "TimeToken" (solc 0.8.30, source ID 46):
+-  runtime IC 433 -> Item 484: Line (location: (source ID: 46, lines: 15..18, bytes: 518..613), hits: 42)
+-  runtime IC 433 -> Item 485: Function "mint" (location: (source ID: 46, lines: 15..18, bytes: 518..613), hits: 42)
+-  runtime IC 1009 -> Item 486: Line (location: (source ID: 46, lines: 16..17, bytes: 589..606), hits: 42)
+-  runtime IC 1009 -> Item 487: Statement (location: (source ID: 46, lines: 16..17, bytes: 589..606), hits: 42)
+
+Anchors for Contract "MilestoneNFT" (solc 0.8.30, source ID 45):
+- creation IC 5 -> Item 388: Line (location: (source ID: 45, lines: 42..45, bytes: 2074..2172), hits: 42)
+- creation IC 5 -> Item 389: Function "constructor" (location: (source ID: 45, lines: 42..45, bytes: 2074..2172), hits: 42)
+- creation IC 287 -> Item 390: Line (location: (source ID: 45, lines: 43..44, bytes: 2150..2165), hits: 42)
+- creation IC 287 -> Item 391: Statement (location: (source ID: 45, lines: 43..44, bytes: 2150..2165), hits: 42)
+-  runtime IC 3346 -> Item 392: Line (location: (source ID: 45, lines: 50..54, bytes: 2434..2503), hits: 11)
+-  runtime IC 3346 -> Item 393: Function "onlyHumanBond" (location: (source ID: 45, lines: 50..54, bytes: 2434..2503), hits: 11)
+-  runtime IC 3346 -> Item 394: Line (location: (source ID: 45, lines: 51..52, bytes: 2469..2485), hits: 11)
+-  runtime IC 3346 -> Item 395: Statement (location: (source ID: 45, lines: 51..52, bytes: 2469..2485), hits: 11)
+-  runtime IC 5710 -> Item 396: Line (location: (source ID: 45, lines: 55..60, bytes: 2509..2663), hits: 11)
+-  runtime IC 5710 -> Item 397: Function "_onlyHumanBond" (location: (source ID: 45, lines: 55..60, bytes: 2509..2663), hits: 11)
+-  runtime IC 5711 -> Item 398: Line (location: (source ID: 45, lines: 56..57, bytes: 2563..2594), hits: 11)
+-  runtime IC 5711 -> Item 399: Statement (location: (source ID: 45, lines: 56..57, bytes: 2563..2594), hits: 11)
+-  runtime IC 5795 -> Item 400: Branch (branch: 0, path: 0) (location: (source ID: 45, lines: 56..59, bytes: 2596..2657), hits: 1)
+-  runtime IC 5795 -> Item 401: Line (location: (source ID: 45, lines: 57..58, bytes: 2610..2646), hits: 1)
+-  runtime IC 5795 -> Item 402: Statement (location: (source ID: 45, lines: 57..58, bytes: 2610..2646), hits: 1)
+-  runtime IC 1736 -> Item 403: Line (location: (source ID: 45, lines: 61..65, bytes: 2669..2730), hits: 32)
+-  runtime IC 1736 -> Item 404: Function "notFrozen" (location: (source ID: 45, lines: 61..65, bytes: 2669..2730), hits: 32)
+-  runtime IC 1736 -> Item 405: Line (location: (source ID: 45, lines: 62..63, bytes: 2700..2712), hits: 32)
+-  runtime IC 1736 -> Item 406: Statement (location: (source ID: 45, lines: 62..63, bytes: 2700..2712), hits: 32)
+-  runtime IC 4461 -> Item 407: Line (location: (source ID: 45, lines: 66..69, bytes: 2736..2830), hits: 165)
+-  runtime IC 4461 -> Item 408: Function "_notFrozen" (location: (source ID: 45, lines: 66..69, bytes: 2736..2830), hits: 165)
+-  runtime IC 4482 -> Item 409: Line (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1)
+-  runtime IC 4482 -> Item 410: Statement (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1)
+-  runtime IC 4482 -> Item 411: Branch (branch: 1, path: 0) (location: (source ID: 45, lines: 67..68, bytes: 2794..2823), hits: 1)
+-  runtime IC 1010 -> Item 412: Line (location: (source ID: 45, lines: 75..78, bytes: 3176..3302), hits: 42)
+-  runtime IC 1010 -> Item 413: Function "setHumanBondContract" (location: (source ID: 45, lines: 75..78, bytes: 3176..3302), hits: 42)
+-  runtime IC 2930 -> Item 414: Line (location: (source ID: 45, lines: 76..77, bytes: 3260..3295), hits: 42)
+-  runtime IC 2930 -> Item 415: Statement (location: (source ID: 45, lines: 76..77, bytes: 3260..3295), hits: 42)
+-  runtime IC 924 -> Item 416: Line (location: (source ID: 45, lines: 81..87, bytes: 3448..3734), hits: 134)
+-  runtime IC 924 -> Item 417: Function "setMilestoneURI" (location: (source ID: 45, lines: 81..87, bytes: 3448..3734), hits: 134)
+-  runtime IC 2574 -> Item 418: Line (location: (source ID: 45, lines: 82..83, bytes: 3551..3560), hits: 132)
+-  runtime IC 2574 -> Item 419: Statement (location: (source ID: 45, lines: 82..83, bytes: 3551..3560), hits: 132)
+-  runtime IC 2581 -> Item 420: Statement (location: (source ID: 45, lines: 82..83, bytes: 3562..3601), hits: 1)
+-  runtime IC 2581 -> Item 421: Branch (branch: 2, path: 0) (location: (source ID: 45, lines: 82..83, bytes: 3562..3601), hits: 1)
+-  runtime IC 2642 -> Item 422: Line (location: (source ID: 45, lines: 83..84, bytes: 3611..3636), hits: 131)
+-  runtime IC 2642 -> Item 423: Statement (location: (source ID: 45, lines: 83..84, bytes: 3611..3636), hits: 131)
+-  runtime IC 2675 -> Item 424: Line (location: (source ID: 45, lines: 84..85, bytes: 3650..3667), hits: 131)
+-  runtime IC 2675 -> Item 425: Statement (location: (source ID: 45, lines: 84..85, bytes: 3650..3667), hits: 131)
+-  runtime IC 2685 -> Item 426: Statement (location: (source ID: 45, lines: 84..85, bytes: 3669..3686), hits: 131)
+-  runtime IC 2685 -> Item 427: Branch (branch: 3, path: 0) (location: (source ID: 45, lines: 84..85, bytes: 3669..3686), hits: 131)
+-  runtime IC 2693 -> Item 428: Line (location: (source ID: 45, lines: 85..86, bytes: 3696..3727), hits: 131)
+-  runtime IC 2693 -> Item 429: Statement (location: (source ID: 45, lines: 85..86, bytes: 3696..3727), hits: 131)
+-  runtime IC 614 -> Item 430: Line (location: (source ID: 45, lines: 89..93, bytes: 3809..3929), hits: 32)
+-  runtime IC 614 -> Item 431: Function "freezeMilestones" (location: (source ID: 45, lines: 89..93, bytes: 3809..3929), hits: 32)
+-  runtime IC 1744 -> Item 432: Line (location: (source ID: 45, lines: 90..91, bytes: 3876..3889), hits: 32)
+-  runtime IC 1744 -> Item 433: Statement (location: (source ID: 45, lines: 90..91, bytes: 3876..3889), hits: 32)
+-  runtime IC 1770 -> Item 434: Line (location: (source ID: 45, lines: 91..92, bytes: 3899..3922), hits: 32)
+-  runtime IC 1770 -> Item 435: Statement (location: (source ID: 45, lines: 91..92, bytes: 3899..3922), hits: 32)
+-  runtime IC 1162 -> Item 436: Line (location: (source ID: 45, lines: 100..112, bytes: 4323..4767), hits: 11)
+-  runtime IC 1162 -> Item 437: Function "mintMilestone" (location: (source ID: 45, lines: 100..112, bytes: 4323..4767), hits: 11)
+-  runtime IC 3354 -> Item 438: Line (location: (source ID: 45, lines: 101..102, bytes: 4423..4462), hits: 10)
+-  runtime IC 3354 -> Item 439: Statement (location: (source ID: 45, lines: 101..102, bytes: 4423..4462), hits: 10)
+-  runtime IC 3509 -> Item 440: Line (location: (source ID: 45, lines: 102..103, bytes: 4476..4498), hits: 10)
+-  runtime IC 3509 -> Item 441: Statement (location: (source ID: 45, lines: 102..103, bytes: 4476..4498), hits: 10)
+-  runtime IC 3517 -> Item 442: Statement (location: (source ID: 45, lines: 102..103, bytes: 4500..4539), hits: 1)
+-  runtime IC 3517 -> Item 443: Branch (branch: 4, path: 0) (location: (source ID: 45, lines: 102..103, bytes: 4500..4539), hits: 1)
+-  runtime IC 3578 -> Item 444: Line (location: (source ID: 45, lines: 104..105, bytes: 4550..4563), hits: 9)
+-  runtime IC 3578 -> Item 445: Statement (location: (source ID: 45, lines: 104..105, bytes: 4550..4563), hits: 9)
+-  runtime IC 3601 -> Item 446: Line (location: (source ID: 45, lines: 105..106, bytes: 4573..4602), hits: 9)
+-  runtime IC 3601 -> Item 447: Statement (location: (source ID: 45, lines: 105..106, bytes: 4573..4602), hits: 9)
+-  runtime IC 3607 -> Item 448: Line (location: (source ID: 45, lines: 106..107, bytes: 4612..4637), hits: 9)
+-  runtime IC 3607 -> Item 449: Statement (location: (source ID: 45, lines: 106..107, bytes: 4612..4637), hits: 9)
+-  runtime IC 3629 -> Item 450: Line (location: (source ID: 45, lines: 107..108, bytes: 4647..4669), hits: 9)
+-  runtime IC 3629 -> Item 451: Statement (location: (source ID: 45, lines: 107..108, bytes: 4647..4669), hits: 9)
+-  runtime IC 3639 -> Item 452: Line (location: (source ID: 45, lines: 109..110, bytes: 4680..4736), hits: 9)
+-  runtime IC 3639 -> Item 453: Statement (location: (source ID: 45, lines: 109..110, bytes: 4680..4736), hits: 9)
+-  runtime IC 3721 -> Item 454: Line (location: (source ID: 45, lines: 110..111, bytes: 4746..4760), hits: 9)
+-  runtime IC 3721 -> Item 455: Statement (location: (source ID: 45, lines: 110..111, bytes: 4746..4760), hits: 9)
+-  runtime IC 1066 -> Item 456: Line (location: (source ID: 45, lines: 118..126, bytes: 5109..5424), hits: 2)
+-  runtime IC 1066 -> Item 457: Function "tokenURI" (location: (source ID: 45, lines: 118..126, bytes: 5109..5424), hits: 2)
+-  runtime IC 3036 -> Item 458: Line (location: (source ID: 45, lines: 119..120, bytes: 5199..5221), hits: 2)
+-  runtime IC 3036 -> Item 459: Statement (location: (source ID: 45, lines: 119..120, bytes: 5199..5221), hits: 2)
+-  runtime IC 3046 -> Item 460: Line (location: (source ID: 45, lines: 120..121, bytes: 5231..5264), hits: 1)
+-  runtime IC 3046 -> Item 461: Statement (location: (source ID: 45, lines: 120..121, bytes: 5231..5264), hits: 1)
+-  runtime IC 3067 -> Item 462: Line (location: (source ID: 45, lines: 121..122, bytes: 5278..5316), hits: 1)
+-  runtime IC 3067 -> Item 463: Statement (location: (source ID: 45, lines: 121..122, bytes: 5278..5316), hits: 1)
+-  runtime IC 3103 -> Item 464: Branch (branch: 5, path: 0) (location: (source ID: 45, lines: 121..124, bytes: 5318..5382), hits: 0)
+-  runtime IC 3103 -> Item 465: Line (location: (source ID: 45, lines: 122..123, bytes: 5332..5371), hits: 0)
+-  runtime IC 3103 -> Item 466: Statement (location: (source ID: 45, lines: 122..123, bytes: 5332..5371), hits: 0)
+-  runtime IC 3164 -> Item 467: Line (location: (source ID: 45, lines: 124..125, bytes: 5391..5417), hits: 1)
+-  runtime IC 3164 -> Item 468: Statement (location: (source ID: 45, lines: 124..125, bytes: 5391..5417), hits: 1)
+-  runtime IC 4533 -> Item 469: Line (location: (source ID: 45, lines: 131..142, bytes: 5687..6091), hits: 10)
+-  runtime IC 4533 -> Item 470: Function "_update" (location: (source ID: 45, lines: 131..142, bytes: 5687..6091), hits: 10)
+-  runtime IC 4535 -> Item 471: Line (location: (source ID: 45, lines: 133..134, bytes: 5829..5861), hits: 10)
+-  runtime IC 4535 -> Item 472: Statement (location: (source ID: 45, lines: 133..134, bytes: 5829..5861), hits: 10)
+-  runtime IC 4536 -> Item 473: Statement (location: (source ID: 45, lines: 133..134, bytes: 5844..5861), hits: 10)
+-  runtime IC 4547 -> Item 474: Line (location: (source ID: 45, lines: 136..137, bytes: 5936..5954), hits: 10)
+-  runtime IC 4547 -> Item 475: Statement (location: (source ID: 45, lines: 136..137, bytes: 5936..5954), hits: 10)
+-  runtime IC 4547 -> Item 476: Statement (location: (source ID: 45, lines: 136..137, bytes: 5936..5968), hits: 10)
+-  runtime IC 4602 -> Item 477: Statement (location: (source ID: 45, lines: 136..137, bytes: 5958..5968), hits: 1)
+-  runtime IC 4656 -> Item 478: Branch (branch: 6, path: 0) (location: (source ID: 45, lines: 136..139, bytes: 5970..6035), hits: 1)
+-  runtime IC 4656 -> Item 479: Line (location: (source ID: 45, lines: 137..138, bytes: 5984..6024), hits: 1)
+-  runtime IC 4656 -> Item 480: Statement (location: (source ID: 45, lines: 137..138, bytes: 5984..6024), hits: 1)
+-  runtime IC 4706 -> Item 481: Line (location: (source ID: 45, lines: 140..141, bytes: 6045..6084), hits: 9)
+-  runtime IC 4706 -> Item 482: Statement (location: (source ID: 45, lines: 140..141, bytes: 6045..6084), hits: 9)
+-  runtime IC 4706 -> Item 483: Statement (location: (source ID: 45, lines: 140..141, bytes: 6052..6084), hits: 9)
+
+Anchors for Contract "HumanBond" (solc 0.8.30, source ID 44):
+- creation IC 6 -> Item 56: Line (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33)
+- creation IC 6 -> Item 57: Function "constructor" (location: (source ID: 44, lines: 118..148, bytes: 4179..5184), hits: 33)
+- creation IC 180 -> Item 58: Line (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33)
+- creation IC 180 -> Item 59: Statement (location: (source ID: 44, lines: 129..130, bytes: 4534..4562), hits: 33)
+- creation IC 232 -> Item 60: Line (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33)
+- creation IC 232 -> Item 61: Statement (location: (source ID: 44, lines: 130..131, bytes: 4572..4596), hits: 33)
+- creation IC 284 -> Item 62: Line (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33)
+- creation IC 284 -> Item 63: Statement (location: (source ID: 44, lines: 131..132, bytes: 4606..4639), hits: 33)
+- creation IC 336 -> Item 64: Line (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33)
+- creation IC 336 -> Item 65: Statement (location: (source ID: 44, lines: 132..133, bytes: 4649..4691), hits: 33)
+- creation IC 388 -> Item 66: Line (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33)
+- creation IC 388 -> Item 67: Statement (location: (source ID: 44, lines: 135..141, bytes: 4802..4987), hits: 33)
+- creation IC 489 -> Item 68: Line (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33)
+- creation IC 489 -> Item 69: Statement (location: (source ID: 44, lines: 142..145, bytes: 4998..5135), hits: 33)
+- creation IC 590 -> Item 70: Line (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33)
+- creation IC 590 -> Item 71: Statement (location: (source ID: 44, lines: 145..146, bytes: 5145..5155), hits: 33)
+- creation IC 599 -> Item 72: Line (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33)
+- creation IC 599 -> Item 73: Statement (location: (source ID: 44, lines: 146..147, bytes: 5165..5177), hits: 33)
+- creation IC 814 -> Item 577: Line (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+- creation IC 814 -> Item 578: Function "hashToField" (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+- creation IC 816 -> Item 579: Line (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+- creation IC 816 -> Item 580: Statement (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+- creation IC 816 -> Item 581: Statement (location: (source ID: 48, lines: 9..10, bytes: 320..350), hits: 185)
+-  runtime IC 752 -> Item 74: Line (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33)
+-  runtime IC 752 -> Item 75: Function "propose" (location: (source ID: 44, lines: 156..207, bytes: 5596..7196), hits: 33)
+-  runtime IC 5205 -> Item 76: Line (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33)
+-  runtime IC 5205 -> Item 77: Statement (location: (source ID: 44, lines: 162..163, bytes: 5756..5819), hits: 33)
+-  runtime IC 5206 -> Item 78: Statement (location: (source ID: 44, lines: 162..163, bytes: 5777..5819), hits: 33)
+-  runtime IC 5248 -> Item 79: Line (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33)
+-  runtime IC 5248 -> Item 80: Statement (location: (source ID: 44, lines: 164..165, bytes: 5863..5885), hits: 33)
+-  runtime IC 5299 -> Item 81: Branch (branch: 0, path: 0) (location: (source ID: 44, lines: 164..167, bytes: 5887..5946), hits: 1)
+-  runtime IC 5299 -> Item 82: Line (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1)
+-  runtime IC 5299 -> Item 83: Statement (location: (source ID: 44, lines: 165..166, bytes: 5901..5935), hits: 1)
+-  runtime IC 5349 -> Item 84: Line (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32)
+-  runtime IC 5349 -> Item 85: Statement (location: (source ID: 44, lines: 167..168, bytes: 5959..5981), hits: 32)
+-  runtime IC 5400 -> Item 86: Branch (branch: 1, path: 0) (location: (source ID: 44, lines: 167..170, bytes: 5983..6047), hits: 1)
+-  runtime IC 5400 -> Item 87: Line (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1)
+-  runtime IC 5400 -> Item 88: Statement (location: (source ID: 44, lines: 168..169, bytes: 5997..6036), hits: 1)
+-  runtime IC 5450 -> Item 89: Line (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31)
+-  runtime IC 5450 -> Item 90: Statement (location: (source ID: 44, lines: 171..172, bytes: 6061..6105), hits: 31)
+-  runtime IC 5595 -> Item 91: Branch (branch: 2, path: 0) (location: (source ID: 44, lines: 171..174, bytes: 6107..6173), hits: 1)
+-  runtime IC 5595 -> Item 92: Line (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1)
+-  runtime IC 5595 -> Item 93: Statement (location: (source ID: 44, lines: 172..173, bytes: 6121..6162), hits: 1)
+-  runtime IC 5645 -> Item 94: Line (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30)
+-  runtime IC 5645 -> Item 95: Statement (location: (source ID: 44, lines: 176..177, bytes: 6200..6242), hits: 30)
+-  runtime IC 5645 -> Item 96: Statement (location: (source ID: 44, lines: 176..178, bytes: 6200..6298), hits: 30)
+-  runtime IC 5718 -> Item 97: Line (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28)
+-  runtime IC 5718 -> Item 98: Statement (location: (source ID: 44, lines: 177..178, bytes: 6258..6298), hits: 28)
+-  runtime IC 5791 -> Item 99: Line (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2)
+-  runtime IC 5791 -> Item 100: Branch (branch: 3, path: 0) (location: (source ID: 44, lines: 178..181, bytes: 6309..6372), hits: 2)
+-  runtime IC 5791 -> Item 101: Line (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2)
+-  runtime IC 5791 -> Item 102: Statement (location: (source ID: 44, lines: 179..180, bytes: 6323..6361), hits: 2)
+-  runtime IC 5923 -> Item 103: Line (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1)
+-  runtime IC 5923 -> Item 104: Branch (branch: 4, path: 0) (location: (source ID: 44, lines: 181..184, bytes: 6445..6506), hits: 1)
+-  runtime IC 5923 -> Item 105: Line (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1)
+-  runtime IC 5923 -> Item 106: Statement (location: (source ID: 44, lines: 182..183, bytes: 6459..6495), hits: 1)
+-  runtime IC 5973 -> Item 107: Line (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27)
+-  runtime IC 5973 -> Item 108: Statement (location: (source ID: 44, lines: 186..193, bytes: 6572..6769), hits: 27)
+-  runtime IC 6147 -> Item 109: Line (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27)
+-  runtime IC 6147 -> Item 110: Statement (location: (source ID: 44, lines: 194..195, bytes: 6780..6845), hits: 27)
+-  runtime IC 6235 -> Item 111: Line (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27)
+-  runtime IC 6235 -> Item 112: Statement (location: (source ID: 44, lines: 197..204, bytes: 6907..7136), hits: 27)
+-  runtime IC 6573 -> Item 113: Line (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27)
+-  runtime IC 6573 -> Item 114: Statement (location: (source ID: 44, lines: 205..206, bytes: 7147..7189), hits: 27)
+-  runtime IC 546 -> Item 115: Line (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20)
+-  runtime IC 546 -> Item 116: Function "accept" (location: (source ID: 44, lines: 213..298, bytes: 7536..10439), hits: 20)
+-  runtime IC 1739 -> Item 117: Line (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20)
+-  runtime IC 1739 -> Item 118: Statement (location: (source ID: 44, lines: 219..220, bytes: 7695..7752), hits: 20)
+-  runtime IC 1803 -> Item 119: Line (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20)
+-  runtime IC 1803 -> Item 120: Statement (location: (source ID: 44, lines: 220..221, bytes: 7855..7918), hits: 20)
+-  runtime IC 1804 -> Item 121: Statement (location: (source ID: 44, lines: 220..221, bytes: 7876..7918), hits: 20)
+-  runtime IC 1846 -> Item 122: Line (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20)
+-  runtime IC 1846 -> Item 123: Statement (location: (source ID: 44, lines: 222..223, bytes: 7933..7974), hits: 20)
+-  runtime IC 1932 -> Item 124: Branch (branch: 5, path: 0) (location: (source ID: 44, lines: 222..225, bytes: 7976..8037), hits: 1)
+-  runtime IC 1932 -> Item 125: Line (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1)
+-  runtime IC 1932 -> Item 126: Statement (location: (source ID: 44, lines: 223..224, bytes: 7990..8026), hits: 1)
+-  runtime IC 2064 -> Item 127: Line (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0)
+-  runtime IC 2064 -> Item 128: Branch (branch: 6, path: 0) (location: (source ID: 44, lines: 225..228, bytes: 8109..8170), hits: 0)
+-  runtime IC 2064 -> Item 129: Line (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0)
+-  runtime IC 2064 -> Item 130: Statement (location: (source ID: 44, lines: 226..227, bytes: 8123..8159), hits: 0)
+-  runtime IC 2114 -> Item 131: Line (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19)
+-  runtime IC 2114 -> Item 132: Statement (location: (source ID: 44, lines: 229..230, bytes: 8254..8294), hits: 19)
+-  runtime IC 2114 -> Item 133: Statement (location: (source ID: 44, lines: 229..231, bytes: 8254..8352), hits: 19)
+-  runtime IC 2187 -> Item 134: Line (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19)
+-  runtime IC 2187 -> Item 135: Statement (location: (source ID: 44, lines: 230..231, bytes: 8310..8352), hits: 19)
+-  runtime IC 2260 -> Item 136: Line (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0)
+-  runtime IC 2260 -> Item 137: Branch (branch: 7, path: 0) (location: (source ID: 44, lines: 231..234, bytes: 8363..8426), hits: 0)
+-  runtime IC 2260 -> Item 138: Line (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0)
+-  runtime IC 2260 -> Item 139: Statement (location: (source ID: 44, lines: 232..233, bytes: 8377..8415), hits: 0)
+-  runtime IC 2310 -> Item 140: Line (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19)
+-  runtime IC 2310 -> Item 141: Statement (location: (source ID: 44, lines: 236..243, bytes: 8532..8690), hits: 19)
+-  runtime IC 2484 -> Item 142: Line (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19)
+-  runtime IC 2484 -> Item 143: Statement (location: (source ID: 44, lines: 244..245, bytes: 8701..8758), hits: 19)
+-  runtime IC 2485 -> Item 144: Statement (location: (source ID: 44, lines: 244..245, bytes: 8722..8758), hits: 19)
+-  runtime IC 2535 -> Item 145: Line (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0)
+-  runtime IC 2535 -> Item 146: Branch (branch: 8, path: 0) (location: (source ID: 44, lines: 245..248, bytes: 8802..8865), hits: 0)
+-  runtime IC 2535 -> Item 147: Line (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0)
+-  runtime IC 2535 -> Item 148: Statement (location: (source ID: 44, lines: 246..247, bytes: 8816..8854), hits: 0)
+-  runtime IC 2585 -> Item 149: Line (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19)
+-  runtime IC 2585 -> Item 150: Statement (location: (source ID: 44, lines: 249..250, bytes: 8875..8909), hits: 19)
+-  runtime IC 2613 -> Item 151: Line (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19)
+-  runtime IC 2613 -> Item 152: Statement (location: (source ID: 44, lines: 250..251, bytes: 8919..8983), hits: 19)
+-  runtime IC 2701 -> Item 153: Line (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19)
+-  runtime IC 2701 -> Item 154: Statement (location: (source ID: 44, lines: 253..263, bytes: 9022..9377), hits: 19)
+-  runtime IC 3049 -> Item 155: Line (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19)
+-  runtime IC 3049 -> Item 156: Statement (location: (source ID: 44, lines: 264..265, bytes: 9388..9427), hits: 19)
+-  runtime IC 3115 -> Item 157: Line (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19)
+-  runtime IC 3115 -> Item 158: Statement (location: (source ID: 44, lines: 265..266, bytes: 9475..9516), hits: 19)
+-  runtime IC 3525 -> Item 159: Line (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19)
+-  runtime IC 3525 -> Item 160: Statement (location: (source ID: 44, lines: 269..270, bytes: 9657..9685), hits: 19)
+-  runtime IC 3563 -> Item 161: Line (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19)
+-  runtime IC 3563 -> Item 162: Statement (location: (source ID: 44, lines: 275..282, bytes: 9891..10039), hits: 19)
+-  runtime IC 3725 -> Item 163: Line (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19)
+-  runtime IC 3725 -> Item 164: Statement (location: (source ID: 44, lines: 284..291, bytes: 10079..10229), hits: 19)
+-  runtime IC 3887 -> Item 165: Line (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19)
+-  runtime IC 3887 -> Item 166: Statement (location: (source ID: 44, lines: 293..294, bytes: 10300..10333), hits: 19)
+-  runtime IC 4031 -> Item 167: Line (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19)
+-  runtime IC 4031 -> Item 168: Statement (location: (source ID: 44, lines: 294..295, bytes: 10343..10378), hits: 19)
+-  runtime IC 4175 -> Item 169: Line (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19)
+-  runtime IC 4175 -> Item 170: Statement (location: (source ID: 44, lines: 296..297, bytes: 10389..10432), hits: 19)
+-  runtime IC 1205 -> Item 171: Line (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4)
+-  runtime IC 1205 -> Item 172: Function "divorce" (location: (source ID: 44, lines: 303..339, bytes: 10607..11846), hits: 4)
+-  runtime IC 9809 -> Item 173: Line (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4)
+-  runtime IC 9809 -> Item 174: Statement (location: (source ID: 44, lines: 304..305, bytes: 10660..10716), hits: 4)
+-  runtime IC 9810 -> Item 175: Statement (location: (source ID: 44, lines: 304..305, bytes: 10681..10716), hits: 4)
+-  runtime IC 9822 -> Item 176: Line (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4)
+-  runtime IC 9822 -> Item 177: Statement (location: (source ID: 44, lines: 305..306, bytes: 10765..10814), hits: 4)
+-  runtime IC 9842 -> Item 178: Line (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4)
+-  runtime IC 9842 -> Item 179: Statement (location: (source ID: 44, lines: 307..308, bytes: 10829..10853), hits: 4)
+-  runtime IC 9869 -> Item 180: Branch (branch: 9, path: 0) (location: (source ID: 44, lines: 307..310, bytes: 10855..10916), hits: 2)
+-  runtime IC 9869 -> Item 181: Line (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2)
+-  runtime IC 9869 -> Item 182: Statement (location: (source ID: 44, lines: 308..309, bytes: 10869..10905), hits: 2)
+-  runtime IC 9919 -> Item 183: Line (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2)
+-  runtime IC 9919 -> Item 184: Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..10974), hits: 2)
+-  runtime IC 9919 -> Item 185: Statement (location: (source ID: 44, lines: 312..313, bytes: 10943..11009), hits: 2)
+-  runtime IC 10008 -> Item 186: Statement (location: (source ID: 44, lines: 312..313, bytes: 10978..11009), hits: 0)
+-  runtime IC 10097 -> Item 187: Line (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0)
+-  runtime IC 10097 -> Item 188: Branch (branch: 10, path: 0) (location: (source ID: 44, lines: 313..316, bytes: 11020..11080), hits: 0)
+-  runtime IC 10097 -> Item 189: Line (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0)
+-  runtime IC 10097 -> Item 190: Statement (location: (source ID: 44, lines: 314..315, bytes: 11034..11069), hits: 0)
+-  runtime IC 10147 -> Item 191: Line (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2)
+-  runtime IC 10147 -> Item 192: Statement (location: (source ID: 44, lines: 317..318, bytes: 11090..11132), hits: 2)
+-  runtime IC 10148 -> Item 193: Statement (location: (source ID: 44, lines: 317..318, bytes: 11107..11132), hits: 2)
+-  runtime IC 10159 -> Item 194: Line (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2)
+-  runtime IC 10159 -> Item 195: Statement (location: (source ID: 44, lines: 319..320, bytes: 11273..11283), hits: 2)
+-  runtime IC 10167 -> Item 196: Branch (branch: 11, path: 0) (location: (source ID: 44, lines: 319..324, bytes: 11285..11444), hits: 1)
+-  runtime IC 10167 -> Item 197: Line (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1)
+-  runtime IC 10167 -> Item 198: Statement (location: (source ID: 44, lines: 320..321, bytes: 11299..11325), hits: 1)
+-  runtime IC 10168 -> Item 199: Statement (location: (source ID: 44, lines: 320..321, bytes: 11315..11325), hits: 1)
+-  runtime IC 10183 -> Item 200: Line (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1)
+-  runtime IC 10183 -> Item 201: Statement (location: (source ID: 44, lines: 321..322, bytes: 11339..11379), hits: 1)
+-  runtime IC 10353 -> Item 202: Line (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1)
+-  runtime IC 10353 -> Item 203: Statement (location: (source ID: 44, lines: 322..323, bytes: 11393..11433), hits: 1)
+-  runtime IC 10526 -> Item 204: Line (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2)
+-  runtime IC 10526 -> Item 205: Statement (location: (source ID: 44, lines: 326..327, bytes: 11491..11514), hits: 2)
+-  runtime IC 10553 -> Item 206: Line (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2)
+-  runtime IC 10553 -> Item 207: Statement (location: (source ID: 44, lines: 327..328, bytes: 11524..11560), hits: 2)
+-  runtime IC 10562 -> Item 208: Line (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2)
+-  runtime IC 10562 -> Item 209: Statement (location: (source ID: 44, lines: 330..331, bytes: 11599..11647), hits: 2)
+-  runtime IC 10664 -> Item 210: Line (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2)
+-  runtime IC 10664 -> Item 211: Statement (location: (source ID: 44, lines: 331..332, bytes: 11657..11705), hits: 2)
+-  runtime IC 10767 -> Item 212: Line (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2)
+-  runtime IC 10767 -> Item 213: Statement (location: (source ID: 44, lines: 333..338, bytes: 11716..11839), hits: 2)
+-  runtime IC 12760 -> Item 214: Line (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8)
+-  runtime IC 12760 -> Item 215: Function "_pendingYield" (location: (source ID: 44, lines: 341..347, bytes: 11931..12281), hits: 8)
+-  runtime IC 12762 -> Item 216: Line (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8)
+-  runtime IC 12762 -> Item 217: Statement (location: (source ID: 44, lines: 342..343, bytes: 12016..12065), hits: 8)
+-  runtime IC 12782 -> Item 218: Line (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8)
+-  runtime IC 12782 -> Item 219: Statement (location: (source ID: 44, lines: 343..344, bytes: 12079..12095), hits: 8)
+-  runtime IC 12803 -> Item 220: Statement (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0)
+-  runtime IC 12803 -> Item 221: Branch (branch: 12, path: 0) (location: (source ID: 44, lines: 343..344, bytes: 12097..12105), hits: 0)
+-  runtime IC 12812 -> Item 222: Line (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8)
+-  runtime IC 12812 -> Item 223: Statement (location: (source ID: 44, lines: 344..345, bytes: 12142..12208), hits: 8)
+-  runtime IC 12813 -> Item 224: Statement (location: (source ID: 44, lines: 344..345, bytes: 12164..12208), hits: 8)
+-  runtime IC 12874 -> Item 225: Line (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8)
+-  runtime IC 12874 -> Item 226: Statement (location: (source ID: 44, lines: 345..346, bytes: 12218..12246), hits: 8)
+-  runtime IC 12874 -> Item 227: Statement (location: (source ID: 44, lines: 345..346, bytes: 12225..12246), hits: 8)
+-  runtime IC 1177 -> Item 228: Line (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1)
+-  runtime IC 1177 -> Item 229: Function "claimYield" (location: (source ID: 44, lines: 348..366, bytes: 12287..12928), hits: 1)
+-  runtime IC 9093 -> Item 230: Line (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1)
+-  runtime IC 9093 -> Item 231: Statement (location: (source ID: 44, lines: 349..350, bytes: 12343..12399), hits: 1)
+-  runtime IC 9094 -> Item 232: Statement (location: (source ID: 44, lines: 349..350, bytes: 12364..12399), hits: 1)
+-  runtime IC 9106 -> Item 233: Line (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1)
+-  runtime IC 9106 -> Item 234: Statement (location: (source ID: 44, lines: 350..351, bytes: 12409..12458), hits: 1)
+-  runtime IC 9126 -> Item 235: Line (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1)
+-  runtime IC 9126 -> Item 236: Statement (location: (source ID: 44, lines: 351..352, bytes: 12472..12488), hits: 1)
+-  runtime IC 9147 -> Item 237: Statement (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0)
+-  runtime IC 9147 -> Item 238: Branch (branch: 13, path: 0) (location: (source ID: 44, lines: 351..352, bytes: 12490..12526), hits: 0)
+-  runtime IC 9197 -> Item 239: Line (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1)
+-  runtime IC 9197 -> Item 240: Statement (location: (source ID: 44, lines: 353..354, bytes: 12537..12579), hits: 1)
+-  runtime IC 9198 -> Item 241: Statement (location: (source ID: 44, lines: 353..354, bytes: 12554..12579), hits: 1)
+-  runtime IC 9209 -> Item 242: Line (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1)
+-  runtime IC 9209 -> Item 243: Statement (location: (source ID: 44, lines: 354..355, bytes: 12593..12604), hits: 1)
+-  runtime IC 9216 -> Item 244: Branch (branch: 14, path: 0) (location: (source ID: 44, lines: 354..357, bytes: 12606..12665), hits: 0)
+-  runtime IC 9216 -> Item 245: Line (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0)
+-  runtime IC 9216 -> Item 246: Statement (location: (source ID: 44, lines: 355..356, bytes: 12620..12654), hits: 0)
+-  runtime IC 9266 -> Item 247: Line (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1)
+-  runtime IC 9266 -> Item 248: Statement (location: (source ID: 44, lines: 358..359, bytes: 12675..12701), hits: 1)
+-  runtime IC 9267 -> Item 249: Statement (location: (source ID: 44, lines: 358..359, bytes: 12691..12701), hits: 1)
+-  runtime IC 9282 -> Item 250: Line (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1)
+-  runtime IC 9282 -> Item 251: Statement (location: (source ID: 44, lines: 360..361, bytes: 12712..12752), hits: 1)
+-  runtime IC 9452 -> Item 252: Line (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1)
+-  runtime IC 9452 -> Item 253: Statement (location: (source ID: 44, lines: 361..362, bytes: 12762..12802), hits: 1)
+-  runtime IC 9623 -> Item 254: Line (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1)
+-  runtime IC 9623 -> Item 255: Statement (location: (source ID: 44, lines: 363..364, bytes: 12813..12849), hits: 1)
+-  runtime IC 9632 -> Item 256: Line (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1)
+-  runtime IC 9632 -> Item 257: Statement (location: (source ID: 44, lines: 364..365, bytes: 12859..12921), hits: 1)
+-  runtime IC 876 -> Item 258: Line (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7)
+-  runtime IC 876 -> Item 259: Function "manualCheckAndMint" (location: (source ID: 44, lines: 371..408, bytes: 13190..14350), hits: 7)
+-  runtime IC 6857 -> Item 260: Line (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7)
+-  runtime IC 6857 -> Item 261: Statement (location: (source ID: 44, lines: 372..373, bytes: 13254..13302), hits: 7)
+-  runtime IC 6858 -> Item 262: Statement (location: (source ID: 44, lines: 372..373, bytes: 13267..13302), hits: 7)
+-  runtime IC 6870 -> Item 263: Line (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7)
+-  runtime IC 6870 -> Item 264: Statement (location: (source ID: 44, lines: 373..374, bytes: 13312..13346), hits: 7)
+-  runtime IC 6890 -> Item 265: Line (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7)
+-  runtime IC 6890 -> Item 266: Statement (location: (source ID: 44, lines: 375..376, bytes: 13361..13370), hits: 7)
+-  runtime IC 6911 -> Item 267: Branch (branch: 15, path: 0) (location: (source ID: 44, lines: 375..378, bytes: 13372..13433), hits: 1)
+-  runtime IC 6911 -> Item 268: Line (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1)
+-  runtime IC 6911 -> Item 269: Statement (location: (source ID: 44, lines: 376..377, bytes: 13386..13422), hits: 1)
+-  runtime IC 6961 -> Item 270: Line (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6)
+-  runtime IC 6961 -> Item 271: Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13470), hits: 6)
+-  runtime IC 6961 -> Item 272: Statement (location: (source ID: 44, lines: 378..379, bytes: 13446..13498), hits: 6)
+-  runtime IC 7050 -> Item 273: Statement (location: (source ID: 44, lines: 378..379, bytes: 13474..13498), hits: 0)
+-  runtime IC 7139 -> Item 274: Branch (branch: 16, path: 0) (location: (source ID: 44, lines: 378..381, bytes: 13500..13600), hits: 0)
+-  runtime IC 7139 -> Item 275: Line (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0)
+-  runtime IC 7139 -> Item 276: Statement (location: (source ID: 44, lines: 379..380, bytes: 13514..13549), hits: 0)
+-  runtime IC 7189 -> Item 277: Line (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6)
+-  runtime IC 7189 -> Item 278: Statement (location: (source ID: 44, lines: 382..383, bytes: 13610..13672), hits: 6)
+-  runtime IC 7190 -> Item 279: Statement (location: (source ID: 44, lines: 382..383, bytes: 13634..13672), hits: 6)
+-  runtime IC 7251 -> Item 280: Line (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6)
+-  runtime IC 7251 -> Item 281: Statement (location: (source ID: 44, lines: 383..384, bytes: 13682..13725), hits: 6)
+-  runtime IC 7252 -> Item 282: Statement (location: (source ID: 44, lines: 383..384, bytes: 13700..13725), hits: 6)
+-  runtime IC 7395 -> Item 283: Line (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6)
+-  runtime IC 7395 -> Item 284: Statement (location: (source ID: 44, lines: 387..388, bytes: 13785..13821), hits: 6)
+-  runtime IC 7395 -> Item 285: Statement (location: (source ID: 44, lines: 387..390, bytes: 13785..13894), hits: 6)
+-  runtime IC 7409 -> Item 286: Line (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3)
+-  runtime IC 7409 -> Item 287: Statement (location: (source ID: 44, lines: 388..389, bytes: 13837..13855), hits: 3)
+-  runtime IC 7409 -> Item 288: Statement (location: (source ID: 44, lines: 388..390, bytes: 13837..13894), hits: 3)
+-  runtime IC 7419 -> Item 289: Line (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3)
+-  runtime IC 7419 -> Item 290: Statement (location: (source ID: 44, lines: 389..390, bytes: 13871..13894), hits: 3)
+-  runtime IC 7428 -> Item 291: Line (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3)
+-  runtime IC 7428 -> Item 292: Branch (branch: 17, path: 0) (location: (source ID: 44, lines: 390..393, bytes: 13905..13964), hits: 3)
+-  runtime IC 7428 -> Item 293: Line (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3)
+-  runtime IC 7428 -> Item 294: Statement (location: (source ID: 44, lines: 391..392, bytes: 13919..13953), hits: 3)
+-  runtime IC 7478 -> Item 295: Line (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3)
+-  runtime IC 7478 -> Item 296: Statement (location: (source ID: 44, lines: 395..396, bytes: 14008..14061), hits: 3)
+-  runtime IC 7668 -> Item 297: Line (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3)
+-  runtime IC 7668 -> Item 298: Statement (location: (source ID: 44, lines: 396..397, bytes: 14071..14124), hits: 3)
+-  runtime IC 7859 -> Item 299: Line (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3)
+-  runtime IC 7859 -> Item 300: Statement (location: (source ID: 44, lines: 399..400, bytes: 14159..14194), hits: 3)
+-  runtime IC 7868 -> Item 301: Line (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3)
+-  runtime IC 7868 -> Item 302: Statement (location: (source ID: 44, lines: 401..407, bytes: 14205..14343), hits: 3)
+-  runtime IC 780 -> Item 303: Line (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0)
+-  runtime IC 780 -> Item 304: Function "_getMarriageId" (location: (source ID: 44, lines: 411..420, bytes: 14462..14705), hits: 0)
+-  runtime IC 6671 -> Item 305: Line (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44)
+-  runtime IC 6671 -> Item 306: Statement (location: (source ID: 44, lines: 415..419, bytes: 14570..14698), hits: 44)
+-  runtime IC 6671 -> Item 307: Line (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44)
+-  runtime IC 6671 -> Item 308: Statement (location: (source ID: 44, lines: 416..419, bytes: 14589..14698), hits: 44)
+-  runtime IC 1167 -> Item 309: Line (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3)
+-  runtime IC 1167 -> Item 310: Function "cancelProposal" (location: (source ID: 44, lines: 422..430, bytes: 14786..15122), hits: 3)
+-  runtime IC 8430 -> Item 311: Line (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3)
+-  runtime IC 8430 -> Item 312: Statement (location: (source ID: 44, lines: 423..424, bytes: 14831..14889), hits: 3)
+-  runtime IC 8720 -> Item 313: Line (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3)
+-  runtime IC 8720 -> Item 314: Statement (location: (source ID: 44, lines: 424..425, bytes: 14903..14944), hits: 3)
+-  runtime IC 8774 -> Item 315: Branch (branch: 18, path: 0) (location: (source ID: 44, lines: 424..427, bytes: 14946..15005), hits: 1)
+-  runtime IC 8774 -> Item 316: Line (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1)
+-  runtime IC 8774 -> Item 317: Statement (location: (source ID: 44, lines: 425..426, bytes: 14960..14994), hits: 1)
+-  runtime IC 8996 -> Item 318: Line (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2)
+-  runtime IC 8996 -> Item 319: Statement (location: (source ID: 44, lines: 428..429, bytes: 15052..15115), hits: 2)
+-  runtime IC 622 -> Item 320: Line (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1)
+-  runtime IC 622 -> Item 321: Function "getMarriage" (location: (source ID: 44, lines: 437..443, bytes: 15449..15609), hits: 1)
+-  runtime IC 4754 -> Item 322: Line (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1)
+-  runtime IC 4754 -> Item 323: Statement (location: (source ID: 44, lines: 441..442, bytes: 15564..15602), hits: 1)
+-  runtime IC 498 -> Item 324: Line (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2)
+-  runtime IC 498 -> Item 325: Function "isMarried" (location: (source ID: 44, lines: 447..450, bytes: 15688..15820), hits: 2)
+-  runtime IC 1689 -> Item 326: Line (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2)
+-  runtime IC 1689 -> Item 327: Statement (location: (source ID: 44, lines: 448..449, bytes: 15768..15813), hits: 2)
+-  runtime IC 1467 -> Item 328: Line (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4)
+-  runtime IC 1467 -> Item 329: Function "getProposal" (location: (source ID: 44, lines: 454..459, bytes: 15887..16023), hits: 4)
+-  runtime IC 11272 -> Item 330: Line (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4)
+-  runtime IC 11272 -> Item 331: Statement (location: (source ID: 44, lines: 457..458, bytes: 15990..16016), hits: 4)
+-  runtime IC 1389 -> Item 332: Line (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0)
+-  runtime IC 1389 -> Item 333: Function "hasPendingProposal" (location: (source ID: 44, lines: 463..466, bytes: 16090..16231), hits: 0)
+-  runtime IC 11079 -> Item 334: Line (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0)
+-  runtime IC 11079 -> Item 335: Statement (location: (source ID: 44, lines: 464..465, bytes: 16175..16224), hits: 0)
+-  runtime IC 11079 -> Item 336: Statement (location: (source ID: 44, lines: 464..465, bytes: 16182..16224), hits: 0)
+-  runtime IC 1591 -> Item 337: Line (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3)
+-  runtime IC 1591 -> Item 338: Function "getPendingYield" (location: (source ID: 44, lines: 470..476, bytes: 16308..16468), hits: 3)
+-  runtime IC 11731 -> Item 339: Line (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3)
+-  runtime IC 11731 -> Item 340: Statement (location: (source ID: 44, lines: 474..475, bytes: 16419..16461), hits: 3)
+-  runtime IC 11731 -> Item 341: Statement (location: (source ID: 44, lines: 474..475, bytes: 16426..16461), hits: 3)
+-  runtime IC 828 -> Item 342: Line (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2)
+-  runtime IC 828 -> Item 343: Function "getCurrentMilestoneYear" (location: (source ID: 44, lines: 480..486, bytes: 16546..16728), hits: 2)
+-  runtime IC 6819 -> Item 344: Line (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2)
+-  runtime IC 6819 -> Item 345: Statement (location: (source ID: 44, lines: 484..485, bytes: 16665..16721), hits: 2)
+-  runtime IC 904 -> Item 346: Line (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1)
+-  runtime IC 904 -> Item 347: Function "getBondStart" (location: (source ID: 44, lines: 490..496, bytes: 16804..16967), hits: 1)
+-  runtime IC 8048 -> Item 348: Line (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1)
+-  runtime IC 8048 -> Item 349: Statement (location: (source ID: 44, lines: 494..495, bytes: 16912..16960), hits: 1)
+-  runtime IC 574 -> Item 350: Line (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1)
+-  runtime IC 574 -> Item 351: Function "getMarriageView" (location: (source ID: 44, lines: 500..520, bytes: 17053..17689), hits: 1)
+-  runtime IC 4282 -> Item 352: Line (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1)
+-  runtime IC 4282 -> Item 353: Statement (location: (source ID: 44, lines: 504..505, bytes: 17178..17211), hits: 1)
+-  runtime IC 4283 -> Item 354: Statement (location: (source ID: 44, lines: 504..505, bytes: 17191..17211), hits: 1)
+-  runtime IC 4295 -> Item 355: Line (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1)
+-  runtime IC 4295 -> Item 356: Statement (location: (source ID: 44, lines: 505..506, bytes: 17221..17254), hits: 1)
+-  runtime IC 4572 -> Item 357: Line (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1)
+-  runtime IC 4572 -> Item 358: Statement (location: (source ID: 44, lines: 507..519, bytes: 17265..17682), hits: 1)
+-  runtime IC 1639 -> Item 359: Line (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1)
+-  runtime IC 1639 -> Item 360: Function "getUserDashboard" (location: (source ID: 44, lines: 521..546, bytes: 17695..18559), hits: 1)
+-  runtime IC 11765 -> Item 361: Line (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1)
+-  runtime IC 11765 -> Item 362: Statement (location: (source ID: 44, lines: 525..526, bytes: 17860..17895), hits: 1)
+-  runtime IC 12055 -> Item 363: Line (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1)
+-  runtime IC 12055 -> Item 364: Statement (location: (source ID: 44, lines: 527..528, bytes: 17936..17979), hits: 1)
+-  runtime IC 12120 -> Item 365: Line (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1)
+-  runtime IC 12120 -> Item 366: Statement (location: (source ID: 44, lines: 529..530, bytes: 17990..18030), hits: 1)
+-  runtime IC 12186 -> Item 367: Line (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1)
+-  runtime IC 12186 -> Item 368: Statement (location: (source ID: 44, lines: 530..531, bytes: 18040..18081), hits: 1)
+-  runtime IC 12347 -> Item 369: Line (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1)
+-  runtime IC 12347 -> Item 370: Statement (location: (source ID: 44, lines: 532..533, bytes: 18126..18150), hits: 1)
+-  runtime IC 12356 -> Item 371: Branch (branch: 19, path: 0) (location: (source ID: 44, lines: 532..539, bytes: 18152..18321), hits: 0)
+-  runtime IC 12356 -> Item 372: Line (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0)
+-  runtime IC 12356 -> Item 373: Statement (location: (source ID: 44, lines: 534..535, bytes: 18201..18220), hits: 0)
+-  runtime IC 12371 -> Item 374: Line (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0)
+-  runtime IC 12371 -> Item 375: Statement (location: (source ID: 44, lines: 535..536, bytes: 18234..18256), hits: 0)
+-  runtime IC 12427 -> Item 376: Line (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0)
+-  runtime IC 12427 -> Item 377: Statement (location: (source ID: 44, lines: 536..537, bytes: 18270..18288), hits: 0)
+-  runtime IC 12437 -> Item 378: Line (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0)
+-  runtime IC 12437 -> Item 379: Statement (location: (source ID: 44, lines: 537..538, bytes: 18302..18310), hits: 0)
+-  runtime IC 12444 -> Item 380: Line (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1)
+-  runtime IC 12444 -> Item 381: Statement (location: (source ID: 44, lines: 541..542, bytes: 18358..18400), hits: 1)
+-  runtime IC 12464 -> Item 382: Line (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1)
+-  runtime IC 12464 -> Item 383: Statement (location: (source ID: 44, lines: 542..543, bytes: 18410..18432), hits: 1)
+-  runtime IC 12495 -> Item 384: Line (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1)
+-  runtime IC 12495 -> Item 385: Statement (location: (source ID: 44, lines: 543..544, bytes: 18442..18500), hits: 1)
+-  runtime IC 12712 -> Item 386: Line (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1)
+-  runtime IC 12712 -> Item 387: Statement (location: (source ID: 44, lines: 544..545, bytes: 18510..18552), hits: 1)
+-  runtime IC 12738 -> Item 577: Line (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+-  runtime IC 12738 -> Item 578: Function "hashToField" (location: (source ID: 48, lines: 8..11, bytes: 230..357), hits: 185)
+-  runtime IC 12740 -> Item 579: Line (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+-  runtime IC 12740 -> Item 580: Statement (location: (source ID: 48, lines: 9..10, bytes: 313..350), hits: 185)
+-  runtime IC 12740 -> Item 581: Statement (location: (source ID: 48, lines: 9..10, bytes: 320..350), hits: 185)
+
+Anchors for Contract "DeployScript" (solc 0.8.30, source ID 43):
+-  runtime IC 56 -> Item 0: Line (location: (source ID: 43, lines: 13..65, bytes: 472..2697), hits: 0)
+-  runtime IC 56 -> Item 1: Function "run" (location: (source ID: 43, lines: 13..65, bytes: 472..2697), hits: 0)
+-  runtime IC 118 -> Item 2: Line (location: (source ID: 43, lines: 14..15, bytes: 506..525), hits: 0)
+-  runtime IC 118 -> Item 3: Statement (location: (source ID: 43, lines: 14..15, bytes: 506..525), hits: 0)
+-  runtime IC 208 -> Item 4: Line (location: (source ID: 43, lines: 17..18, bytes: 574..602), hits: 0)
+-  runtime IC 208 -> Item 5: Statement (location: (source ID: 43, lines: 17..18, bytes: 574..602), hits: 0)
+-  runtime IC 209 -> Item 6: Statement (location: (source ID: 43, lines: 17..18, bytes: 590..602), hits: 0)
+-  runtime IC 249 -> Item 7: Line (location: (source ID: 43, lines: 18..19, bytes: 612..658), hits: 0)
+-  runtime IC 249 -> Item 8: Statement (location: (source ID: 43, lines: 18..19, bytes: 612..658), hits: 0)
+-  runtime IC 250 -> Item 9: Statement (location: (source ID: 43, lines: 18..19, bytes: 640..658), hits: 0)
+-  runtime IC 290 -> Item 10: Line (location: (source ID: 43, lines: 19..20, bytes: 668..705), hits: 0)
+-  runtime IC 290 -> Item 11: Statement (location: (source ID: 43, lines: 19..20, bytes: 668..705), hits: 0)
+-  runtime IC 291 -> Item 12: Statement (location: (source ID: 43, lines: 19..20, bytes: 690..705), hits: 0)
+-  runtime IC 331 -> Item 13: Line (location: (source ID: 43, lines: 20..21, bytes: 715..795), hits: 0)
+-  runtime IC 331 -> Item 14: Statement (location: (source ID: 43, lines: 20..21, bytes: 715..795), hits: 0)
+-  runtime IC 355 -> Item 15: Line (location: (source ID: 43, lines: 23..24, bytes: 901..989), hits: 0)
+-  runtime IC 355 -> Item 16: Statement (location: (source ID: 43, lines: 23..24, bytes: 901..989), hits: 0)
+-  runtime IC 458 -> Item 17: Line (location: (source ID: 43, lines: 24..25, bytes: 999..1087), hits: 0)
+-  runtime IC 458 -> Item 18: Statement (location: (source ID: 43, lines: 24..25, bytes: 999..1087), hits: 0)
+-  runtime IC 561 -> Item 19: Line (location: (source ID: 43, lines: 25..26, bytes: 1097..1185), hits: 0)
+-  runtime IC 561 -> Item 20: Statement (location: (source ID: 43, lines: 25..26, bytes: 1097..1185), hits: 0)
+-  runtime IC 664 -> Item 21: Line (location: (source ID: 43, lines: 26..27, bytes: 1195..1283), hits: 0)
+-  runtime IC 664 -> Item 22: Statement (location: (source ID: 43, lines: 26..27, bytes: 1195..1283), hits: 0)
+-  runtime IC 767 -> Item 23: Line (location: (source ID: 43, lines: 27..28, bytes: 1293..1324), hits: 0)
+-  runtime IC 767 -> Item 24: Statement (location: (source ID: 43, lines: 27..28, bytes: 1293..1324), hits: 0)
+-  runtime IC 858 -> Item 25: Line (location: (source ID: 43, lines: 30..31, bytes: 1385..1445), hits: 0)
+-  runtime IC 858 -> Item 26: Statement (location: (source ID: 43, lines: 30..31, bytes: 1385..1445), hits: 0)
+-  runtime IC 886 -> Item 27: Line (location: (source ID: 43, lines: 31..32, bytes: 1455..1499), hits: 0)
+-  runtime IC 886 -> Item 28: Statement (location: (source ID: 43, lines: 31..32, bytes: 1455..1499), hits: 0)
+-  runtime IC 943 -> Item 29: Line (location: (source ID: 43, lines: 32..33, bytes: 1509..1551), hits: 0)
+-  runtime IC 943 -> Item 30: Statement (location: (source ID: 43, lines: 32..33, bytes: 1509..1551), hits: 0)
+-  runtime IC 1000 -> Item 31: Line (location: (source ID: 43, lines: 35..46, bytes: 1603..1941), hits: 0)
+-  runtime IC 1000 -> Item 32: Statement (location: (source ID: 43, lines: 35..46, bytes: 1603..1941), hits: 0)
+-  runtime IC 1001 -> Item 33: Statement (location: (source ID: 43, lines: 35..46, bytes: 1625..1941), hits: 0)
+-  runtime IC 1090 -> Item 34: Line (location: (source ID: 43, lines: 48..49, bytes: 1977..2030), hits: 0)
+-  runtime IC 1090 -> Item 35: Statement (location: (source ID: 43, lines: 48..49, bytes: 1977..2030), hits: 0)
+-  runtime IC 1192 -> Item 36: Line (location: (source ID: 43, lines: 49..50, bytes: 2073..2120), hits: 0)
+-  runtime IC 1192 -> Item 37: Statement (location: (source ID: 43, lines: 49..50, bytes: 2073..2120), hits: 0)
+-  runtime IC 1294 -> Item 38: Line (location: (source ID: 43, lines: 52..53, bytes: 2169..2213), hits: 0)
+-  runtime IC 1294 -> Item 39: Statement (location: (source ID: 43, lines: 52..53, bytes: 2169..2213), hits: 0)
+-  runtime IC 1396 -> Item 40: Line (location: (source ID: 43, lines: 53..54, bytes: 2223..2270), hits: 0)
+-  runtime IC 1396 -> Item 41: Statement (location: (source ID: 43, lines: 53..54, bytes: 2223..2270), hits: 0)
+-  runtime IC 1498 -> Item 42: Line (location: (source ID: 43, lines: 54..55, bytes: 2280..2330), hits: 0)
+-  runtime IC 1498 -> Item 43: Statement (location: (source ID: 43, lines: 54..55, bytes: 2280..2330), hits: 0)
+-  runtime IC 1621 -> Item 44: Line (location: (source ID: 43, lines: 56..57, bytes: 2341..2359), hits: 0)
+-  runtime IC 1621 -> Item 45: Statement (location: (source ID: 43, lines: 56..57, bytes: 2341..2359), hits: 0)
+-  runtime IC 1711 -> Item 46: Line (location: (source ID: 43, lines: 59..60, bytes: 2386..2437), hits: 0)
+-  runtime IC 1711 -> Item 47: Statement (location: (source ID: 43, lines: 59..60, bytes: 2386..2437), hits: 0)
+-  runtime IC 1774 -> Item 48: Line (location: (source ID: 43, lines: 60..61, bytes: 2447..2510), hits: 0)
+-  runtime IC 1774 -> Item 49: Statement (location: (source ID: 43, lines: 60..61, bytes: 2447..2510), hits: 0)
+-  runtime IC 1837 -> Item 50: Line (location: (source ID: 43, lines: 61..62, bytes: 2520..2577), hits: 0)
+-  runtime IC 1837 -> Item 51: Statement (location: (source ID: 43, lines: 61..62, bytes: 2520..2577), hits: 0)
+-  runtime IC 1900 -> Item 52: Line (location: (source ID: 43, lines: 62..63, bytes: 2587..2645), hits: 0)
+-  runtime IC 1900 -> Item 53: Statement (location: (source ID: 43, lines: 62..63, bytes: 2587..2645), hits: 0)
+-  runtime IC 1963 -> Item 54: Line (location: (source ID: 43, lines: 63..64, bytes: 2655..2690), hits: 0)
+-  runtime IC 1963 -> Item 55: Statement (location: (source ID: 43, lines: 63..64, bytes: 2655..2690), hits: 0)
+
+Anchors for Contract "MockWorldID" (solc 0.8.30, source ID 54):
+-  runtime IC 95 -> Item 587: Line (location: (source ID: 54, lines: 9..12, bytes: 212..297), hits: 0)
+-  runtime IC 95 -> Item 588: Function "setShouldRevert" (location: (source ID: 54, lines: 9..12, bytes: 212..297), hits: 0)
+-  runtime IC 239 -> Item 589: Line (location: (source ID: 54, lines: 10..11, bytes: 269..290), hits: 0)
+-  runtime IC 239 -> Item 590: Statement (location: (source ID: 54, lines: 10..11, bytes: 269..290), hits: 0)
+-  runtime IC 67 -> Item 591: Line (location: (source ID: 54, lines: 13..18, bytes: 303..499), hits: 46)
+-  runtime IC 67 -> Item 592: Function "verifyProof" (location: (source ID: 54, lines: 13..18, bytes: 303..499), hits: 46)
+-  runtime IC 173 -> Item 593: Line (location: (source ID: 54, lines: 14..17, bytes: 432..493), hits: 0)
+-  runtime IC 173 -> Item 594: Branch (branch: 0, path: 0) (location: (source ID: 54, lines: 14..17, bytes: 432..493), hits: 0)
+-  runtime IC 173 -> Item 595: Line (location: (source ID: 54, lines: 15..16, bytes: 446..482), hits: 0)
+-  runtime IC 173 -> Item 596: Statement (location: (source ID: 54, lines: 15..16, bytes: 446..482), hits: 0)
+

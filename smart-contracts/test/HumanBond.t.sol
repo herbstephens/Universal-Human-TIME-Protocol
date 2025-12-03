@@ -2,427 +2,480 @@
 pragma solidity ^0.8.20;
 
 import {Test} from "forge-std/Test.sol";
-import {HumanBond, IWorldID} from "../src/HumanBond.sol";
+import {HumanBond} from "../src/HumanBond.sol";
 import {VowNFT} from "../src/VowNFT.sol";
 import {MilestoneNFT} from "../src/MilestoneNFT.sol";
 import {TimeToken} from "../src/TimeToken.sol";
 import {MarriageIdHelper} from "./utils/MarriageHelper.sol";
-
-// Dummy verifier (same used in deploy)
-contract DummyWorldID is IWorldID {
-    function verifyProof(
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256,
-        uint256[8] calldata
-    ) external pure override {}
-}
+import {MockWorldID} from "./utils/MockWorldId.sol";
+import {DeployScript} from "../script/Deploy.s.sol";
 
 contract AutomationFlowTest is Test {
     VowNFT vowNFT;
     MilestoneNFT milestoneNFT;
     TimeToken timeToken;
-    DummyWorldID worldId;
+    MockWorldID worldId;
     HumanBond humanBond;
+    DeployScript deployer;
 
-    address alice = address(0xA1);
-    address bob = address(0xB1);
+    address leticia = makeAddr("leticia");
+    address bob = makeAddr("bob");
+
+    // Mock World ID parameters
+    uint256 constant ROOT = 1;
+    uint256 constant NULLIFIER_PROPOSE = 1111;
+    uint256 constant NULLIFIER_ACCEPT = 2222;
+    uint256[8] PROOF = [uint256(0), 0, 0, 0, 0, 0, 0, 0];
 
     function setUp() public {
-        // Deploy base components
-        worldId = new DummyWorldID();
+        // Deploy mock WorldID
+        worldId = new MockWorldID();
+
+        // Deploy the other contracts
         vowNFT = new VowNFT();
         milestoneNFT = new MilestoneNFT();
         timeToken = new TimeToken();
 
-        // Set milestone URIs (required or mint will revert)
-        milestoneNFT.setMilestoneURI(
-            1,
-            "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8"
-        );
-        milestoneNFT.setMilestoneURI(
-            2,
-            "ipfs://QmPTuKXg64EaeyreUFe4PJ1istspMd4G2oe2ArRYrtBGYn"
-        );
+        // Setup milestone years (same as deploy script)
+        milestoneNFT.setMilestoneURI(1, "ipfs://dummy1");
+        milestoneNFT.setMilestoneURI(2, "ipfs://dummy2");
+        milestoneNFT.setMilestoneURI(3, "ipfs://dummy3");
+        milestoneNFT.setMilestoneURI(4, "ipfs://dummy4");
+        milestoneNFT.freezeMilestones();
 
-        // Deploy HumanBond
+        // Deploy HumanBond using the mock
         humanBond = new HumanBond(
             address(worldId),
             address(vowNFT),
             address(timeToken),
             address(milestoneNFT),
-            12345,
-            67890
+            "app_test",
+            "propose-bond",
+            "accept-bond",
+            1 minutes,
+            3 minutes
         );
 
-        // Link contracts
+        // Wire up
         milestoneNFT.setHumanBondContract(address(humanBond));
         vowNFT.setHumanBondContract(address(humanBond));
-
-        // Transfer ownership so HumanBond can mint
-        milestoneNFT.transferOwnership(address(humanBond));
-        timeToken.transferOwnership(address(humanBond));
         vowNFT.transferOwnership(address(humanBond));
+        timeToken.transferOwnership(address(humanBond));
+        milestoneNFT.transferOwnership(address(humanBond));
 
-        // Give ETH so things don't revert
-        vm.deal(alice, 10 ether);
+        // Give ETH
+        vm.deal(leticia, 10 ether);
         vm.deal(bob, 10 ether);
     }
 
-    function test__CannotProposeToSelf() public {
-        vm.startPrank(alice);
-        vm.expectRevert();
-        humanBond.propose(alice, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+    //============================ MODIFIERS ============================//
+
+    modifier marriedCouple() {
+        vm.startPrank(leticia);
+        humanBond.propose(bob, ROOT, NULLIFIER_PROPOSE, PROOF);
         vm.stopPrank();
+
+        vm.startPrank(bob);
+        humanBond.accept(leticia, ROOT, NULLIFIER_ACCEPT, PROOF);
+        vm.stopPrank();
+        _;
     }
 
-    function test__proposal_CannotProposeTwice() public {
-        vm.startPrank(alice);
+    modifier proposalSent() {
+        vm.prank(leticia);
+        humanBond.propose(bob, ROOT, NULLIFIER_PROPOSE, PROOF);
+        _;
+    }
 
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+    //test_<unitUnderTest>_<stateOrCondition>_<expectedOutcome/Behaviour>
 
-        vm.expectRevert(); // expecting double proposal revert
-        humanBond.propose(
-            address(0xB5),
-            1,
-            1111,
-            [uint256(0), 0, 0, 0, 0, 0, 0, 0]
+    //============================ PROPOSAL & ACCEPTANCE TESTS ============================//
+    //=====================================================================================//
+
+    function test_propose_reverts_whenProposeToYourself() public {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__CannotProposeToSelf.selector);
+        humanBond.propose(leticia, ROOT, NULLIFIER_PROPOSE, PROOF);
+    }
+
+    function test_propose_reverts_ifProposeToInvalidAddress() public {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__InvalidAddress.selector);
+        humanBond.propose(address(0), ROOT, NULLIFIER_PROPOSE, PROOF);
+    }
+
+    function test_propose_reverts_ifAlreadyHasProposalOpen()
+        public
+        proposalSent
+    {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__ProposalAlreadyExists.selector);
+        humanBond.propose(address(0x01), NULLIFIER_PROPOSE + 1, 111, PROOF);
+    }
+
+    function test_propose_reverts_ifAlreadyMarried() public marriedCouple {
+        vm.startPrank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__UserAlreadyMarried.selector);
+        humanBond.propose(address(0x01), NULLIFIER_PROPOSE + 1, 111, PROOF);
+
+        vm.startPrank(bob);
+        vm.expectRevert(HumanBond.HumanBond__UserAlreadyMarried.selector);
+        humanBond.propose(address(0x02), NULLIFIER_PROPOSE + 2, 111, PROOF);
+    }
+
+    function test_propose_reverts_ifUsingSameNullifier() public proposalSent {
+        vm.prank(leticia);
+        humanBond.cancelProposal();
+        bool usedNullfier = humanBond.usedNullifier(
+            humanBond.externalNullifierPropose(),
+            NULLIFIER_PROPOSE
         );
+        assertEq(usedNullfier, true);
 
-        vm.stopPrank();
+        vm.expectRevert(HumanBond.HumanBond__InvalidNullifier.selector);
+        humanBond.propose(address(0x01), ROOT, NULLIFIER_PROPOSE, PROOF);
     }
 
-    function test__OnlyProposedPartnerCanAccept() public {
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        address intruder = address(0xDEAD);
-
-        vm.startPrank(intruder);
-        vm.expectRevert();
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+    function test_propose_sucessfully_storeProposal() public proposalSent {
+        uint256 timeStamp = block.timestamp;
+        HumanBond.Proposal memory letisProposal = humanBond.getProposal(
+            leticia
+        );
+        assertEq(letisProposal.proposer, leticia);
+        assertEq(letisProposal.proposed, bob);
+        assertEq(letisProposal.proposerNullifier, NULLIFIER_PROPOSE);
+        assertEq(letisProposal.accepted, false);
+        assertEq(letisProposal.timestamp, timeStamp);
     }
 
-    function test__MarriageIdSymmetry() public {
-        // Deploy helper
+    function test_propose_emits_ProposalCreated() public {
+        // Expect ProposalCreated
+        vm.expectEmit(address(humanBond));
+        emit HumanBond.ProposalCreated(leticia, bob);
+
+        vm.prank(leticia);
+        humanBond.propose(bob, ROOT, NULLIFIER_PROPOSE, PROOF);
+    }
+
+    //============================ ACCEPTANCE TESTS =======================================//
+    //=====================================================================================//
+
+    function test_accept_reverts_ifNotCorrectPartnerAccept()
+        public
+        proposalSent
+    {
+        vm.expectRevert(HumanBond.HumanBond__NotProposedToYou.selector);
+        humanBond.accept(leticia, ROOT, NULLIFIER_ACCEPT, PROOF);
+    }
+
+    // function test_accept_reverts_ifNullifierAlreadyUsed() public marriedCouple {
+    //     // recreates a new proposal because accept() deletes it
+    //     vm.prank(leticia);
+    //     humanBond.propose(bob, ROOT, 1002, PROOF);
+
+    //     // bob tries to accept using SAME nullifier 2001 → should revert
+    //     vm.prank(bob);
+    //     vm.expectRevert(HumanBond.HumanBond__InvalidNullifier.selector);
+    //     humanBond.accept(leticia, ROOT, NULLIFIER_ACCEPT, PROOF);
+    // }
+
+    function test_accept_getMarriageId_recordsMarriageIdSymmetryAndPushToArray()
+        public
+        marriedCouple
+    {
         MarriageIdHelper helper = new MarriageIdHelper();
 
-        bytes32 id1 = helper.exposed_getMarriageId(alice, bob);
-        bytes32 id2 = helper.exposed_getMarriageId(bob, alice);
+        bytes32 id1 = helper.exposed_getMarriageId(leticia, bob);
+        bytes32 id2 = helper.exposed_getMarriageId(bob, leticia);
+        bytes32 recordedMarriage = humanBond.marriageIds(0);
 
         assertEq(id1, id2, "Marriage IDs should be symmetric");
+        assertEq(recordedMarriage, id1);
     }
 
-    function test__VowNFTMintedOnAccept() public {
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+    function test_accept_changeAcceptToTrue() public marriedCouple {
+        bool currentStatus = humanBond.isMarried(leticia, bob);
 
+        assertEq(currentStatus, true);
+    }
+
+    function test_accept_deletes_allPreviousProposals() public proposalSent {
         vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
+        humanBond.propose(address(0x01), ROOT, NULLIFIER_PROPOSE + 1, PROOF);
+        humanBond.accept(leticia, ROOT, NULLIFIER_ACCEPT, PROOF);
         vm.stopPrank();
+        HumanBond.Proposal memory bobsProposal = humanBond.getProposal(bob);
+        assertEq(bobsProposal.proposer, address(0));
+        assertEq(bobsProposal.proposed, address(0));
+    }
 
-        assertEq(vowNFT.ownerOf(1), alice);
+    function test_accpet_MintsVowNFTandSendTokens() public marriedCouple {
+        assertEq(vowNFT.ownerOf(1), leticia);
         assertEq(vowNFT.ownerOf(2), bob);
-    }
-
-    function test__InitialTimeTokenMintOnAccept() public {
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        assertEq(timeToken.balanceOf(alice), 1 ether);
+        assertEq(timeToken.balanceOf(leticia), 1 ether);
         assertEq(timeToken.balanceOf(bob), 1 ether);
     }
 
-    // function test__TimeWithdrawalSplitEvenly() public {
-    //     // marry
-    //     vm.startPrank(alice);
-    //     humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     vm.startPrank(bob);
-    //     humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     // warp minutes (100 TIME)
-    //     vm.warp(block.timestamp + 100 minutes);
-
-    //     // withdraw yield — but the correct method is claimYield(partner)
-    //     vm.startPrank(alice);
-    //     humanBond.claimYield(bob);
-    //     vm.stopPrank();
-
-    //     // both should get 50 tokens each
-    //     assertEq(timeToken.balanceOf(alice), 51 ether);
-    //     assertEq(timeToken.balanceOf(bob), 51 ether);
-    // }
-
-    // function test__ClaimYieldResetsCounter() public {
-    //     // marry
-    //     vm.startPrank(alice);
-    //     humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     vm.startPrank(bob);
-    //     humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     // warp 1 day
-    //     vm.warp(block.timestamp + 1 minutes);
-
-    //     // Correct ordering: caller is alice, partner is bob
-    //     vm.startPrank(alice);
-    //     humanBond.claimYield(bob);
-    //     vm.stopPrank();
-
-    //     // both receive 0.5 DAY token + 1 initial mint
-    //     assertEq(timeToken.balanceOf(alice), 1 ether + 0.5 ether);
-    //     assertEq(timeToken.balanceOf(bob), 1 ether + 0.5 ether);
-
-    //     // warp another day
-    //     vm.warp(block.timestamp + 1 minutes);
-
-    //     // claim again
-    //     vm.startPrank(bob);
-    //     humanBond.claimYield(alice);
-    //     vm.stopPrank();
-
-    //     assertEq(timeToken.balanceOf(alice), 2 ether);
-    //     assertEq(timeToken.balanceOf(bob), 2 ether);
-    // }
-
-    function test__OnlyHumanBondCanMintMilestone() public {
-        vm.expectRevert();
-        milestoneNFT.mintMilestone(alice, 1);
-    }
-
-    //============================ MILESTONE NFT  ============================//
-    function testManualCheckAndMint() public {
-        address A = address(0x1);
-        address B = address(0x2);
-
-        uint256 root = 1;
-        uint256 nullA = 10;
-        uint256 nullB = 20;
-        uint256[8] memory proof;
-
-        // A proposes
-        vm.startPrank(A);
-        humanBond.propose(B, root, nullA, proof);
-        vm.stopPrank();
-
-        // B accepts
-        vm.startPrank(B);
-        humanBond.accept(A, root, nullB, proof);
-        vm.stopPrank();
-
-        // warp forward to satisfy 1 "year" (2 minutes)
-        vm.warp(block.timestamp + 366 days);
-
-        // call manual function
-        humanBond.manualCheckAndMint();
-
-        // check milestone minted (ERC721)
-        assertEq(milestoneNFT.balanceOf(A), 1, "A should have 1 milestone NFT");
-        assertEq(milestoneNFT.balanceOf(B), 1, "B should have 1 milestone NFT");
-
-        // verify state updated
-        HumanBond.Marriage memory m = humanBond.getMarriage(A, B);
-
-        assertEq(m.lastMilestoneYear, 1, "Milestone year should update");
-    }
-
-    //============================ DIVORCE TESTS ============================//
-    function test__DivorceWorks() public {
-        // marry
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        // divorce
-        vm.startPrank(alice);
-        humanBond.divorce(bob);
-        vm.stopPrank();
-
-        bytes32 id = humanBond._getMarriageId(alice, bob);
-        (, , , , , , , bool active) = humanBond.marriages(id);
-
-        assertFalse(active, "Marriage should be inactive after divorce");
-        assertFalse(humanBond.isHumanMarried(1111), "Nullifier A not freed");
-        assertFalse(humanBond.isHumanMarried(2222), "Nullifier B not freed");
-    }
-
-    // function test__DivorceDistributesPendingYield() public {
-    //     // marry
-    //     vm.startPrank(alice);
-    //     humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     vm.startPrank(bob);
-    //     humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
-
-    //     // warp 10 days → 10 TIME yield
-    //     vm.warp(block.timestamp + 10 minutes);
-
-    //     vm.startPrank(alice);
-    //     humanBond.divorce(bob);
-    //     vm.stopPrank();
-
-    //     // pending = 10 → split = 5 each
-    //     assertEq(timeToken.balanceOf(alice), 1 ether + 5 ether);
-    //     assertEq(timeToken.balanceOf(bob), 1 ether + 5 ether);
-    // }
-
-    function test__DivorceTwiceFails() public {
-        // marry
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        vm.startPrank(alice);
+    //======================================= YIELD TESTS ===============================//
+    //===================================================================================//
+    function test_pendingYield_returnsZeroWhenMarriageInactive()
+        public
+        marriedCouple
+    {
+        // Kill marriage
+        vm.prank(leticia);
         humanBond.divorce(bob);
 
-        vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
-        humanBond.divorce(bob);
-        vm.stopPrank();
+        uint256 pending = humanBond.getPendingYield(leticia, bob);
+        assertEq(pending, 0);
     }
 
-    function test__ClaimYieldAfterDivorceFails() public {
-        // marry
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+    function test_pendingYield_recordsBalanceCorrectly() public marriedCouple {
+        // warp minutes (100 TIME)
+        skip(block.timestamp + 100 minutes);
+        uint256 expectedBalance = humanBond.getPendingYield(leticia, bob);
+        assertEq(expectedBalance, 100 ether);
+    }
 
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+    function test_claimYield_reverts_ifNoYield() public marriedCouple {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NothingToClaim.selector);
+        humanBond.claimYield(bob);
+    }
 
-        // divorce
-        vm.startPrank(alice);
+    function test_claimYield_reverts_ifMarriageInactive() public marriedCouple {
+        vm.prank(leticia);
         humanBond.divorce(bob);
-        vm.stopPrank();
 
-        vm.startPrank(alice);
+        vm.prank(leticia);
         vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
         humanBond.claimYield(bob);
-        vm.stopPrank();
     }
 
-    function test__RemarryAfterDivorce() public {
-        // ----------- FIRST MARRIAGE -----------
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+    function test_claimYield_splitsTokensEvenlyAndResetsCounter()
+        public
+        marriedCouple
+    {
+        skip(block.timestamp + 10 minutes);
 
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
+        vm.prank(leticia);
+        humanBond.claimYield(bob);
 
-        // Divorce
-        vm.startPrank(alice);
+        // both receive 5 TIME token + 1 initial mint
+        assertEq(timeToken.balanceOf(leticia), 1 ether + 5 ether);
+        assertEq(timeToken.balanceOf(bob), 1 ether + 5 ether);
+
+        // pending yield resets to 0
+        uint256 pendingAfterClaim = humanBond.getPendingYield(leticia, bob);
+        assertEq(pendingAfterClaim, 0);
+    }
+
+    //==================================  MILESTONES NFTS ===============================//
+    //===================================================================================//
+    function test_checkAndMintMilestone_reverts_ifNoActiveMarriage() public {
+        // Leticia is NOT married
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
+        humanBond.manualCheckAndMint(bob);
+    }
+
+    function test_checkAndMintMilestone_reverts_ifYearNotReached()
+        public
+        marriedCouple
+    {
+        // marriage just started
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NothingToClaim.selector);
+        humanBond.manualCheckAndMint(bob);
+    }
+
+    function test_milestone_reverts_ifYearExceedsMax() public marriedCouple {
+        uint256 max = milestoneNFT.latestYear();
+
+        // warp to year = 5
+        skip((max + 1));
+
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NothingToClaim.selector);
+        humanBond.manualCheckAndMint(bob);
+    }
+
+    function test_checkAndMintMilestone_mintsWhenYearReached()
+        public
+        marriedCouple
+    {
+        // warp just over 1 year (YEAR = 3 minutes)
+        skip(3 minutes + 1);
+
+        vm.prank(leticia);
+        humanBond.manualCheckAndMint(bob);
+
+        // tokenId 0 and 1 minted (soulbound)
+        assertEq(milestoneNFT.ownerOf(1), leticia);
+        assertEq(milestoneNFT.ownerOf(2), bob);
+
+        uint256 currentYear = humanBond.getCurrentMilestoneYear(leticia, bob);
+        assertEq(currentYear, 1);
+    }
+
+    function test_checkAndMintMilestone_reverts_ifAlreadyMintedForYear()
+        public
+        marriedCouple
+    {
+        // reach year = 1
+        skip(3 minutes + 1);
+
+        vm.prank(leticia);
+        humanBond.manualCheckAndMint(bob);
+
+        // attempt again
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NothingToClaim.selector);
+        humanBond.manualCheckAndMint(bob);
+    }
+
+    //==================================  DIVORCE TESTS ===============================//
+    //=================================================================================//
+
+    function test_divorce_reverts_ifNotActiveMarriage() public {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
         humanBond.divorce(bob);
-        vm.stopPrank();
-
-        // Both nullifiers must be free
-        assertFalse(humanBond.isHumanMarried(1111));
-        assertFalse(humanBond.isHumanMarried(2222));
-
-        // ----------- SECOND MARRIAGE -----------
-        vm.startPrank(alice);
-        humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        vm.startPrank(bob);
-        humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-        vm.stopPrank();
-
-        // Marriage must be active again
-        bytes32 id = humanBond._getMarriageId(alice, bob);
-        (, , , , , , , bool active) = humanBond.marriages(id);
-        assertTrue(active, "Should be active after remarrying");
-
-        // Both must have received new VowNFTs
-        assertEq(vowNFT.ownerOf(3), alice);
-        assertEq(vowNFT.ownerOf(4), bob);
-
-        // New initial TIME token allocation should be present
-        assertEq(timeToken.balanceOf(alice), 1 ether + 1 ether); // first mint + second mint
-        assertEq(timeToken.balanceOf(bob), 1 ether + 1 ether);
     }
 
-    //=============== GETTERS TESTS ===============//
-    // function test__GetMarriageView() public {
-    //     // marry
-    //     vm.startPrank(alice);
-    //     humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
+    function test_divorce_reverts_ifNotYourMarriage() public marriedCouple {
+        // attacker tries to divorce them
+        address attacker = makeAddr("attacker");
 
-    //     vm.startPrank(bob);
-    //     humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
+        vm.prank(attacker);
+        vm.expectRevert(HumanBond.HumanBond__NoActiveMarriage.selector);
+        humanBond.divorce(leticia);
+    }
 
-    //     // warp 3 days
-    //     vm.warp(block.timestamp + 3 minutes);
+    function test_divorce_claimsPendingYieldAndSplitsEvenly()
+        public
+        marriedCouple
+    {
+        // simulate 20 minutes (20 TIME)
+        skip(20 minutes);
 
-    //     HumanBond.MarriageView memory v = humanBond.getMarriageView(alice, bob);
+        uint256 expectedSplit = (20 ether) / 2;
 
-    //     assertEq(v.partnerA, alice);
-    //     assertEq(v.partnerB, bob);
-    //     assertEq(v.nullifierA, 1111);
-    //     assertEq(v.nullifierB, 2222);
-    //     assertEq(v.active, true);
-    //     assertEq(v.pendingYield, 3 ether);
-    // }
+        vm.prank(leticia);
+        humanBond.divorce(bob);
 
-    // function test__UserDashboard() public {
-    //     // proposal
-    //     vm.startPrank(alice);
-    //     humanBond.propose(bob, 1, 1111, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
+        // each receives initial 1 + 10
+        assertEq(timeToken.balanceOf(leticia), 1 ether + expectedSplit);
+        assertEq(timeToken.balanceOf(bob), 1 ether + expectedSplit);
 
-    //     // BEFORE ACCEPT — Alice has proposal, not married
-    //     {
-    //         HumanBond.UserDashboard memory d1 = humanBond.getUserDashboard(
-    //             alice
-    //         );
-    //         assertTrue(d1.hasProposal);
-    //         assertFalse(d1.isMarried);
-    //         assertEq(d1.partner, address(0));
-    //     }
+        // marriage should now be inactive
+        bool active = humanBond.isMarried(leticia, bob);
+        assertEq(active, false);
+    }
 
-    //     // accept
-    //     vm.startPrank(bob);
-    //     humanBond.accept(alice, 1, 2222, [uint256(0), 0, 0, 0, 0, 0, 0, 0]);
-    //     vm.stopPrank();
+    function test_divorce_resetsActiveMarriageMapping() public marriedCouple {
+        vm.prank(leticia);
+        humanBond.divorce(bob);
 
-    //     // warp 5 days → 5 tokens pending
-    //     vm.warp(block.timestamp + 5 minutes);
+        assertEq(humanBond.activeMarriageOf(leticia), bytes32(0));
+        assertEq(humanBond.activeMarriageOf(bob), bytes32(0));
+    }
 
-    //     // AFTER ACCEPT — married, partner detected
-    //     HumanBond.UserDashboard memory d2 = humanBond.getUserDashboard(alice);
+    //================================== CANCEL PROPOSAL TESTS ===========================//
+    //===================================================================================//
 
-    //     assertTrue(d2.isMarried);
-    //     assertFalse(d2.hasProposal);
-    //     assertEq(d2.partner, bob);
-    //     assertEq(d2.pendingYield, 5 ether);
-    //     assertEq(d2.timeBalance, 1 ether); // initial mint
-    // }
+    function test_cancelProposal_reverts_ifNoProposal() public {
+        vm.prank(leticia);
+        vm.expectRevert(HumanBond.HumanBond__InvalidAddress.selector);
+        humanBond.cancelProposal();
+    }
+
+    function test_cancelProposal_clearsProposalCorrectly() public proposalSent {
+        vm.prank(leticia);
+        humanBond.cancelProposal();
+
+        HumanBond.Proposal memory p = humanBond.getProposal(leticia);
+        assertEq(p.proposer, address(0));
+        assertEq(p.proposed, address(0));
+    }
+
+    //================================ GETTERS TESTS ================================//
+    //=================================================================================//
+    function test_getMarriageView_returnsCorrectData() public marriedCouple {
+        HumanBond.MarriageView memory v = humanBond.getMarriageView(
+            leticia,
+            bob
+        );
+
+        assertEq(v.partnerA, leticia);
+        assertEq(v.partnerB, bob);
+        assertEq(v.active, true);
+        assertEq(v.lastMilestoneYear, 0);
+        assertEq(v.pendingYield, 0); // just married
+        assertEq(v.marriageId, humanBond.activeMarriageOf(leticia));
+    }
+
+    function test_getCurrentMilestoneYear_returnsCorrectYear()
+        public
+        marriedCouple
+    {
+        skip(6 minutes + 1); // warp to year = 2
+
+        vm.prank(leticia);
+        humanBond.manualCheckAndMint(bob);
+
+        uint256 year = humanBond.getCurrentMilestoneYear(leticia, bob);
+        assertEq(year, 2);
+    }
+
+    function test_getPendingYield_returnsCorrectValue() public marriedCouple {
+        // Elapsed = 10 minutes → 10 ether (because DAY = 1 minute in test)
+        skip(10 minutes);
+
+        uint256 pending = humanBond.getPendingYield(leticia, bob);
+        assertEq(pending, 10 ether);
+    }
+
+    function test_getBondStart_returnsCorrectTimestamp() public marriedCouple {
+        HumanBond.Marriage memory m = humanBond.getMarriage(leticia, bob);
+        uint256 stored = humanBond.getBondStart(leticia, bob);
+
+        assertEq(stored, m.bondStart);
+        assertTrue(stored > 0);
+    }
+
+    function test_getProposal_returnsCorrectData() public {
+        vm.prank(leticia);
+        humanBond.propose(bob, ROOT, NULLIFIER_PROPOSE, PROOF);
+
+        HumanBond.Proposal memory p = humanBond.getProposal(leticia);
+
+        assertEq(p.proposer, leticia);
+        assertEq(p.proposed, bob);
+        assertEq(p.accepted, false);
+        assertEq(p.proposerNullifier, NULLIFIER_PROPOSE);
+    }
+
+    function test_getUserDashboard_unmarriedUser() public {
+        HumanBond.UserDashboard memory d = humanBond.getUserDashboard(leticia);
+
+        assertEq(d.isMarried, false);
+        assertEq(d.hasProposal, false);
+        assertEq(d.partner, address(0));
+        assertEq(d.pendingYield, 0);
+        assertEq(d.timeBalance, 0);
+    }
+
+    function test_getUserDashboard_marriedUser() public marriedCouple {
+        // warp 5 minutes to accumulate yield
+        skip(5 minutes);
+
+        HumanBond.UserDashboard memory d = humanBond.getUserDashboard(leticia);
+
+        assertEq(d.isMarried, true);
+        assertEq(d.hasProposal, false);
+        assertEq(d.partner, bob);
+        assertEq(d.timeBalance, 1 ether); // initial mint
+        assertEq(d.pendingYield, 5 ether);
+    }
 }

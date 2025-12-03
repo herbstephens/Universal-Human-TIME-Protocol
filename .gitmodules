@@ -4,3 +4,6 @@
 [submodule "smart-contracts/lib/chainlink-brownie-contracts"]
 	path = smart-contracts/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "smart-contracts/lib/world-id-contracts"]
+	path = smart-contracts/lib/world-id-contracts
+	url = https://github.com/worldcoin/world-id-contracts

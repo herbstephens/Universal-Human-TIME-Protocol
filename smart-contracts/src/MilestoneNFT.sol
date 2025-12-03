@@ -11,13 +11,16 @@ import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
  *         Only the HumanBond contract can mint new NFTs automatically.
  */
 contract MilestoneNFT is ERC721, Ownable {
-    error SoulboundNFT__TransfersDisabled();
+    error MilestoneNFT__TransfersDisabled();
+    error MilestoneNFT__NotAuthorized();
+    error MilestoneNFT__Frozen();
+    error MilestoneNFT__URI_NotFound(uint256 year);
 
     /* -------------------------------------------------------------------------- */
     /*                                 STATE VARS                                 */
     /* -------------------------------------------------------------------------- */
 
-    uint256 public nextTokenId; // Counter for minted NFTs
+    uint256 public totalSupply; // Counter for minted NFTs
     address public humanBondContract; // Authorized minter
     mapping(uint256 => string) public milestoneURIs; // year => IPFS URI
     mapping(uint256 => uint256) public tokenYear; // tokenId => milestone year
@@ -33,18 +36,12 @@ contract MilestoneNFT is ERC721, Ownable {
     event MilestonesFrozen();
 
     /* -------------------------------------------------------------------------- */
-    /*                                   ERRORS                                   */
-    /* -------------------------------------------------------------------------- */
-
-    error MilestoneNFT__NotAuthorized();
-    error MilestoneNFT__Frozen();
-    error MilestoneNFT__URI_NotFound(uint256 year);
-
-    /* -------------------------------------------------------------------------- */
     /*                                 CONSTRUCTOR                                */
     /* -------------------------------------------------------------------------- */
 
-    constructor() ERC721("Milestone NFT", "MILE") Ownable(msg.sender) {}
+    constructor() ERC721("Milestone NFT", "MILE") Ownable(msg.sender) {
+        totalSupply = 0;
+    }
 
     /* -------------------------------------------------------------------------- */
     /*                                MODIFIERS                                   */
@@ -82,6 +79,7 @@ contract MilestoneNFT is ERC721, Ownable {
     /// @notice Define or update the metadata URI for a specific milestone year.
     /// @dev Example: setMilestoneURI(1, "ipfs://QmCID1");
     function setMilestoneURI(uint256 year, string calldata uri) external onlyOwner notFrozen {
+        if (year == 0) revert MilestoneNFT__URI_NotFound(year);
         milestoneURIs[year] = uri;
         if (year > latestYear) latestYear = year;
         emit MilestoneURISet(year, uri);
@@ -103,7 +101,8 @@ contract MilestoneNFT is ERC721, Ownable {
         string memory uri = milestoneURIs[year];
         if (bytes(uri).length == 0) revert MilestoneNFT__URI_NotFound(year);
 
-        uint256 tokenId = nextTokenId++;
+        totalSupply++;
+        uint256 tokenId = totalSupply;
         tokenYear[tokenId] = year;
         _safeMint(to, tokenId);
 
@@ -135,7 +134,7 @@ contract MilestoneNFT is ERC721, Ownable {
 
         // If NOT minting and NOT burning, forbid transfers
         if (from != address(0) && to != from) {
-            revert SoulboundNFT__TransfersDisabled();
+            revert MilestoneNFT__TransfersDisabled();
         }
 
         return super._update(to, tokenId, auth);

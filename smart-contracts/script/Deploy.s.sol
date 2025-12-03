@@ -3,21 +3,13 @@ pragma solidity ^0.8.20;
 
 import {Script, console} from "forge-std/Script.sol";
 import {VowNFT} from "../src/VowNFT.sol";
-import {IWorldID, HumanBond} from "../src/HumanBond.sol";
+import {HumanBond} from "../src/HumanBond.sol";
 import {MilestoneNFT} from "../src/MilestoneNFT.sol";
 import {TimeToken} from "../src/TimeToken.sol";
-import {ByteHasher} from "../src/helpers/ByteHasher.sol";
-
-/// @notice Dummy World ID verifier for local testing. Replace with the real one on testnet.
-contract DummyWorldID is IWorldID {
-    function verifyProof(uint256, uint256, uint256, uint256, uint256, uint256[8] calldata) external pure override {}
-}
 
 /// @title Deploy Script for HumanBond Protocol
 /// @notice Deploys VowNFT and HumanBond, sets up linkage, and prints addresses.
 contract DeployScript is Script {
-    using ByteHasher for bytes;
-
     function run() external {
         vm.startBroadcast();
 
@@ -25,7 +17,7 @@ contract DeployScript is Script {
         VowNFT vowNFT = new VowNFT();
         MilestoneNFT milestoneNFT = new MilestoneNFT();
         TimeToken timeToken = new TimeToken();
-        // DummyWorldID worldId = new DummyWorldID();
+        address WORLD_ID_ROUTER_FOR_TESTING = 0x469449f251692E0779667583026b5A1E99512157; // World ID Router on Sepolia
 
         //Set milestones metadata URIs BEFORE ownership transfer
         milestoneNFT.setMilestoneURI(1, "ipfs://QmPAVmWBuJnNgrGrAp34CqTa13VfKkEZkZak8d6E4MJio8");
@@ -36,10 +28,8 @@ contract DeployScript is Script {
 
         // Compute external nullifiers and app ID
         string memory appId = "app_bfc3261816aeadc589f9c6f80a98f5df";
-        uint256 externalNullifierPropose =
-            abi.encodePacked(abi.encodePacked(appId).hashToField(), "propose-bond").hashToField();
-        uint256 externalNullifierAccept =
-            abi.encodePacked(abi.encodePacked(appId).hashToField(), "accept-bond").hashToField();
+        string memory actionPropose = "propose-bond";
+        string memory actionAccept = "accept-bond";
 
         //Deploy HumanBond main contract
         HumanBond humanBond = new HumanBond(
@@ -47,8 +37,11 @@ contract DeployScript is Script {
             address(vowNFT),
             address(timeToken),
             address(milestoneNFT),
-            externalNullifierPropose,
-            externalNullifierAccept
+            appId,
+            actionPropose,
+            actionAccept,
+            1 minutes,
+            3 minutes
         );
 
         //Link contracts
